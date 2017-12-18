@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Nevreme</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/li-scroller.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/slick.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/theme.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery-comments.css">
+<!--[if lt IE 9]>
+<script src="assets/js/html5shiv.min.js"></script>
+<script src="assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+<!-- 	<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a> -->
+	<div class="container">
+		<div class="box_wrapper">
+			<header id="header">
+				<div class="header_top">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse" data-target="#navbar"
+									aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+							<div id="navbar" class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="localhost:8080/p/">Naslovna strana</a></li>
+									<li><a href="localhost:8080/p/pretraga">Pretraga</a></li>
+									<!-- 									<li><a href="http://www.nevreme.com/p/">Naslovna strana</a></li> -->
+									<!-- 									<li><a href="http://www.nevreme.com/p/pretraga">Pretraga</a></li> -->
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<div class="header_search">
+						<button id="searchIcon">
+							<i class="fa fa-search"></i>
+						</button>
+						<div id="shide">
+							<div id="search-hide">
+								<form action="#">
+									<input type="text" size="40" placeholder="Search here ...">
+								</form>
+								<button class="remove">
+									<span><i class="fa fa-times"></i></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="header_bottom">
+					<div class="logo_area">
+						<a class="logo" href="#"><b>N</b>evreme<span>Nevremenska
+								prognoza</span></a>
+					</div>
+					<div class="" style="float: left;">
+						<a class="" href="#"><img
+							src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-many-clouds-icon.png"
+							style="height: 57px;"></a>
+					</div>
+					<div class="" style="float: left;">
+						<a class="" href="#"><img
+							src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-hail-icon.png"
+							style="height: 57px;"></a>
+					</div>
+
+					<div class="" style="float: left;">
+						<a class="" href="#"><img
+							src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-clear-icon.png"
+							style="height: 57px;"></a>
+					</div>
+					<div class="" style="float: left;">
+						<a class="" href="#"><img
+							src="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Status-weather-storm-night-icon.png"
+							style="height: 57px;"></a>
+					</div>
+				</div>
+			</header>
+			<div class="latest_newsarea">
+				<span>Dobrodosli</span>
+				<ul id="ticker01" class="news_sticker">
+					<li>_NEVREMENSKA PROGNOZA_</li>
+					<li>_NEVREMENSKA PROGNOZA_</li>
+					<li>_NEVREMENSKA PROGNOZA_</li>
+					<li>_NEVREMENSKA PROGNOZA_</li>
+					<li>_NEVREMENSKA PROGNOZA_</li>
+				</ul>
+			</div>
+			<section id="contentbody">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+						<div class="row">
+							<div class="left_bar">
+								<div class="single_leftbar">
+									<h2>
+										<span>Subjektivni osecaj</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul class="recentpost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+								<!-- 								<div class="single_leftbar wow fadeInDown"> -->
+								<!-- 									<h2> -->
+								<!-- 										<span>Side Add</span> -->
+								<!-- 									</h2> -->
+								<!-- 									<div class="singleleft_inner"> -->
+								<!-- 										<a href="#"><img src="../images/150x600.jpg" alt=""></a> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-7 col-md-7 col-sm-8 col-xs-12">
+						<div class="row">
+							<div class="middle_bar">
+								<div class="single_post_area">
+<!-- 									<ul> -->
+										
+<!-- 										<li><a href="#"><span class="fa fa-twitter"></span></a></li> -->
+<!-- 										<li><a href="#"><span class="fa fa-google-plus"></span></a></li> -->
+<!-- 										<li><a href="#"><span class="fa fa-linkedin"></span></a></li> -->
+<!-- 										<li><a href="#"><span class="fa fa-pinterest"></span></a></li> -->
+<!-- 									</ul> -->
+									<h2 class="post_title wow "></h2>
+									<a href="#" class="author_name"><i class="fa fa-user"></i>
+									</a> <a href="#" class="post_date"><i class="fa fa-clock-o"></i></a>
+									<div class="single_post_content"></div>
+									<div class="post_footer"></div>
+									<div class=" wow fadeInLeft animated animated animated"
+										style="visibility: visible; animation-name: fadeInLeft;">
+										<div id="comments-list" class="comments-container"></div>
+									</div>
+									<!-- 									<div class="social_area wow fadeInLeft"> -->
+									<!-- 										<ul> -->
+									<!-- 											<li><a href="#"><span class="fa fa-facebook"></span></a></li> -->
+									<!-- 											<li><a href="#"><span class="fa fa-twitter"></span></a></li> -->
+									<!-- 											<li><a href="#"><span class="fa fa-google-plus"></span></a></li> -->
+									<!-- 											<li><a href="#"><span class="fa fa-linkedin"></span></a></li> -->
+									<!-- 											<li><a href="#"><span class="fa fa-pinterest"></span></a></li> -->
+									<!-- 										</ul> -->
+									<!-- 									</div> -->
+									<!-- 									<div class="related_post"> -->
+									<!-- 										<h2 class="wow fadeInLeftBig"> -->
+									<!-- 											Related Posts you may like <i class="fa fa-thumbs-o-up"></i> -->
+									<!-- 										</h2> -->
+									<!-- 										<ul -->
+									<!-- 											class="recentpost_nav relatedpost_nav wow fadeInDown animated"> -->
+									<!-- 										</ul> -->
+									<!-- 									</div> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="single_leftbar wow fadeInDown">
+									<h2>
+										<span>Popularne price</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="popular_posts" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+								<div class="single_leftbar wow fadeInDown">
+									<h2>
+										<span>Postavi vest na drustvene mreze</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul class="catg3_snav ppost_nav wow fadeInDown">
+											<li><button class="btn btn-lg btn-primary tootlip" data-toggle="tooltip"
+								data-placement="top" title="Facebook" onclick="share_to_fb()"><i
+									class="fa fa-facebook"></i></button></li>
+<!-- 											<li><button class="btn btn-lg btn-primary tootlip" data-toggle="tooltip" -->
+<!-- 								data-placement="top" title="Twitter" onclick="share_to_tw()"><i -->
+<!-- 									class="fa fa-twitter"></i></button></li> -->
+										</ul>
+									</div>
+								</div>
+								<!-- 								<div class="single_leftbar wow fadeInDown"> -->
+								<!-- 									<h2> -->
+								<!-- 										<span>Side Ad</span> -->
+								<!-- 									</h2> -->
+								<!-- 									<div class="singleleft_inner"> -->
+								<!-- 										<a href="#"><img alt="" src="../images/262x218.jpg"></a> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer id="footer">
+				<div class="footer_top">
+
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+				</div>
+				<div class="footer_bottom">
+					<div class="footer_bottom_left">
+						<p>Powered By Klaudije</p>
+					</div>
+					<div class="footer_bottom_right">
+						<ul>
+							<!-- 							<li><a class="tootlip" data-toggle="tooltip" -->
+							<!-- 								data-placement="top" title="Twitter" href="#"><i -->
+							<!-- 									class="fa fa-twitter"></i></a></li> -->
+							<li></li>
+							<!-- 							<li><a class="tootlip" data-toggle="tooltip" -->
+							<!-- 								data-placement="top" title="Googel+" href="#"><i -->
+							<!-- 									class="fa fa-google-plus"></i></a></li> -->
+							<!-- 							<li><a class="tootlip" data-toggle="tooltip" -->
+							<!-- 								data-placement="top" title="Youtube" href="#"><i -->
+							<!-- 									class="fa fa-youtube"></i></a></li> -->
+							<!-- 							<li><a class="tootlip" data-toggle="tooltip" -->
+							<!-- 								data-placement="top" title="Rss" href="#"><i -->
+							<!-- 									class="fa fa-rss"></i></a></li> -->
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="../theme/js/jquery.min.js"></script>
+	<script src="../theme/js/wow.min.js"></script>
+	<script src="../theme/js/bootstrap.min.js"></script>
+	<script src="../theme/js/slick.min.js"></script>
+	<script src="../theme/js/jquery.li-scroller.1.0.js"></script>
+	<script src="../theme/js/custom.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    	
+       function share_to_fb() {
+    	   window.location.href = "https://www.facebook.com/sharer/sharer.php?u="+window.location.href;
+       }
+       function share_to_tw() {
+    	   var url = window.location.href;
+    	   var text = "Nevreme.com";
+    	   window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text), '', 'left=0,top=0,width=550,height=450,personalbar=0,toolbar=0,scrollbars=0,resizable=0');
+
+       }
+       var appRoot = [[${appRoot}]];
+	   
+    /*]]>*/
+</script>
+	<script type="text/javascript" src="../js/date.js"></script>
+	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
+	<script type="text/javascript" src="../js/post/home_page.js"></script>
+	<script type="text/javascript" src="../js/jquery-comments.js"></script>
+	<!-- 	<script type="text/javascript" src="/js/jquery-comments.min.js"></script> -->
+	<script>
+		getPPosts();
+		getSPosts();
+// 		appendPost('${post}');
+	</script>
+	<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+	   console.log([[${post}]]);
+       appendPost([[${post}]]);
+	   
+    /*]]>*/
+</script>
+</body>
+</html>

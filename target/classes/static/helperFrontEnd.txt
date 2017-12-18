@@ -1,0 +1,19 @@
+!!!DODAVANJE POSTA NA STRANU ZA PREGLED!!!
+
+$(".post_title").text(post[0].title);
+$(".author_name").text("");
+$(".author_name").append("<i class='fa fa-user'></i>Suncica");
+$(".post_date").text("");
+$(".post_date").append("<i class='fa fa-clock-o'></i>"+new Date(post[0].date));
+$(".single_post_content").children().remove();
+$(".single_post_content").append(post[0].post_html);
+@(".recentpost_nav").append('<li>
+												<div class="media">
+													<a class="media-left" href="#"> <img alt="" src="../images/70x70.jpg">
+													</a>
+													<div class="media-body">
+														<a class="catg_title" href="#"> Aliquam malesuada diam
+															eget turpis varius</a>
+													</div>
+												</div>
+											</li>')
