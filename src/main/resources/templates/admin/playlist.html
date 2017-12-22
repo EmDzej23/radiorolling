@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+<title>Playlist</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
@@ -9,69 +10,57 @@
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
 	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<link
+	href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css"
+	rel="stylesheet">
+	
+<script src="../theme/js/jquery.min.js"></script>
+<script src="../theme/js/jquery-ui.min.js"></script>
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<style>
+.selected{
+    background-color: gray!important;
+    cursor:move;
+}
+</style>	
 <link
 	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
 	rel="stylesheet">
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 </head>
-<style>
-body {
-	text-align: center;
-}
-
-div#editor {
-	width: 50%;
-	margin: auto;
-	text-align: left;
-}
-
-pre#preview {
-	padding: 10px;
-	background: #efefef;
-	white-space: pre-line;
-	line-height: 1.5;
-}
-</style>
 <body>
-
-	<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
-		<br /> <input type="file" name="file" /><br /> <br /> <input
-			type="submit" value="Url slike" id="btnUpload" />
-	</form>
-	<input id="url" type="text" />
-	<div id="summernote">
-		<p>Hello Summernote</p>
+	<h2>Unesi pesmu za plejlistu:</h2>
+	<select>
+		<option>Public</option>
+	</select>
+	<br>
+	<br>
+	<label for="url">Youtube id:</label>
+	<input class="form-control" id="url" type="text" />
+	<button onclick="getVideoDetails()">Popuni ostala polja</button>
+	<br>
+	<label for="title">Naslov:</label>
+	<input class="form-control" id="title" type="text" />
+	<label for="duration">Trajanje Videa(sekunde):</label>
+	<input class="form-control" id="duration" type="text" />
+	<button onclick="saveSong()">Sacuvaj</button>
+	<br>
+	<br>
+	<div id="table_div"></div>
+	<button class="btn btn-primary" id="convert-table">Azuriraj!</button>
+	<div style="display:none" id="dialog-message" title="Brisanje pesme iz plejliste">
+		<p>
+			<span class="pom_text">Obrisi pesmu</span> <span id="title_vid"></span><span class="pom_text">?</span>
+		</p>
 	</div>
-	<pre id="preview" contenteditable="true"></pre>
-	<!-- 	<textarea id="editor" placeholder="Balabala" autofocus></textarea> -->
-	<button id="ap_html" onclick="appendHtml()">PREBACI</button>
-	<button id="smbt" onclick="sendPostData()">POSTAVI</button>
-	<label>Tagovi:</label>
-	<textarea type="text" id="tags"></textarea>
-	<label>Naslov:</label>
-	<textarea type="text" id="title"></textarea>
-	Subj.Os.
-	<input type="radio" value="0" name="type"> Prica
-	<input type="radio" name="type" value="1" checked="">
-	<!-- 	<pre id="preview" contenteditable="true"></pre> -->
-	<!-- 	<script type="text/javascript" src="/js/jquery.min.js"></script> -->
-	<!-- 	<script type="text/javascript" src="/js/module.js"></script> -->
-	<!-- 	<script type="text/javascript" src="/js/hotkeys.js"></script> -->
-	<!-- 	<script type="text/javascript" src="/js/uploader.js"></script> -->
-	<!-- 	<script type="text/javascript" src="/js/simditor.js"></script> -->
 	<script type="text/javascript" th:inline="javascript">
-    /*<![CDATA[*/
        var appRoot = [[${appRoot}]];
-	   
-    /*]]>*/
-</script>
+	</script>
+	<script type="text/javascript" src="/js/jquery.tabletojson.js"></script>
 	<script type="text/javascript" src="/js/dynamicHtmlLib.js"></script>
-	<script type="text/javascript" src="/js/post/post.js"></script>
+	<script type="text/javascript" src="/js/admin/playlists.js"></script>
 	<script>console</script>
 
 </body>

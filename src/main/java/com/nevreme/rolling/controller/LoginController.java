@@ -37,7 +37,7 @@ public class LoginController {
 	
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String hom() {
-		return "redirect:/p/";
+		return "redirect:/home/";
 	}
 	
 	private boolean isCurrentAuthenticationAnonymous() {
@@ -89,8 +89,11 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
-	public String home() {
-		return "redirect:/admin/addPost/";
+	public ModelAndView home() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",Constants.APP_ROOT);
+		modelAndView.setViewName("admin/playlist");
+		return modelAndView;
 	}
 
 }
