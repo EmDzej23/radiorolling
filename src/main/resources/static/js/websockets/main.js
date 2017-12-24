@@ -30,6 +30,7 @@ function connect() {
 function onConnected() {
 	stompClient.subscribe('/channel/public', onMessageReceived);
 	getVideo();
+	getPlaylist();
 	// sendMessage();
 	// Tell your username to the server
 	// stompClient.send("/app/chat.addUser",
@@ -50,6 +51,21 @@ function getVideo() {
 	FetchData({url:"http://localhost:8080/public/nowPlaying/"},afterVideoRequested);
 }
 
+
+function getPlaylist() {
+	//todo add playlists logic
+	FetchData({url:"http://localhost:8080/public/api/video/"},afterPlaylistRequested);
+}
+function afterPlaylistRequested(videos) {
+	$(".ppost_nav").children().remove();
+	videos.sort(function(a, b) {
+		return a.index_num - b.index_num;
+	});
+	for (var i = 0;i<videos.length;i++) {
+		var background = videos[i].state=="1"?"black":"green"; 
+		$(".ppost_nav").append("<li><span style='color:"+background+"'>"+videos[i].index_num+". "+videos[i].description+"</span></li>")
+	}
+}
 function sendMessage() {
 
 	var requestMessageDto = {
@@ -67,7 +83,7 @@ function onMessageReceived(payload) {
 		title : data.videoDescription,
 		id : data.videoUrl
 	};
-	addVideoToDiv2(opt);
+	addVideoToDivAfterFinished(opt);
 }
 
 function afterVideoRequested(payload) {
@@ -83,9 +99,10 @@ function afterVideoRequested(payload) {
 	addVideoToDiv(opt);
 }
 
-function addVideoToDiv2(options) {
+function addVideoToDivAfterFinished(options) {
 	$(".embed-responsive-item").attr("src","//www.youtube.com/embed/"+options.id+"&rel=0&&autoplay=1&showinfo=0&controls=0");
 	$(".song_title").text(options.title);
+	getPlaylist();
 }
 
 function addVideoToDiv(options) {
