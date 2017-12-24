@@ -67,7 +67,7 @@ function onMessageReceived(payload) {
 		title : data.videoDescription,
 		id : data.videoUrl
 	};
-	addVideoToDiv(opt);
+	addVideoToDiv2(opt);
 }
 
 function afterVideoRequested(payload) {
@@ -81,6 +81,11 @@ function afterVideoRequested(payload) {
 	};
 	
 	addVideoToDiv(opt);
+}
+
+function addVideoToDiv2(options) {
+	$(".embed-responsive-item").attr("src","//www.youtube.com/embed/"+options.id+"&rel=0&&autoplay=1&showinfo=0&controls=0");
+	$(".song_title").text(options.title);
 }
 
 function addVideoToDiv(options) {
