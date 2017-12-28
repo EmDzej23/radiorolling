@@ -72,7 +72,7 @@ public class UserDao extends AbstractDao<User, Long> {
 	public User findOneEagerly(Long primaryKey) {
 		if (primaryKey == null)
 			return null;
-		String sql = new SqlBuilder().select(User.class, true).fetch("roles").fetch("posts").fetch("comments").where("id").build();
+		String sql = new SqlBuilder().select(User.class, true).fetch("roles").where("id").build();
 		User admin = entityManager.createQuery(sql, User.class).setParameter("id", primaryKey).getSingleResult();
 		return admin;
 	}
@@ -85,7 +85,7 @@ public class UserDao extends AbstractDao<User, Long> {
 
 	@Override
 	public List<User> findAllEagerly() {
-		String sql = new SqlBuilder().select(User.class, true).fetch("roles").fetch("comments").fetch("posts").build();
+		String sql = new SqlBuilder().select(User.class, true).fetch("roles").build();
 		return entityManager.createQuery(sql, User.class).getResultList();
 	}
 

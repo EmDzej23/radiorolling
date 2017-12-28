@@ -54,14 +54,6 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 	
-//	@JsonBackReference(value="com_aut")
-	@OneToMany(mappedBy="comment_author")
-	private Set<Comment> comments;
-	
-//	@JsonBackReference(value="aut")
-	@OneToMany(mappedBy="author")
-	private Set<Post> posts;
-
 	public Long getId() {
 		return id;
 	}
@@ -116,22 +108,6 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	public Set<Post> getPosts() {
-		return posts;
-	}
-
-	public void setPosts(Set<Post> posts) {
-		this.posts = posts;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public String getImage() {

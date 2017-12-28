@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.nevreme.rolling.model.Video;
-import com.nevreme.rolling.model.VideoState;
 import com.nevreme.rolling.service.VideoService;
 import com.nevreme.rolling.utils.PlaylistUtils;
 
@@ -36,6 +34,8 @@ public class HomeController {
 //			playlistUtils.executeJob(1000*(video.getDuration() - time));
 //		}
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.setViewName("admin/home");
 //		modelAndView.addObject("videoUrl", video.getYtId()+"?start="+time);
 //		modelAndView.addObject("vidDescription",video.getDescription());

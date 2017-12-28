@@ -78,7 +78,7 @@ function tableEvents() {
 			        		return;
 			        	}
 			        	PostData({
-		        			  url:"http://localhost:8080/public/api/video/deleteVideo",
+		        			  url:appRoot+"/public/api/video/deleteVideo",
 		        		      data:JSON.stringify({id:$(m).find('td:first').text(),
 		        		      index_num:"1",
 		        		      started:"",
@@ -87,7 +87,6 @@ function tableEvents() {
 		        		      ytId:"",
 		        		      duration:""})},
 	        		      function(re){
-		        		      conole.log(re);
 		        		      fetchSongs();
 	        		      });
 			        }

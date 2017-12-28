@@ -6,6 +6,7 @@
 //var messageArea = document.querySelector('#messageArea');
 //var connectingElement = document.querySelector('.connecting');
 $(document).ready(function() {
+	
 	connect();
 	
 });
@@ -20,7 +21,7 @@ function connect() {
 
 	if (username) {
 
-		var socket = new SockJS('/ws');
+		var socket = new SockJS(ws+'/ws');
 		stompClient = Stomp.over(socket);
 
 		stompClient.connect({}, onConnected, onError);
@@ -28,7 +29,7 @@ function connect() {
 }
 
 function onConnected() {
-	stompClient.subscribe('/channel/public', onMessageReceived);
+	stompClient.subscribe(ws+'/channel/public', onMessageReceived);
 	getVideo();
 	getPlaylist();
 	// sendMessage();
@@ -48,13 +49,13 @@ function getVideo() {
 	var requestMessageDto = {
 		requestType : '1'
 	};
-	FetchData({url:"http://localhost:8080/public/nowPlaying/"},afterVideoRequested);
+	FetchData({url:appRoot+"/public/nowPlaying/"},afterVideoRequested);
 }
 
 
 function getPlaylist() {
 	//todo add playlists logic
-	FetchData({url:"http://localhost:8080/public/api/video/"},afterPlaylistRequested);
+	FetchData({url:appRoot+"/public/api/video/"},afterPlaylistRequested);
 }
 function afterPlaylistRequested(videos) {
 	$(".ppost_nav").children().remove();
@@ -63,7 +64,7 @@ function afterPlaylistRequested(videos) {
 	});
 	for (var i = 0;i<videos.length;i++) {
 		var background = videos[i].state=="1"?"black":"green"; 
-		$(".ppost_nav").append("<li><span style='color:"+background+"'>"+videos[i].index_num+". "+videos[i].description+"</span></li>")
+		$(".ppost_nav").append("<a target='_blank' href='http://youtube.com/watch?v="+videos[i].ytId+"'><li><span style='color:"+background+"'>"+videos[i].index_num+". "+videos[i].description+"</span></li></a>")
 	}
 }
 function sendMessage() {
@@ -72,7 +73,7 @@ function sendMessage() {
 		requestType : '1'
 	};
 
-	stompClient.send("/app/radio.nowplaying", {}, JSON
+	stompClient.send(ws+"/app/radio.nowplaying", {}, JSON
 			.stringify(requestMessageDto));
 }
 
@@ -100,7 +101,7 @@ function afterVideoRequested(payload) {
 }
 
 function addVideoToDivAfterFinished(options) {
-	$(".embed-responsive-item").attr("src","//www.youtube.com/embed/"+options.id+"&rel=0&&autoplay=1&showinfo=0&controls=0");
+	$(".embed-responsive-item").attr("src","//www.youtube.com/embed/"+options.id+"&showinfo=0&controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
 }
@@ -109,8 +110,28 @@ function addVideoToDiv(options) {
 	$("#video_frame").remove();
 	$(".single_post_content")
 			.append(
-					'<div id="video_frame" style="pointer-events: none;" class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" src="//www.youtube.com/embed/'
+					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
 							+ options.id
-							+ '&rel=0&amp;&autoplay=1&showinfo=0&controls=0" frameborder="0" allowfullscreen></div>')
+							+ '&rel=0&amp;&showinfo=0&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
+	ytp();
+}
+var player;
+function ytp() {
+	var tag = document.createElement('script');
+	tag.id = 'iframe-demo';
+	tag.src = 'https://www.youtube.com/iframe_api';
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('existing-iframe-example', {
+      events: {
+        'onReady': onPlayerReady
+      }
+  });
+}
+function onPlayerReady(event) {
+	player.playVideo();
 }

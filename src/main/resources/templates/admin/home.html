@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:image"
+	content="http://big-games.com/wp-content/uploads/2015/06/radio-celebracio%CC%81n-mundial.jpg" />
 <link rel="stylesheet" type="text/css"
 	href="../theme/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -17,6 +19,7 @@
 <link rel="stylesheet" type="text/css" href="../theme/css/theme.css">
 <link rel="stylesheet" type="text/css" href="../theme/css/style.css">
 <link rel="stylesheet" type="text/css" href="../css/jquery-comments.css">
+<link rel="icon" href="../../images/favicon.ico" />
 <script type="text/javascript">
 	var timerStart = Date.now();
 </script>
@@ -40,9 +43,20 @@
 										class="icon-bar"></span>
 								</button>
 							</div>
-							<div id="navbar" class="navbar-collapse collapse">
+							<div sec:authorize="isAuthenticated()" id="navbar"
+								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="localhost:8080">Naslovna strana</a></li>
+									<li><a href="#">Naslovna strana</a></li>
+									<li><a href="http://rolling.nevreme.com/logout">Logout</a></li>
+									<li><a href="http://rolling.nevreme.com/admin/setup">Videos
+											setup</a></li>
+								</ul>
+							</div>
+							<div sec:authorize="isAnonymous()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="#">Naslovna strana</a></li>
+									<li><a href="http://rolling.nevreme.com/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -55,16 +69,6 @@
 					</div>
 				</div>
 			</header>
-			<div class="latest_newsarea">
-				<span>Dobrodosli</span>
-				<ul id="ticker01" class="news_sticker">
-					<li>_ROLLIN RADIO_</li>
-					<li>_ROLLIN RADIO_</li>
-					<li>_ROLLIN RADIO_</li>
-					<li>_ROLLIN RADIO_</li>
-					<li>_ROLLIN RADIO_</li>
-				</ul>
-			</div>
 			<section id="contentbody">
 				<div class="row">
 					<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
@@ -91,7 +95,7 @@
 									</h2>
 									<div class="singleleft_inner">
 										<ul class="catg3_snav ppost_nav wow fadeInDown">
-											
+
 										</ul>
 									</div>
 								</div>
@@ -130,6 +134,10 @@
 	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
 	<script src="../js/websockets/sock.min.js"></script>
 	<script src="../js/websockets/stomp.min.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+       var appRoot = [[${appRoot}]];
+       var ws = [[${ws}]];
+	</script>
 	<script src="../js/websockets/main.js"></script>
 </body>
 </html>

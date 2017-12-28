@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.nevreme.rolling.model.Role;
 import com.nevreme.rolling.model.User;
 import com.nevreme.rolling.service.UserService;
-import com.nevreme.rolling.utils.Constants;
 
 @Controller
 public class LoginController {
@@ -31,13 +30,13 @@ public class LoginController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
-		String viewName = isCurrentAuthenticationAnonymous()?"login":"redirect:/";
+		String viewName = isCurrentAuthenticationAnonymous()?"login":"redirect:"+System.getProperty("APP_ROOT")+"/";
 		return viewName;
 	}
 	
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String hom() {
-		return "redirect:/home/";
+		return "redirect:"+System.getProperty("APP_ROOT")+"/home/";
 	}
 	
 	private boolean isCurrentAuthenticationAnonymous() {
@@ -48,7 +47,7 @@ public class LoginController {
 	@RequestMapping(value = "/vest", method = RequestMethod.GET)
 	public ModelAndView news() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("appRoot",Constants.APP_ROOT);
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.setViewName("post_view");
 		
 		return modelAndView;
@@ -87,13 +86,12 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-
+	
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
-	public ModelAndView home() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("appRoot",Constants.APP_ROOT);
-		modelAndView.setViewName("admin/playlist");
-		return modelAndView;
+	public String home() {
+		System.out.println("******************************************");
+		System.out.println(System.getProperty("APP_ROOT"));
+		System.out.println("******************************************");
+		return "redirect:"+System.getProperty("APP_ROOT")+"/admin/setup";
 	}
-
 }

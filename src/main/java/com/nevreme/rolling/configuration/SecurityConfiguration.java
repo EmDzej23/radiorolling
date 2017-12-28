@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.nevreme.rolling.utils.Constants;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -52,8 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    authProvider.setPasswordEncoder(bCryptPasswordEncoder);
 	    return authProvider;
 	}
-	
-	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
@@ -69,6 +69,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		if (System.getProperty("APP_ROOT") == null) {
+			System.out.println("****SETUP NOT OK****");
+			System.setProperty("APP_ROOT", Constants.APP_ROOT);
+		}
+		System.out.println("************APPROOT**************"+System.getProperty("APP_ROOT"));
 		http.
 			authorizeRequests()
 				.antMatchers("/").permitAll()
@@ -78,16 +83,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/public/**").permitAll()
 				.antMatchers("/home/**").permitAll()
 				.antMatchers("/login").permitAll()
-				.antMatchers("/registration").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
 				.loginPage("/login").failureUrl("/login?error=true")
-				.defaultSuccessUrl("/admin/home")
+				.defaultSuccessUrl(System.getProperty("APP_ROOT")+"/admin/setup")
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and().exceptionHandling()
+				.logoutSuccessUrl(System.getProperty("APP_ROOT")).and().exceptionHandling()
 				.accessDeniedPage("/access-denied");
 	}
 	
