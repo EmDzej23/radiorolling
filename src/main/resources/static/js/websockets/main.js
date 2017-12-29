@@ -8,8 +8,15 @@
 $(document).ready(function() {
 	
 	connect();
-	
+	appendPLists();
 });
+function appendPLists() {
+	FetchData({url:"http://rolling.nevreme.com/public/api/playlist/"},function(res){
+		for (var i = 0;i<res.length;i++) {
+		$("#plists").append("<a href='http://rolling.nevreme.com/home/"+res[i].id+"'><li><span>"+res[i].name+"</span></li></a>")
+	}
+	});
+}
 var stompClient = null;
 var username = null;
 
@@ -29,7 +36,7 @@ function connect() {
 }
 
 function onConnected() {
-	stompClient.subscribe(ws+'/channel/public', onMessageReceived);
+	stompClient.subscribe(ws+'/channel/public/'+playlist_id, onMessageReceived);
 	getVideo();
 	getPlaylist();
 	// sendMessage();
@@ -49,22 +56,23 @@ function getVideo() {
 	var requestMessageDto = {
 		requestType : '1'
 	};
-	FetchData({url:appRoot+"/public/nowPlaying/"},afterVideoRequested);
+	FetchData({url:appRoot+"/public/nowPlaying/"+playlist_id},afterVideoRequested);
 }
 
 
 function getPlaylist() {
 	//todo add playlists logic
-	FetchData({url:appRoot+"/public/api/video/"},afterPlaylistRequested);
+	FetchData({url:appRoot+"/public/api/playlist/"+playlist_id},afterPlaylistRequested);
 }
-function afterPlaylistRequested(videos) {
-	$(".ppost_nav").children().remove();
+function afterPlaylistRequested(pl) {
+	var videos = pl.videos;
+	$("#songs").children().remove();
 	videos.sort(function(a, b) {
 		return a.index_num - b.index_num;
 	});
 	for (var i = 0;i<videos.length;i++) {
 		var background = videos[i].state=="1"?"black":"green"; 
-		$(".ppost_nav").append("<a target='_blank' href='http://youtube.com/watch?v="+videos[i].ytId+"'><li><span style='color:"+background+"'>"+videos[i].index_num+". "+videos[i].description+"</span></li></a>")
+		$("#songs").append("<a target='_blank' href='http://youtube.com/watch?v="+videos[i].ytId+"'><li><span style='color:"+background+"'>"+videos[i].index_num+". "+videos[i].description+"</span></li></a>")
 	}
 }
 function sendMessage() {

@@ -28,17 +28,17 @@ public class PlaylistUtils {
 
 	private boolean started = false;
 
-	public void executeJob(long interval) {
+	public void executeJob(long interval, Long playlist_id) {
 		Timer timer = new Timer();
 		System.out.println(System.currentTimeMillis());
 		timer.schedule(new TimerTask() {
 			public void run() {
 				System.out.println(System.currentTimeMillis());
 				setStarted(true);
-				Video currentVideo = videoService.findVideoByState(VideoState.PLAYING);
+				Video currentVideo = videoService.findVideoByStateForPlaylist(VideoState.PLAYING, playlist_id);
 				currentVideo.setState(VideoState.NOT_PLAYING);
 				videoService.save(currentVideo);
-				Video nextVideo = videoService.findNextVideo(currentVideo.getIndex_num());
+				Video nextVideo = videoService.findNextVideoForPlaylist(currentVideo.getIndex_num(), playlist_id);
 				nextVideo.setStarted(new Timestamp(new Date().getTime()));
 				nextVideo.setState(VideoState.PLAYING);
 				videoService.save(nextVideo);
@@ -49,8 +49,8 @@ public class PlaylistUtils {
 				videoDto.setVideoDescription(nextVideo.getDescription());
 				videoDto.setVideoDuration(""+nextVideo.getDuration());
 				videoDto.setVideoUrl(nextVideo.getYtId()+"?start="+time);
-				messagingTemplate.convertAndSend("/channel/public", videoDto);
-				executeJob(nextVideo.getDuration()*1000);
+				messagingTemplate.convertAndSend("/channel/public/"+playlist_id, videoDto);
+				executeJob(nextVideo.getDuration()*1000, playlist_id);
 			}
 		}, interval);
 	}

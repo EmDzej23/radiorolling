@@ -94,7 +94,23 @@
 										<span>Trenutna plejlista</span>
 									</h2>
 									<div class="singleleft_inner">
-										<ul class="catg3_snav ppost_nav wow fadeInDown">
+										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="playLists single_leftbar wow fadeInDown">
+									<h2>
+										<span>Ostali kanali</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="plists" class="catg3_snav ppost_nav wow fadeInDown">
 
 										</ul>
 									</div>
@@ -137,6 +153,7 @@
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
        var ws = [[${ws}]];
+       var playlist_id = [[${playlist_id}]];
 	</script>
 	<script src="../js/websockets/main.js"></script>
 </body>

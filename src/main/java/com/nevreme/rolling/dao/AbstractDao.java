@@ -56,6 +56,7 @@ public abstract class AbstractDao<T, ID extends Serializable> {
 	
 	public void delete(ID id) {
 		T entity = findOne(id);
+		System.out.println("nasaooooooooo "+entity);
 		this.entityManager.remove(entity);
 	}
 	public void saveWithSql(String sql){

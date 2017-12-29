@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -16,26 +19,30 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Component
 @Entity
-@Table(name = "video")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
+@Table(name = "video", indexes = { @Index(columnList = "playlist_id", name = "idx_playlist_id"),
+		@Index(columnList = "state", name = "idx_state") })
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Video {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
 	private Long id;
-	
+
 	private String description;
-	
+
 	private Timestamp started;
-	
+
 	private String ytId;
-	
+
 	private int duration;
-	
+
 	private int index_num;
-	
+
 	private int state;
+
+	@ManyToOne
+	@JoinColumn(name = "playlist_id")
+	private Playlist playlist;
 
 	public Long getId() {
 		return id;
@@ -92,5 +99,13 @@ public class Video {
 	public void setState(int state) {
 		this.state = state;
 	}
-	
+
+	public Playlist getPlaylist() {
+		return playlist;
+	}
+
+	public void setPlaylist(Playlist playlist) {
+		this.playlist = playlist;
+	}
+
 }

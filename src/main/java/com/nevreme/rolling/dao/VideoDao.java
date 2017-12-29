@@ -31,6 +31,14 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		tq.setParameter("state", state);
 		return tq.getSingleResult();
 	}
+	
+	public Video findVideoByStateForPlaylist(int state, Long playlist_id) {
+		TypedQuery<Video> tq = entityManager
+				.createQuery(new SqlBuilder().select(Video.class, true).wheres(new String[]{"state","playlist.id"},new String[]{"state","playlist_id"}).build(), Video.class);
+		tq.setParameter("state", state);
+		tq.setParameter("playlist_id", playlist_id);
+		return tq.getSingleResult();
+	}
 
 	public Video findNextVideo(int index) {
 		TypedQuery<Video> tq = entityManager
@@ -38,6 +46,18 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		tq.setParameter("index_num", ++index);
 		if (tq.getResultList() == null || tq.getResultList().size()==0) {
 			tq.setParameter("index_num", 1);
+		}
+		return tq.getSingleResult();
+	}
+	
+	public Video findNextVideoForPlaylist(int index, Long playlist_id) {
+		TypedQuery<Video> tq = entityManager
+				.createQuery(new SqlBuilder().select(Video.class, true).wheres(new String[]{"index_num","playlist.id"},new String[]{"index_num","playlist_id"}).build(), Video.class);
+		tq.setParameter("index_num", ++index);
+		tq.setParameter("playlist_id", playlist_id);
+		if (tq.getResultList() == null || tq.getResultList().size()==0) {
+			tq.setParameter("index_num", 1);
+			tq.setParameter("playlist_id", playlist_id);
 		}
 		return tq.getSingleResult();
 	}

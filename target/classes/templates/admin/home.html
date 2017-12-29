@@ -1,35 +1,160 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<title>Admin Page</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Rolling Radio</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:image"
+	content="http://big-games.com/wp-content/uploads/2015/06/radio-celebracio%CC%81n-mundial.jpg" />
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/li-scroller.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/slick.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/theme.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery-comments.css">
+<link rel="icon" href="../../images/favicon.ico" />
+<script type="text/javascript">
+	var timerStart = Date.now();
+</script>
 </head>
-
 <body>
-	<div class="container">
-	
-		<form th:action="@{/logout}" method="get">
-			<button class="btn btn-md btn-danger btn-block" name="registration"
-				type="Submit">Logout</button>
-		</form>    
-		
-		<div class="panel-group" style="margin-top:40px">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<span th:utext="${userName}"></span>
-				</div>
-				<div class="panel-body">
-					<img th:src="@{/images/beer.jpg}" class="img-responsive center-block" width="400" height="400" alt="Beer" /> 
-				</div>
-				<p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
-			</div>
-		</div>
-		
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
 	</div>
+	<div class="container">
+		<div class="box_wrapper">
+			<header id="header">
+				<div class="header_top">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse" data-target="#navbar"
+									aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+							<div sec:authorize="isAuthenticated()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="#">Naslovna strana</a></li>
+									<li><a href="http://rolling.nevreme.com/logout">Logout</a></li>
+									<li><a href="http://rolling.nevreme.com/admin/setup">Videos
+											setup</a></li>
+								</ul>
+							</div>
+							<div sec:authorize="isAnonymous()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="#">Naslovna strana</a></li>
+									<li><a href="http://rolling.nevreme.com/login">Login</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="header_bottom">
+					<div class="logo_area">
+						<a class="logo" href="#"><b>Rolling</b> Radio<span>Radio
+								for all</span></a>
+					</div>
+				</div>
+			</header>
+			<section id="contentbody">
+				<div class="row">
+					<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+						<div class="row">
+							<div class="middle_bar">
+								<div class="single_post_area">
+									<h2 class="song_title wow "></h2>
+									<div class="single_post_content"></div>
+									<div class="post_footer"></div>
+									<div class=" wow fadeInLeft animated animated animated"
+										style="visibility: visible; animation-name: fadeInLeft;">
+										<div id="comments-list" class="comments-container"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="single_leftbar wow fadeInDown">
+									<h2>
+										<span>Trenutna plejlista</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="playLists single_leftbar wow fadeInDown">
+									<h2>
+										<span>Ostali kanali</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="plists" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer id="footer">
+				<div class="footer_top">
+
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+				</div>
+				<div class="footer_bottom">
+					<div class="footer_bottom_left">
+						<p>Powered By Rolling Radio</p>
+					</div>
+					<div class="footer_bottom_right">
+						<ul>
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="../theme/js/jquery.min.js"></script>
+	<script src="../theme/js/jquery-ui.min.js"></script>
+	<script src="../theme/js/wow.min.js"></script>
+	<script src="../theme/js/bootstrap.min.js"></script>
+	<script src="../theme/js/slick.min.js"></script>
+	<script src="../theme/js/jquery.li-scroller.1.0.js"></script>
+	<script src="../theme/js/custom.js"></script>
+	<script type="text/javascript" src="../js/date.js"></script>
+	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
+	<script src="../js/websockets/sock.min.js"></script>
+	<script src="../js/websockets/stomp.min.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+       var appRoot = [[${appRoot}]];
+       var ws = [[${ws}]];
+       var playlist_id = [[${playlist_id}]];
+	</script>
+	<script src="../js/websockets/main.js"></script>
 </body>
 </html>

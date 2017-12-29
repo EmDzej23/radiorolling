@@ -37,4 +37,12 @@ public class VideoService extends AbstractService<Video, Long> {
 	public void updateList(List<Video> videos) {
 		dao.updateList(videos);
 	}
+	
+	public Video findVideoByStateForPlaylist(int state, Long playlist_id) {
+		return dao.findVideoByStateForPlaylist(state, playlist_id);
+	}
+	
+	public Video findNextVideoForPlaylist(int state, Long playlist_id) {
+		return dao.findNextVideoForPlaylist(state, playlist_id);
+	}
 }

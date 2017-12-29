@@ -5,7 +5,7 @@ $(document).ready(function() {
 		console.log(table);
 		alert(JSON.stringify(table));
 		PostData({
-			url : appRoot + "/public/api/video/updatePlaylist",
+			url : appRoot + "/public/api/video/updatePlaylist?pl="+playlist_id,
 			data : JSON.stringify(table)
 		}, playlistInserted, onError);
 	});
@@ -16,14 +16,14 @@ function playlistInserted(response) {
 }
 function fetchSongs() {
 	FetchData({
-		url : appRoot + "/public/api/video/"
+		url : appRoot + "/public/api/playlist/"+playlist_id
 	}, setSongs);
 }
 
 var songs;
 
 function setSongs(response) {
-	songs = response;
+	songs = response.videos;
 	songs.sort(function(a, b) {
 		return a.index_num - b.index_num;
 	})
@@ -78,7 +78,7 @@ function tableEvents() {
 			        		return;
 			        	}
 			        	PostData({
-		        			  url:appRoot+"/public/api/video/deleteVideo",
+		        			  url:appRoot+"/public/api/video/deleteVideo?pl="+playlist_id,
 		        		      data:JSON.stringify({id:$(m).find('td:first').text(),
 		        		      index_num:"1",
 		        		      started:"",
@@ -97,7 +97,7 @@ function tableEvents() {
 }
 function saveSong() {
 	PostData({
-		url : appRoot + "/public/api/video/newVideo",
+		url : appRoot + "/public/api/video/newVideo?pl="+playlist_id,
 		data : JSON.stringify({
 			id : "",
 			index_num : "",
