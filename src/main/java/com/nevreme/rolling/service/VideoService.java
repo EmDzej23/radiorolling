@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nevreme.rolling.dao.VideoDao;
 import com.nevreme.rolling.model.Video;
@@ -30,8 +31,9 @@ public class VideoService extends AbstractService<Video, Long> {
 		dao.insertNewVideo(video);
 	}
 	
-	public List<Video> updateAllHigherThan(int index) {
-		return dao.updateAllHigherThan(index);
+	@Transactional
+	public List<Video> updateAllHigherThan(int index, Long playlist) {
+		return dao.updateAllHigherThan(index, playlist);
 	}
 	
 	public void updateList(List<Video> videos) {

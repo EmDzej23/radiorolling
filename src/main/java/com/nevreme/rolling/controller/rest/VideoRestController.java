@@ -1,24 +1,20 @@
 package com.nevreme.rolling.controller.rest;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.nevreme.rolling.dao.mapping.MapperConfig;
 import com.nevreme.rolling.dto.PlaylistDto;
-import com.nevreme.rolling.dto.VideoDetailsDto;
 import com.nevreme.rolling.dto.VideoDto;
 import com.nevreme.rolling.model.Playlist;
 import com.nevreme.rolling.model.Video;
@@ -63,6 +59,7 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		video.setState(1);
 		video.setId(null);
 		video.setYtId(videoDto.getYtId());
+		video.setQuote(videoDto.getQuote());
 		videoService.insertNewVideo(video);
 		return "{\"status\":\"ok\"}";
 	}
@@ -70,7 +67,7 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 	@RequestMapping(value = {"/deleteVideo","/deleteVideo/"})
 	@ResponseBody
 	public synchronized ResponseEntity<List<Video>> deleteVideo(@RequestBody VideoDto videoDto, @RequestParam Long pl) {
-		videoService.delete(videoDto.getId());
+		
 		Playlist plist = playlistService.findOne(pl);
 		for (Video v : plist.getVideos()) {
 			if (v.getId()==videoDto.getId()) {
@@ -79,7 +76,8 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 			}
 		}
 		playlistService.save(plist);
-		List<Video> videos = videoService.updateAllHigherThan(videoDto.getIndex_num());
+		videoService.delete(videoDto.getId());
+		List<Video> videos = videoService.updateAllHigherThan(videoDto.getIndex_num(), pl);
 		return new ResponseEntity<List<Video>>(videos, HttpStatus.OK);
 	}
 	
@@ -95,6 +93,18 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		}
 		videoService.updateList(vids);
 		return new ResponseEntity<VideoDto[]>(videosDto, HttpStatus.OK);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = {"/addNewPlaylist","/addNewPlaylist/"})
+	@ResponseBody
+	public synchronized ResponseEntity<PlaylistDto> addPlaylist(@RequestBody PlaylistDto playlistDto) {
+		Playlist playlist = new Playlist();
+		playlist.setImage(playlistDto.getImage());
+		playlist.setName(playlistDto.getName());
+		playlist.setStart(playlistDto.isStart());
+		playlistService.save(playlist);
+		return new ResponseEntity<PlaylistDto>(playlistDto, HttpStatus.OK);
 	}
 	
 }

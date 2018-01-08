@@ -4,8 +4,6 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.nevreme.rolling.model.Video;
-
 @Component
 public class PlaylistDto {
 
@@ -13,6 +11,8 @@ public class PlaylistDto {
 	private String name;
 	private Set<VideoDto> videos;
 	private boolean start;
+	private String image;
+	
 	public Long getId() {
 		return id;
 	}
@@ -36,6 +36,12 @@ public class PlaylistDto {
 	}
 	public void setStart(boolean start) {
 		this.start = start;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

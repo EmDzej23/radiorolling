@@ -40,7 +40,7 @@ public class HomeController {
 //			playlistUtils.executeJob(1000*(video.getDuration() - time));
 //		}
 		ModelAndView modelAndView = new ModelAndView();
-		Long playlist_id = playlistService.getPlaylistByName("public");
+		Long playlist_id = playlistService.getPlaylistByName("Rolling");
 		modelAndView.addObject("playlist_id",playlist_id);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
@@ -51,8 +51,8 @@ public class HomeController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = { "{id}/","{id}" }, method = RequestMethod.GET)
-	public ModelAndView ids(@PathVariable Long id) {
+	@RequestMapping(value = { "{name}/","{name}" }, method = RequestMethod.GET)
+	public ModelAndView ids(@PathVariable String name) {
 //		Video video = videoService.findVideoByState(VideoState.PLAYING);
 //		
 //		long time = 0;
@@ -64,7 +64,8 @@ public class HomeController {
 //			playlistUtils.executeJob(1000*(video.getDuration() - time));
 //		}
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("playlist_id",id);
+		Long playlist_id = playlistService.getPlaylistByName(name);
+		modelAndView.addObject("playlist_id",playlist_id);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.setViewName("admin/home");
@@ -73,6 +74,8 @@ public class HomeController {
 //		modelAndView.addObject("vidDuration",video.getDuration());
 		return modelAndView;
 	}
+	
+	
 	
 	
 }

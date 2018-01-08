@@ -55,7 +55,7 @@ function tableEvents() {
 	        var elements = ui.item.data('multidrag');
 	        ui.item.after(elements).remove();
 	        $(this).children().each(function(index) {
-				$(this).find('td:last').prev("td").html(index + 1)
+				$(this).find('td:last').prev("td").prev("td").html(index + 1)
 			});
 	    }
 	});
@@ -105,7 +105,8 @@ function saveSong() {
 			state : "",
 			description : $("#title").val(),
 			ytId : $("#url").val(),
-			duration : $("#duration").val()
+			duration : $("#duration").val(),
+			quote: $("#quote").val()
 		})
 	}, songInserted, onError);
 }

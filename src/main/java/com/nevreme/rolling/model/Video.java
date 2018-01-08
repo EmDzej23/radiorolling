@@ -39,6 +39,9 @@ public class Video {
 	private int index_num;
 
 	private int state;
+	
+	@Column
+	private String quote;
 
 	@ManyToOne
 	@JoinColumn(name = "playlist_id")
@@ -106,6 +109,14 @@ public class Video {
 
 	public void setPlaylist(Playlist playlist) {
 		this.playlist = playlist;
+	}
+
+	public String getQuote() {
+		return quote;
+	}
+
+	public void setQuote(String quote) {
+		this.quote = quote;
 	}
 
 }

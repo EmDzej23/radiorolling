@@ -14,6 +14,8 @@ public class VideoDto {
 	private int duration;
 	private int index_num;
 	private int state;
+	private String quote;
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,6 +57,12 @@ public class VideoDto {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public String getQuote() {
+		return quote;
+	}
+	public void setQuote(String quote) {
+		this.quote = quote;
 	}
 	
 }

@@ -31,10 +31,11 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		tq.setParameter("state", state);
 		return tq.getSingleResult();
 	}
-	
+
 	public Video findVideoByStateForPlaylist(int state, Long playlist_id) {
-		TypedQuery<Video> tq = entityManager
-				.createQuery(new SqlBuilder().select(Video.class, true).wheres(new String[]{"state","playlist.id"},new String[]{"state","playlist_id"}).build(), Video.class);
+		TypedQuery<Video> tq = entityManager.createQuery(new SqlBuilder().select(Video.class, true)
+				.wheres(new String[] { "state", "playlist.id" }, new String[] { "state", "playlist_id" }).build(),
+				Video.class);
 		tq.setParameter("state", state);
 		tq.setParameter("playlist_id", playlist_id);
 		return tq.getSingleResult();
@@ -44,42 +45,51 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		TypedQuery<Video> tq = entityManager
 				.createQuery(new SqlBuilder().select(Video.class, true).where("index_num").build(), Video.class);
 		tq.setParameter("index_num", ++index);
-		if (tq.getResultList() == null || tq.getResultList().size()==0) {
+		if (tq.getResultList() == null || tq.getResultList().size() == 0) {
 			tq.setParameter("index_num", 1);
 		}
 		return tq.getSingleResult();
 	}
-	
+
 	public Video findNextVideoForPlaylist(int index, Long playlist_id) {
-		TypedQuery<Video> tq = entityManager
-				.createQuery(new SqlBuilder().select(Video.class, true).wheres(new String[]{"index_num","playlist.id"},new String[]{"index_num","playlist_id"}).build(), Video.class);
+		TypedQuery<Video> tq = entityManager.createQuery(new SqlBuilder().select(Video.class, true)
+				.wheres(new String[] { "index_num", "playlist.id" }, new String[] { "index_num", "playlist_id" })
+				.build(), Video.class);
 		tq.setParameter("index_num", ++index);
 		tq.setParameter("playlist_id", playlist_id);
-		if (tq.getResultList() == null || tq.getResultList().size()==0) {
+		if (tq.getResultList() == null || tq.getResultList().size() == 0) {
 			tq.setParameter("index_num", 1);
 			tq.setParameter("playlist_id", playlist_id);
 		}
 		return tq.getSingleResult();
 	}
-	
+
 	public void insertNewVideo(Video video) {
-		Video latestVideo = entityManager.createQuery(new SqlBuilder().select(Video.class, true).order("index_num","DESC").build(), Video.class).setMaxResults(1).getSingleResult();
-		video.setIndex_num(latestVideo.getIndex_num()+1);
+		Video latestVideo = entityManager
+				.createQuery(
+						new SqlBuilder().select(Video.class, true).order("index_num", "DESC")
+								.wheres(new String[] { "playlist.id" }, new String[] { "playlist_id" }).build(),
+						Video.class)
+				.setParameter("playlist_id", video.getPlaylist().getId()).setMaxResults(1).getSingleResult();
+		video.setIndex_num(latestVideo.getIndex_num() + 1);
 		entityManager.flush();
 		entityManager.merge(video);
 	}
-	
-	public List<Video> updateAllHigherThan(int index) {
-		List<Video> videos = entityManager.createQuery("SELECT v FROM Video v WHERE v.index_num > (:index)", Video.class).setParameter("index",index).getResultList();
-		for (Video video:videos) {
-			video.setIndex_num(video.getIndex_num()-1);
+
+	public List<Video> updateAllHigherThan(int index, Long playlist) {
+		List<Video> videos = entityManager
+				.createQuery("SELECT v FROM Video v WHERE v.index_num > (:index) AND v.playlist.id = (:playlist)",
+						Video.class)
+				.setParameter("index", index).setParameter("playlist", playlist).getResultList();
+		for (Video video : videos) {
+			video.setIndex_num(video.getIndex_num() - 1);
 			entityManager.merge(video);
 		}
 		return videos;
 	}
-	
+
 	public void updateList(List<Video> videos) {
-		for (Video video:videos) {
+		for (Video video : videos) {
 			entityManager.merge(video);
 		}
 	}

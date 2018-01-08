@@ -60,6 +60,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		return all;
 	}
 
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody Map<String, Object> create(@RequestBody String json) {

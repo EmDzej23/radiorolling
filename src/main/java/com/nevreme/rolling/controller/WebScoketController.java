@@ -73,6 +73,7 @@ public class WebScoketController {
 		videoDto.setVideoDescription(video.getDescription());
 		videoDto.setVideoDuration(""+video.getDuration());
 		videoDto.setVideoUrl(video.getYtId()+"?start="+time);
+		videoDto.setVideoQuote(video.getQuote());
 		return videoDto;
 	}
 	

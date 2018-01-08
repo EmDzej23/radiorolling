@@ -27,7 +27,7 @@ public class AdminController {
 	
 	@RequestMapping(value = { "/setup","/setup/" }, method = RequestMethod.GET)
 	public ModelAndView setup() {
-		Long playlist_id = playlistService.getPlaylistByName("public");
+		Long playlist_id = playlistService.getPlaylistByName("Rolling");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.addObject("playlist_id",playlist_id);
@@ -41,6 +41,13 @@ public class AdminController {
 		modelAndView.addObject("playlist_id",id);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.setViewName("admin/playlist");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/playlistAdd/","/playlistAdd" }, method = RequestMethod.GET)
+	public ModelAndView playlistAdd() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/playlistAdd");
 		return modelAndView;
 	}
 }

@@ -34,6 +34,9 @@ public class Playlist {
 	@Column
 	private boolean start;
 	
+	@Column
+	private String image;
+	
 	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Video> videos;
 
@@ -68,6 +71,13 @@ public class Playlist {
 	public void setStart(boolean start) {
 		this.start = start;
 	}
-	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 	
 }

@@ -7,6 +7,7 @@ public class VideoDetailsDto {
 	private String videoUrl;
 	private String videoDescription;
 	private String videoDuration;
+	private String videoQuote;
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -24,6 +25,12 @@ public class VideoDetailsDto {
 	}
 	public void setVideoDuration(String videoDuration) {
 		this.videoDuration = videoDuration;
+	}
+	public String getVideoQuote() {
+		return videoQuote;
+	}
+	public void setVideoQuote(String videoQuote) {
+		this.videoQuote = videoQuote;
 	}
 	
 }
