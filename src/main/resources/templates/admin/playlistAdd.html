@@ -62,15 +62,19 @@
 								<div class="single_post_area">
 									<h2 class="song_title wow "></h2>
 									<div class="single_post_content">
-									
-									<label>Naziv plejliste</label>
-									<input type="text" id="plName">
-									
-									<label>Slika</label>
-									<input type="text" id="plImage">
-									
-									<button onclick="addPlaylist()">Dodaj novu plejlistu</button>
-									
+
+										<label>Naziv plejliste</label> <input type="text" id="plName">
+
+										<label>Slika</label> <input type="text" id="plImage">
+
+										<button onclick="addPlaylist()">Dodaj novu plejlistu</button>
+
+										<br> <label>Citat</label> <input type="text" id="citat">
+
+										<label>Id videa</label> <input type="text" id="vidId">
+
+										<button onclick="updateQuote()">Izmeni citat</button>
+
 									</div>
 									<div class="post_footer"></div>
 									<div class=" wow fadeInLeft animated animated animated"
@@ -105,12 +109,30 @@
 	<script src="../../theme/js/jquery.min.js"></script>
 	<script type="text/javascript" src="../../js/dynamicHtmlLib.js"></script>
 	<script>
-	function addPlaylist() {
-		var image = $("#plImage").val();
-		var name = $("#plName").val();
-		var json = JSON.stringify({name:name,image:image});
-		PostData({url:"http://rolling.nevreme.com/public/api/video/addNewPlaylist/",data:json},function(res){alert("Sacuvano:"+res)});
-	}
+		function addPlaylist() {
+			var image = $("#plImage").val();
+			var name = $("#plName").val();
+			var json = JSON.stringify({
+				name : name,
+				image : image
+			});
+			PostData(
+					{
+						url : "http://rolling.nevreme.com/public/api/video/addNewPlaylist/",
+						data : json
+					}, function(res) {
+						alert("Sacuvano");
+					});
+		}
+		function updateQuote() {
+			PostData({
+				url : "http://rolling.nevreme.com/public/api/video/"
+						+ $("#vidId").val(),
+				data : JSON.stringify({
+					quote : $("#citat").val()
+				})
+			},function(resp){alert("Azurirano")}, function(error){console.log("Greska");console.log(error)});
+		}
 	</script>
 </body>
 </html>

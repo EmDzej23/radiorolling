@@ -6,9 +6,15 @@
 //var messageArea = document.querySelector('#messageArea');
 //var connectingElement = document.querySelector('.connecting');
 $(document).ready(function() {
-
 	connect();
 	appendPLists();
+	if (playlist_id == 287) {
+		$("body").css("cursor","url('../../images/darko.cur'), auto");
+	}
+	
+	if (playlist_id == 281) {
+		$("body").css("cursor","url('../../images/pavel.cur'), auto");
+	}
 });
 function appendPLists() {
 	FetchData(
@@ -82,6 +88,7 @@ function getPlaylist() {
 		url : appRoot + "/public/api/playlist/" + playlist_id
 	}, afterPlaylistRequested);
 }
+
 var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
@@ -133,6 +140,7 @@ function onMessageReceived(payload) {
 		id : data.videoUrl,
 		videoQuote : data.videoQuote
 	};
+	document.title = data.videoDescription;
 	addVideoToDivAfterFinished(opt);
 }
 
@@ -146,7 +154,7 @@ function afterVideoRequested(payload) {
 		id : url,
 		videoQuote : payload.videoQuote
 	};
-
+	document.title = payload.videoDescription;
 	addVideoToDiv(opt);
 }
 

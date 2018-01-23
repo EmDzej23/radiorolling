@@ -40,7 +40,6 @@ public class Video {
 
 	private int state;
 	
-	@Column
 	private String quote;
 
 	@ManyToOne

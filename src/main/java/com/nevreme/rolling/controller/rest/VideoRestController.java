@@ -1,7 +1,9 @@
 package com.nevreme.rolling.controller.rest;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,19 +68,22 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 	
 	@RequestMapping(value = {"/deleteVideo","/deleteVideo/"})
 	@ResponseBody
-	public synchronized ResponseEntity<List<Video>> deleteVideo(@RequestBody VideoDto videoDto, @RequestParam Long pl) {
+	public synchronized ResponseEntity<Set<Video>> deleteVideo(@RequestBody VideoDto videoDto, @RequestParam Long pl) {
 		
 		Playlist plist = playlistService.findOne(pl);
 		for (Video v : plist.getVideos()) {
-			if (v.getId()==videoDto.getId()) {
+			if (v.getId().longValue()==videoDto.getId().longValue()) {
+				System.out.println("******************************************************");
+				System.out.println("***********************DELETE*************************");
+				System.out.println("******************************************************");
 				plist.getVideos().remove(v);
 				break;
 			}
 		}
 		playlistService.save(plist);
-		videoService.delete(videoDto.getId());
-		List<Video> videos = videoService.updateAllHigherThan(videoDto.getIndex_num(), pl);
-		return new ResponseEntity<List<Video>>(videos, HttpStatus.OK);
+//		videoService.delete(videoDto.getId());
+		videoService.updateAllHigherThan(videoDto.getIndex_num(), pl);
+		return new ResponseEntity<Set<Video>>(new HashSet<Video>(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = {"/updatePlaylist","/updatePlaylist/"})
@@ -87,7 +92,9 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		List<Video> vids = new ArrayList<>();
 		Playlist p = playlistService.findOne(pl);
 		for (VideoDto vdto : videosDto) {
-			Video vid = mapper.getMapper().map(vdto, Video.class);
+			Video vid = videoService.findOne(vdto.getId());
+			vid.setIndex_num(vdto.getIndex_num());
+//			mapper.getMapper().map(vdto, Video.class);
 			vid.setPlaylist(p);
 			vids.add(vid);
 		}

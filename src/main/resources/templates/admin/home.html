@@ -2,6 +2,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-111192516-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111192516-2');
+</script>
 <title>Rolling Radio</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +34,14 @@
 </script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="preloader">
 		<div id="status">&nbsp;</div>
 	</div>
@@ -81,12 +98,24 @@
 										<br>
 										<p id="videoQuote" style="text-align: center;font-size: 25px;"></p>
 									</div>
-									<div class=" wow fadeInLeft animated animated animated"
-										style="visibility: visible; animation-name: fadeInLeft;">
-										<div id="comments-list" class="comments-container"></div>
-									</div>
 								</div>
+								
 							</div>
+							
+						</div>
+						<div class="row">
+						<div class=" wow fadeInLeft animated animated animated"
+									style="visibility: visible; animation-name: fadeInLeft;">
+									<div id="link2" class="fb-comments" data-width="100%"
+										data-href="" data-numposts="5"></div>
+									<script>
+										var id = window.location.href.split("/")[window.location.href.split("/").length-1];
+										var strLink = "http://rolling.nevreme.com/home/" + id;
+										console.log(strLink);
+										document.getElementById("link2").setAttribute("data-href",strLink);
+										</script>
+
+								</div>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">

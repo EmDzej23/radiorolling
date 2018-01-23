@@ -31,7 +31,6 @@ public class VideoService extends AbstractService<Video, Long> {
 		dao.insertNewVideo(video);
 	}
 	
-	@Transactional
 	public List<Video> updateAllHigherThan(int index, Long playlist) {
 		return dao.updateAllHigherThan(index, playlist);
 	}

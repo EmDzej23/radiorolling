@@ -37,7 +37,7 @@ public class Playlist {
 	@Column
 	private String image;
 	
-	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private Set<Video> videos;
 
 	public Long getId() {

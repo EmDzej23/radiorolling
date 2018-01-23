@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	fetchSongs();
+	initPlaylist();
+	connect();
 	$('#convert-table').click(function() {
 		var table = $('table').tableToJSON(); 
 		console.log(table);
@@ -11,6 +12,33 @@ $(document).ready(function() {
 	});
 	document.oncontextmenu = function() {return false;};
 });
+var stompClient = null;
+function initPlaylist() {
+	fetchSongs();
+}
+
+function connect() {
+	var socket = new SockJS('/ws');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, onConnected, onError);
+}
+
+function onConnected() {
+	stompClient.subscribe('/channel/public/' + playlist_id,
+			onMessageReceived);
+}
+
+function onMessageReceived(payload) {
+	console.log(payload);
+	initPlaylist();
+}
+
+function afterPlaylistRequested(pl) {
+	myVideos = pl.videos;
+	//TODO
+}
+
 function playlistInserted(response) {
 	console.log(response);
 }
@@ -72,7 +100,7 @@ function tableEvents() {
 			$( "#dialog-message" ).dialog({
 			      buttons: {
 			        Ok: function() {
-			        	if ($(m).find('td:last').text()=="0") {
+			        	if ($(m).find('td:last').prev("td").text()=="0") {
 			        		$(".pom_text").remove();
 			        		$("#title_vid").text("Ne mozes da brises ovu, ona ide sad..");
 			        		return;
@@ -80,7 +108,7 @@ function tableEvents() {
 			        	PostData({
 		        			  url:appRoot+"/public/api/video/deleteVideo?pl="+playlist_id,
 		        		      data:JSON.stringify({id:$(m).find('td:first').text(),
-		        		      index_num:"1",
+		        		      index_num:$(m).find('td:last').prev("td").prev("td").text(),
 		        		      started:"",
 		        		      state:"",
 		        		      description:"",
@@ -88,6 +116,7 @@ function tableEvents() {
 		        		      duration:""})},
 	        		      function(re){
 		        		      fetchSongs();
+		        		      $('#dialog-message').dialog('close');
 	        		      });
 			        }
 			      }
