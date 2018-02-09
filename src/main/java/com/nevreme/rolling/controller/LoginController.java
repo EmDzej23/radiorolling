@@ -36,7 +36,7 @@ public class LoginController {
 	
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String hom() {
-		return "redirect:"+System.getProperty("APP_ROOT")+"/home/";
+		return "redirect:"+System.getProperty("APP_ROOT")+"/music/";
 	}
 	
 	private boolean isCurrentAuthenticationAnonymous() {

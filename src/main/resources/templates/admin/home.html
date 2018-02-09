@@ -34,8 +34,8 @@
 </script>
 </head>
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
@@ -63,17 +63,17 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="#">Home</a></li>
-									<li><a href="http://rolling.nevreme.com/logout">Logout</a></li>
-									<li><a href="http://rolling.nevreme.com/admin/setup">Videos
+									<li><a href="http://radiorolling.com/">Radio</a></li>
+									<li><a href="http://radiorolling.com/logout">Logout</a></li>
+									<li><a href="http://radiorolling.com/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="#">Home</a></li>
-									<li><a href="http://rolling.nevreme.com/login">Login</a></li>
+									<li><a href="http://radiorolling.com/">Radio</a></li>
+									<li><a href="http://radiorolling.com/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -92,30 +92,41 @@
 						<div class="row">
 							<div class="middle_bar">
 								<div class="single_post_area">
+									<!-- 									<div class="row"> -->
+									<!-- 										<div class="col-md-9"> -->
+									<!-- 											<h2 class="song_title wow  animated" -->
+									<!-- 												style="visibility: visible;"></h2> -->
+									<!-- 										</div> -->
+									<!-- 										<div class="col-md-3"> -->
+									<!-- 											<img id = "tv_kanal_slika" src="" -->
+									<!-- 												style="width: 30%; float: right;"> -->
+									<!-- 										</div> -->
+									<!-- 									</div> -->
 									<h2 class="song_title wow "></h2>
 									<div class="single_post_content"></div>
 									<div class="post_footer">
 										<br>
-										<p id="videoQuote" style="text-align: center;font-size: 25px;"></p>
+										<p id="videoQuote"
+											style="text-align: center; font-size: 25px;"></p>
 									</div>
 								</div>
-								
+
 							</div>
-							
+
 						</div>
 						<div class="row">
-						<div class=" wow fadeInLeft animated animated animated"
-									style="visibility: visible; animation-name: fadeInLeft;">
-									<div id="link2" class="fb-comments" data-width="100%"
-										data-href="" data-numposts="5"></div>
-									<script>
+							<div class=" wow fadeInLeft animated animated animated"
+								style="visibility: visible; animation-name: fadeInLeft;">
+								<div id="link2" class="fb-comments" data-width="100%"
+									data-href="" data-numposts="5"></div>
+								<script>
 										var id = window.location.href.split("/")[window.location.href.split("/").length-1];
-										var strLink = "http://rolling.nevreme.com/home/" + id;
+										var strLink = "http://radiorolling.com/music/" + id;
 										console.log(strLink);
 										document.getElementById("link2").setAttribute("data-href",strLink);
 										</script>
 
-								</div>
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -123,7 +134,7 @@
 							<div class="right_bar">
 								<div class="single_leftbar wow fadeInDown">
 									<h2>
-										<span>Now rolling</span>
+										<span>Now rolling</span> <span id="clock"></span>
 									</h2>
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
@@ -186,7 +197,52 @@
        var appRoot = [[${appRoot}]];
        var ws = [[${ws}]];
        var playlist_id = [[${playlist_id}]];
+       var lastStartedTime = 0;
+       
+       function updateClock() {
+    	    var currentTime = new Date();
+    	    var currentHoursAP = currentTime.getHours();
+    	    var currentHours = currentTime.getHours();
+    	    var currentMinutes = currentTime.getMinutes();
+    	    var currentSeconds = currentTime.getSeconds();
+    	    
+    	    // Pad the minutes and seconds with leading zeros, if required
+    	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+    	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+    	    
+    	    // Choose either "AM" or "PM" as appropriate
+    	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+    	    
+    	    // Convert the hours component to 12-hour format if needed
+    	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
+    	    
+    	    // Convert an hours component of "0" to "12"
+    	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
+    	    
+    	    // Compose the string for display
+    	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
+    	    
+    	    $("#clock").html(currentTimeString);
+    	}
+       
+       function updateRollingTime() {
+    	
+   	    var myTime = new Date(lastStartedTime);
+   	    var currentMinutes = myTime.getMinutes();
+   	    var currentSeconds = myTime.getSeconds();
+   	 	var currentTimeString = "...Roll on...";
+	    if (currentMinutes !== 0 || currentSeconds !== 0) {
+	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+	 		lastStartedTime -= 1000;
+	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
+	 	}
+   	    // Pad the minutes and seconds with leading zeros, if required
+   	    $("#clock").html(currentTimeString);
+   	}
+       
 	</script>
+
 	<script src="../js/websockets/main.js"></script>
 </body>
 </html>

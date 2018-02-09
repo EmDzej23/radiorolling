@@ -32,8 +32,8 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="#">Naslovna strana</a></li>
-									<li><a href="http://rolling.nevreme.com/logout">Logout</a></li>
-									<li><a href="http://rolling.nevreme.com/admin/setup">Videos
+									<li><a href="http://radiorolling.com/logout">Logout</a></li>
+									<li><a href="http://radiorolling.com/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
@@ -41,7 +41,7 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="#">Naslovna strana</a></li>
-									<li><a href="http://rolling.nevreme.com/login">Login</a></li>
+									<li><a href="http://radiorolling.com/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -118,7 +118,7 @@
 			});
 			PostData(
 					{
-						url : "http://rolling.nevreme.com/public/api/video/addNewPlaylist/",
+						url : "http://radiorolling.com/public/api/video/addNewPlaylist/",
 						data : json
 					}, function(res) {
 						alert("Sacuvano");
@@ -126,7 +126,7 @@
 		}
 		function updateQuote() {
 			PostData({
-				url : "http://rolling.nevreme.com/public/api/video/"
+				url : "http://radiorolling.com/public/api/video/"
 						+ $("#vidId").val(),
 				data : JSON.stringify({
 					quote : $("#citat").val()

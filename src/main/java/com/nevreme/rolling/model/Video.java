@@ -41,6 +41,9 @@ public class Video {
 	private int state;
 	
 	private String quote;
+	
+	@Column(name="video_offset")
+	private int offset;
 
 	@ManyToOne
 	@JoinColumn(name = "playlist_id")
@@ -117,5 +120,15 @@ public class Video {
 	public void setQuote(String quote) {
 		this.quote = quote;
 	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+	
+	
 
 }

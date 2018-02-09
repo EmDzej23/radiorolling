@@ -59,6 +59,7 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		video.setDuration(videoDto.getDuration());
 		video.setStarted(null);
 		video.setState(1);
+		video.setOffset(videoDto.getOffset());
 		video.setId(null);
 		video.setYtId(videoDto.getYtId());
 		video.setQuote(videoDto.getQuote());

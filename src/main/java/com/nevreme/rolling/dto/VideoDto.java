@@ -14,6 +14,7 @@ public class VideoDto {
 	private int duration;
 	private int index_num;
 	private int state;
+	private int offset;
 	private String quote;
 	
 	public Long getId() {
@@ -63,6 +64,12 @@ public class VideoDto {
 	}
 	public void setQuote(String quote) {
 		this.quote = quote;
+	}
+	public int getOffset() {
+		return offset;
+	}
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 	
 }

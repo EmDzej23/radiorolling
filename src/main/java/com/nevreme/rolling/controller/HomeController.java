@@ -13,7 +13,7 @@ import com.nevreme.rolling.service.VideoService;
 import com.nevreme.rolling.utils.PlaylistUtils;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/music")
 public class HomeController {
 	
 	@Autowired

@@ -50,6 +50,7 @@ public class PlaylistUtils {
 				videoDto.setVideoDuration(""+nextVideo.getDuration());
 				videoDto.setVideoUrl(nextVideo.getYtId()+"?start="+time);
 				videoDto.setVideoQuote(nextVideo.getQuote());
+				videoDto.setVideoOffset(nextVideo.getOffset());
 				messagingTemplate.convertAndSend("/channel/public/"+playlist_id, videoDto);
 				executeJob(nextVideo.getDuration()*1000, playlist_id);
 			}

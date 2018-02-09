@@ -55,6 +55,9 @@ function setSongs(response) {
 	songs.sort(function(a, b) {
 		return a.index_num - b.index_num;
 	})
+	for (var i = 0;i<songs.length;i++) {
+		delete songs[i].offset;
+	}
 	$("#table_div").children().remove();
 	$("#table_div").append(MakeResponsiveDHTable(songs).html);
 	tableEvents();
@@ -135,7 +138,8 @@ function saveSong() {
 			description : $("#title").val(),
 			ytId : $("#url").val(),
 			duration : $("#duration").val(),
-			quote: $("#quote").val()
+			quote: $("#quote").val(),
+			offset:$("#offset").val()
 		})
 	}, songInserted, onError);
 }
@@ -166,10 +170,15 @@ function getVideoDetails() {
 		fields : "items(id,contentDetails,statistics,snippet(title))",
 		url : 'https://www.googleapis.com/youtube/v3/videos'
 	}).done(function(data) {
+		if (data.items[0].contentDetails.licensedContent) {
+			alert("Ne mozes da uneses ovaj video, zasticen je autorskim pravima!")
+		}
+		else {
 		populateFields({
 			title : data.items[0].snippet.title,
 			duration : YTDurationToSeconds(data.items[0].contentDetails.duration)
 		})
+		}
 	});
 }
 function populateFields(options) {

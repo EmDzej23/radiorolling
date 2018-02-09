@@ -15,21 +15,22 @@ $(document).ready(function() {
 	if (playlist_id == 281) {
 		$("body").css("cursor","url('../../images/pavel.cur'), auto");
 	}
+	setInterval(updateRollingTime, 1000);
 });
 function appendPLists() {
 	FetchData(
 			{
-				url : "http://rolling.nevreme.com/public/api/playlist/"
+				url : "http://radiorolling.com/public/api/playlist/"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://rolling.nevreme.com/home/'
+									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://rolling.nevreme.com/home/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/music/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -92,6 +93,7 @@ function getPlaylist() {
 var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
+//	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();
 	myVideos.sort(function(a, b) {
@@ -107,19 +109,24 @@ function afterPlaylistRequested(pl) {
 		}
 	}
 	if (current) sortedList.push(current);
+	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
 	for (var i = current.index_num;i<myVideos.length;i++) {
 		sortedList.push(myVideos[i]);
 	}
 	for (var i = 0;i<current.index_num-1;i++) {
 		sortedList.push(myVideos[i]);
 	}
+	var currentSong = sortedList[0].started;
 	for (var i = 0; i < sortedList.length; i++) {
 		var background = sortedList[i].state == "1" ? "black" : "green";
+		var zero = new Date(currentSong).getMinutes() < 10 ? "0" : "";
+		var zeroH = new Date(currentSong).getHours() < 10 ? "0" : "";
 		$("#songs").append(
 				"<a target='_blank' href='http://youtube.com/watch?v="
-						+ sortedList[i].ytId + "'><li><span style='color:"
+						+ sortedList[i].ytId + "'><li><span style='color:gray'>"+zeroH+new Date(currentSong).getHours()+":"+zero+new Date(currentSong).getMinutes()+"</span><span style='color:"
 						+ background + "'>"
-						+ sortedList[i].description + "</span></li></a>")
+						+" "+sortedList[i].description + "</span></li></a>");
+		if (i<sortedList.length-1) currentSong += sortedList[i].duration * 1000;
 	}
 }
 function sendMessage() {
@@ -138,7 +145,8 @@ function onMessageReceived(payload) {
 		duration : data.videoDuration,
 		title : data.videoDescription,
 		id : data.videoUrl,
-		videoQuote : data.videoQuote
+		videoQuote : data.videoQuote,
+		off : data.videoOffset
 	};
 	document.title = data.videoDescription;
 	addVideoToDivAfterFinished(opt);
@@ -152,16 +160,18 @@ function afterVideoRequested(payload) {
 		duration : payload.videoDuration,
 		title : payload.videoDescription,
 		id : url,
-		videoQuote : payload.videoQuote
+		videoQuote : payload.videoQuote,
+		off : payload.videoOffset
 	};
 	document.title = payload.videoDescription;
 	addVideoToDiv(opt);
 }
 
 function addVideoToDivAfterFinished(options) {
+	var offset = parseInt(options.id.split("?")[1].split("=")[1]) + parseInt(options.off);
 	$(".embed-responsive-item").attr(
 			"src",
-			"//www.youtube.com/embed/" + options.id
+			"//www.youtube.com/embed/" + options.id.split("?")[0] + "?start="+offset
 					+ "&showinfo=0&controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
@@ -169,11 +179,12 @@ function addVideoToDivAfterFinished(options) {
 }
 
 function addVideoToDiv(options) {
+	var offset = parseInt(options.id.split("?")[1].split("=")[1]) + parseInt(options.off);
 	$("#video_frame").remove();
 	$(".single_post_content")
 			.append(
 					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
-							+ options.id
+					+ options.id.split("?")[0] + "?start="+offset
 							+ '&rel=0&amp;&showinfo=0&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text("\""+options.videoQuote+"\"");
