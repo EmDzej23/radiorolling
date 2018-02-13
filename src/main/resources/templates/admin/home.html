@@ -83,7 +83,7 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="http://radiorolling.com/music/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/">Video</a></li>
+									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
 									<li><a href="http://radiorolling.com/logout">Logout</a></li>
 									<li><a href="http://radiorolling.com/admin/setup">Videos
 											setup</a></li>
@@ -93,7 +93,7 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="http://radiorolling.com/music/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/">Video</a></li>
+									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
 									<li><a href="http://radiorolling.com/login">Login</a></li>
 								</ul>
 							</div>
@@ -131,6 +131,7 @@
 											style="text-align: center; font-size: 25px;"></p>
 									</div>
 									<div class="btn btn-default" id="fb_share_btn">Share</div>
+									<div class="btn btn-default" id="fb_like_btn">Like</div>
 								</div>
 
 							</div>
@@ -269,6 +270,25 @@
        	FB.ui({
        		method: 'share_open_graph',
        		action_type: 'og.shares',
+       		action_properties: JSON.stringify({
+       			object: {
+       				'og:url': overrideLink,
+       				'og:title': overrideTitle,
+       				'og:description': overrideDescription,
+       				'og:image': overrideImage
+       			}
+       		})
+       	},
+       	function (response) {
+       	// Action after response
+       	});
+       }
+       
+       function likeOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
+       {
+       	FB.ui({
+       		method: 'share_open_graph',
+       		action_type: 'og.likes',
        		action_properties: JSON.stringify({
        			object: {
        				'og:url': overrideLink,

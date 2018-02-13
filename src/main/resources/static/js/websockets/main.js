@@ -19,6 +19,9 @@ $(document).ready(function() {
 	$("#fb_share_btn").click(function(){
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
+	$("#fb_like_btn").click(function(){
+		likeOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
+	});
 });
 var shareDetails={};
 function appendPLists() {
@@ -124,7 +127,7 @@ function afterPlaylistRequested(pl) {
 			break;
 		}
 	}
-	shareDetails.description = "Now rolling:"+current.description;
+	shareDetails.description = "Now rolling : "+current.description;
 	if (current) sortedList.push(current);
 	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
 	for (var i = current.index_num;i<myVideos.length;i++) {
@@ -192,7 +195,7 @@ function addVideoToDivAfterFinished(options) {
 					+ "&showinfo=0&controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
-	$("#videoQuote").text("\""+options.videoQuote+"\"");
+	$("#videoQuote").text(""+options.videoQuote+"");
 }
 
 function addVideoToDiv(options) {

@@ -31,11 +31,11 @@ function appendPLists() {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/'
+									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/video/autoplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/video/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/video/autoplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -98,8 +98,8 @@ function getPlaylist() {
 var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
-	shareDetails.image = pl.image;
-	shareDetails.title = "Radio Video ("+pl.name+")";
+	
+	shareDetails.title = "Rolling Video ("+pl.name+")";
 	
 	var pUrl = [];
 	var urlName = "";
@@ -108,7 +108,7 @@ function afterPlaylistRequested(pl) {
 		if (i===(pUrl.length-1)) urlName += pUrl[i];
 		else urlName += pUrl[i] + "%20";
 	}
-	shareDetails.url = "http://radiorolling.com/video/"+urlName;
+	shareDetails.url = "http://radiorolling.com/video/autoplay/"+urlName;
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();
@@ -124,7 +124,8 @@ function afterPlaylistRequested(pl) {
 			break;
 		}
 	}
-	shareDetails.description = "Now rolling:"+current.description;
+	shareDetails.description = "Video : "+current.description;
+	shareDetails.image = "https://i.ytimg.com/vi/"+current.ytId+"/hqdefault.jpg";
 	if (current) sortedList.push(current);
 	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
 	for (var i = current.index_num;i<myVideos.length;i++) {
@@ -192,7 +193,7 @@ function addVideoToDivAfterFinished(options) {
 					+ "&showinfo=0&controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
-	$("#videoQuote").text("\""+options.videoQuote+"\"");
+	$("#videoQuote").text(""+options.videoQuote+"");
 }
 
 function addVideoToDiv(options) {
