@@ -1,5 +1,7 @@
 package com.nevreme.rolling.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ public class PlaylistService extends AbstractService<Playlist, Long>{
 	
 	public Long getPlaylistByName(String name) {
 		return dao.getPlaylistByName(name);
+	}
+	
+	public List<Playlist> getPLaylstByType(int type) {
+		return dao.getPLaylstByType(type);
 	}
 	
 }

@@ -74,6 +74,12 @@
 										<label>Id videa</label> <input type="text" id="vidId">
 
 										<button onclick="updateQuote()">Izmeni citat</button>
+										
+										<br> <label>Naziv pesme</label> <input type="text" id="naslov">
+
+										<label>Id videa</label> <input type="text" id="vidIdTitle">
+
+										<button onclick="updateTitle()">Izmeni naslov</button>
 
 									</div>
 									<div class="post_footer"></div>
@@ -130,6 +136,15 @@
 						+ $("#vidId").val(),
 				data : JSON.stringify({
 					quote : $("#citat").val()
+				})
+			},function(resp){alert("Azurirano")}, function(error){console.log("Greska");console.log(error)});
+		}
+		function updateTitle() {
+			PostData({
+				url : "http://radiorolling.com/public/api/video/"
+						+ $("#vidIdTitle").val(),
+				data : JSON.stringify({
+					description : $("#naslov").val()
 				})
 			},function(resp){alert("Azurirano")}, function(error){console.log("Greska");console.log(error)});
 		}

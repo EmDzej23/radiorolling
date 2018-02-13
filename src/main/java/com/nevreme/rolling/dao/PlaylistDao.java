@@ -1,5 +1,7 @@
 package com.nevreme.rolling.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -37,6 +39,14 @@ public class PlaylistDao extends AbstractDao<Playlist, Long>{
 	@Override
 	public boolean exists(Long primaryKey) {
 		return false;
+	}
+
+
+	public List<Playlist> getPLaylstByType(int type) {
+		TypedQuery<Playlist> tq = entityManager
+				.createQuery(new SqlBuilder().select(Playlist.class, true).where("playlist_type").build(), Playlist.class);
+		tq.setParameter("playlist_type", type);
+		return tq.getResultList();
 	}
 
 }

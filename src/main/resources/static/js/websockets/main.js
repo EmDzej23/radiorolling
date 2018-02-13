@@ -16,11 +16,16 @@ $(document).ready(function() {
 		$("body").css("cursor","url('../../images/pavel.cur'), auto");
 	}
 	setInterval(updateRollingTime, 1000);
+	$("#fb_share_btn").click(function(){
+		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
+	});
 });
+var shareDetails={};
 function appendPLists() {
 	FetchData(
 			{
-				url : "http://radiorolling.com/public/api/playlist/"
+				//todo: add playlist_type
+				url : "http://radiorolling.com/public/api/playlist/t?type=1"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
@@ -93,6 +98,17 @@ function getPlaylist() {
 var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
+	shareDetails.image = pl.image;
+	shareDetails.title = "Rolling Music ("+pl.name+")";
+	
+	var pUrl = [];
+	var urlName = "";
+	pUrl = pl.name.split(" ");
+	for (var i = 0;i<pUrl.length;i++) {
+		if (i===(pUrl.length-1)) urlName += pUrl[i];
+		else urlName += pUrl[i] + "%20";
+	}
+	shareDetails.url = "http://radiorolling.com/music/"+urlName;
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();
@@ -108,6 +124,7 @@ function afterPlaylistRequested(pl) {
 			break;
 		}
 	}
+	shareDetails.description = "Now rolling:"+current.description;
 	if (current) sortedList.push(current);
 	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
 	for (var i = current.index_num;i<myVideos.length;i++) {

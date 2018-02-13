@@ -12,6 +12,7 @@ public class PlaylistDto {
 	private Set<VideoDto> videos;
 	private boolean start;
 	private String image;
+	private int playlist_type;
 	
 	public Long getId() {
 		return id;
@@ -43,6 +44,11 @@ public class PlaylistDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+	public int getPlaylist_type() {
+		return playlist_type;
+	}
+	public void setPlaylist_type(int playlist_type) {
+		this.playlist_type = playlist_type;
+	}
 	
 }

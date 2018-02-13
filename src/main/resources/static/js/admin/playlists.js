@@ -10,6 +10,10 @@ $(document).ready(function() {
 			data : JSON.stringify(table)
 		}, playlistInserted, onError);
 	});
+	$('#shuffle-playlist').click(function() {
+		shuffleVideos();
+	});
+	
 	document.oncontextmenu = function() {return false;};
 });
 var stompClient = null;
@@ -62,6 +66,34 @@ function setSongs(response) {
 	$("#table_div").append(MakeResponsiveDHTable(songs).html);
 	tableEvents();
 	
+}
+function shuffleVideos() {
+	var videos = $('table').tableToJSON();
+	videos = shuffle(videos);
+	$("#table_div").children().remove();
+	$("#table_div").append(MakeResponsiveDHTable(videos).html);
+	tableEvents();
+	$("table tbody").children().each(function(index) {
+		$(this).find('td:last').prev("td").prev("td").html(index + 1)
+	});
+}
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 function tableEvents() {
 	$( "table tbody" ).on('click', 'tr', function(e){

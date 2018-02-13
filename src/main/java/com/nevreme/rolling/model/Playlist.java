@@ -37,6 +37,9 @@ public class Playlist {
 	@Column
 	private String image;
 	
+	@Column
+	private int playlist_type;
+	
 	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private Set<Video> videos;
 
@@ -78,6 +81,14 @@ public class Playlist {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public int getPlaylist_type() {
+		return playlist_type;
+	}
+
+	public void setPlaylist_type(int playlist_type) {
+		this.playlist_type = playlist_type;
 	}
 	
 }
