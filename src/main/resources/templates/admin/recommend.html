@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-111192516-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-111192516-2');
+</script>
+<meta name="google-site-verification" content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc" />
+<meta name="description" content="Best Music, Video and Text content from all around the web.">
+<title>Rolling Radio</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="fb:app_id" content="1498376340278074" />
+<meta property="og:url" content="http://radiorolling.com" >
+<meta property="og:type" content="article" >
+<meta property="og:title" content="Radio Rolling" >
+<meta property="og:description" content="Music, Video, Text and Recommended content from around the web" >
+<meta property="og:image" content="http://nevreme.com/res/images/20182101446/rolllogo.png" >
+<meta property="og:image:width" content="1200" >
+<meta property="og:image:height" content="630" >
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="../theme/css/li-scroller.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/slick.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/theme.css">
+<link rel="stylesheet" type="text/css" href="../theme/css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery-comments.css">
+<link rel="icon" href="../../images/favicon.ico" />
+<script type="text/javascript">
+	var timerStart = Date.now();
+</script>
+<script>
+  window.fbAsyncInit = function() {
+	FB.init({
+	  appId            : '1498376340278074',
+	  autoLogAppEvents : true,
+	  xfbml            : true,
+	  version          : 'v2.10'
+	});
+	FB.AppEvents.logPageView();
+  };
+ 
+  (function(d, s, id){
+	 var js, fjs = d.getElementsByTagName(s)[0];
+	 if (d.getElementById(id)) {return;}
+	 js = d.createElement(s); js.id = id;
+	 js.src = "//connect.facebook.net/en_US/sdk.js";
+	 fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+</head>
+<body>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<div class="container">
+		<div class="box_wrapper">
+			<header id="header">
+				<div class="header_top">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse" data-target="#navbar"
+									aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+							<div sec:authorize="isAuthenticated()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="http://radiorolling.com/music/">Music</a></li>
+									<li><a href="http://radiorolling.com/video/">Video</a></li>
+									<li><a href="http://radiorolling.com/logout">Logout</a></li>
+									<li><a href="http://radiorolling.com/admin/setup">Videos
+											setup</a></li>
+								</ul>
+							</div>
+							<div sec:authorize="isAnonymous()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="http://radiorolling.com/music/">Music</a></li>
+									<li><a href="http://radiorolling.com/video/">Video</a></li>
+									<li><a href="http://radiorolling.com/login">Login</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="header_bottom">
+					<div class="logo_area">
+						<a class="logo" href="#"><b>Rolling</b> Preporuke<span
+							id="playlistName">USKORO!!!</span></a>
+					</div>
+				</div>
+			</header>
+			<section id="contentbody">
+				<div class="row">
+					<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+						<div class="row">
+							<div class="middle_bar">
+								<div class="single_post_area">
+									<!-- 									<div class="row"> -->
+									<!-- 										<div class="col-md-9"> -->
+									<!-- 											<h2 class="song_title wow  animated" -->
+									<!-- 												style="visibility: visible;"></h2> -->
+									<!-- 										</div> -->
+									<!-- 										<div class="col-md-3"> -->
+									<!-- 											<img id = "tv_kanal_slika" src="" -->
+									<!-- 												style="width: 30%; float: right;"> -->
+									<!-- 										</div> -->
+									<!-- 									</div> -->
+									<h2 class="song_title wow "></h2>
+									<div class="single_post_content">
+									USKORO, ROLLING PREPORUKE
+									</div>
+									<div class="post_footer">
+										<br>
+										<p id="videoQuote"
+											style="text-align: center; font-size: 25px;"></p>
+									</div>
+									<div class="btn btn-default" id="fb_share_btn">Share</div>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="row">
+							<div class=" wow fadeInLeft animated animated animated"
+								style="visibility: visible; animation-name: fadeInLeft;">
+								<div id="link2" class="fb-comments" data-width="100%"
+									data-href="" data-numposts="5"></div>
+								<script>
+										var id = window.location.href.split("/")[window.location.href.split("/").length-1];
+										var strLink = "http://radiorolling.com/video/" + id;
+										console.log(strLink);
+										document.getElementById("link2").setAttribute("data-href",strLink);
+										</script>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="single_leftbar wow fadeInDown">
+									<h2>
+										<span>Now rolling</span> <span id="clock"></span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+						<div class="row">
+							<div class="right_bar">
+								<div class="playLists single_leftbar wow fadeInDown">
+									<h2>
+										<span>Ostale oblasti</span>
+									</h2>
+									<div class="singleleft_inner">
+										<ul id="plists" class="catg3_snav ppost_nav wow fadeInDown">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer id="footer">
+				<div class="footer_top">
+
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+				</div>
+				<div class="footer_bottom">
+					<div class="footer_bottom_left">
+						<p>Powered By Rolling Radio</p>
+					</div>
+					<div class="footer_bottom_right">
+						<ul>
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="../theme/js/jquery.min.js"></script>
+	<script src="../theme/js/jquery-ui.min.js"></script>
+	<script src="../theme/js/wow.min.js"></script>
+	<script src="../theme/js/bootstrap.min.js"></script>
+	<script src="../theme/js/slick.min.js"></script>
+	<script src="../theme/js/jquery.li-scroller.1.0.js"></script>
+	<script src="../theme/js/custom.js"></script>
+	<script type="text/javascript" src="../js/date.js"></script>
+	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
+	<script src="../js/websockets/sock.min.js"></script>
+	<script src="../js/websockets/stomp.min.js"></script>
+	<script type="text/javascript" th:inline="javascript">
+       var appRoot = [[${appRoot}]];
+       var ws = [[${ws}]];
+//        var playlist_id = [[${playlist_id}]];
+//        var lastStartedTime = 0;
+       
+//        function updateClock() {
+//     	    var currentTime = new Date();
+//     	    var currentHoursAP = currentTime.getHours();
+//     	    var currentHours = currentTime.getHours();
+//     	    var currentMinutes = currentTime.getMinutes();
+//     	    var currentSeconds = currentTime.getSeconds();
+    	    
+//     	    // Pad the minutes and seconds with leading zeros, if required
+//     	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+//     	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+    	    
+//     	    // Choose either "AM" or "PM" as appropriate
+//     	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+    	    
+//     	    // Convert the hours component to 12-hour format if needed
+//     	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
+    	    
+//     	    // Convert an hours component of "0" to "12"
+//     	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
+    	    
+//     	    // Compose the string for display
+//     	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
+    	    
+//     	    $("#clock").html(currentTimeString);
+//     	}
+       
+//        function updateRollingTime() {
+    	
+//    	    var myTime = new Date(lastStartedTime);
+//    	    var currentMinutes = myTime.getMinutes();
+//    	    var currentSeconds = myTime.getSeconds();
+//    	 	var currentTimeString = "...Roll on...";
+// 	    if (currentMinutes !== 0 || currentSeconds !== 0) {
+// 	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+// 	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+// 	 		lastStartedTime -= 1000;
+// 	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
+// 	 	}
+//    	    // Pad the minutes and seconds with leading zeros, if required
+//    	    $("#clock").html(currentTimeString);
+   	    
+   	    
+//    	}
+//        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
+//        {
+//        	FB.ui({
+//        		method: 'share_open_graph',
+//        		action_type: 'og.shares',
+//        		action_properties: JSON.stringify({
+//        			object: {
+//        				'og:url': overrideLink,
+//        				'og:title': overrideTitle,
+//        				'og:description': overrideDescription,
+//        				'og:image': overrideImage
+//        			}
+//        		})
+//        	},
+//        	function (response) {
+//        	// Action after response
+//        	});
+//        }
+       
+	</script>
+
+<!-- 	<script src="../js/websockets/recommend.js"></script> -->
+</body>
+</html>
