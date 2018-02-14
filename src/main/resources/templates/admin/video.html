@@ -131,6 +131,7 @@
 											style="text-align: center; font-size: 25px;"></p>
 									</div>
 									<div class="btn btn-default" id="fb_share_btn">Share</div>
+									<div id="manualplaySelect" class="btn btn-default">Manualplay</div>
 								</div>
 
 							</div>
@@ -218,6 +219,7 @@
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
        var ws = [[${ws}]];
+       var vid_id = [[${vid_id}]];
        var playlist_id = [[${playlist_id}]];
        var lastStartedTime = 0;
        

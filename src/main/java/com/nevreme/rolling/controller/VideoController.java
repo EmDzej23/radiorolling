@@ -1,5 +1,6 @@
 package com.nevreme.rolling.controller;
 
+import org.hibernate.validator.internal.util.IgnoreJava6Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,43 @@ public class VideoController {
 		ModelAndView modelAndView = new ModelAndView();
 		Long playlist_id = playlistService.getPlaylistByName("Inserti Iz Filmova");
 		modelAndView.addObject("playlist_id",playlist_id);
+		modelAndView.addObject("vid_id",-1);
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
+		modelAndView.setViewName("admin/staticalVideo");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "manualplay/{name}/","manualplay/{name}" }, method = RequestMethod.GET)
+	public ModelAndView staticalName(@PathVariable String name) {
+		ModelAndView modelAndView = new ModelAndView();
+		Long playlist_id = playlistService.getPlaylistByName(name);
+		modelAndView.addObject("playlist_id",playlist_id);
+		modelAndView.addObject("vid_id",-1);
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
+		modelAndView.setViewName("admin/staticalVideo");
+		return modelAndView;
+	}
+//	
+//	@RequestMapping(value = "manualplay/{name}/vid", method = RequestMethod.GET)
+//	public ModelAndView staticalVidName(@RequestParam String vid, @RequestParam String plName) {
+//		ModelAndView modelAndView = new ModelAndView();
+//		Long playlist_id = playlistService.getPlaylistByName(plName);
+//		modelAndView.addObject("playlist_id",playlist_id);
+//		modelAndView.addObject("vid_id",vid);
+//		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+//		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
+//		modelAndView.setViewName("admin/staticalVideo");
+//		return modelAndView;
+//	}
+	
+	@RequestMapping(value = "manualplay/vid", method = RequestMethod.GET)
+	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName) {
+		ModelAndView modelAndView = new ModelAndView();
+		Long playlist_id = playlistService.getPlaylistByName(plName);
+		modelAndView.addObject("playlist_id",playlist_id);
+		modelAndView.addObject("vid_id",vid);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.setViewName("admin/staticalVideo");
