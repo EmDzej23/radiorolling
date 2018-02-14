@@ -19,8 +19,8 @@ $(document).ready(function() {
 	$("#fb_share_btn").click(function(){
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
-	$("#fb_like_btn").click(function(){
-		likeOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
+	$("#manualplaySelect").click(function(){
+		window.location.href = "http://radiorolling.com/music/manualplay/"+plName;
 	});
 });
 var shareDetails={};
@@ -34,11 +34,11 @@ function appendPLists() {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/'
+									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/autoplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/music/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/music/autoplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -48,7 +48,7 @@ function appendPLists() {
 }
 var stompClient = null;
 var username = null;
-
+var plName;
 var colors = [ '#2196F3', '#32c787', '#00BCD4', '#ff5652', '#ffc107',
 		'#ff85af', '#FF9800', '#39bbb0' ];
 
@@ -111,7 +111,8 @@ function afterPlaylistRequested(pl) {
 		if (i===(pUrl.length-1)) urlName += pUrl[i];
 		else urlName += pUrl[i] + "%20";
 	}
-	shareDetails.url = "http://radiorolling.com/music/"+urlName;
+	shareDetails.url = "http://radiorolling.com/music/autoplay/"+urlName;
+	plName = urlName;
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();

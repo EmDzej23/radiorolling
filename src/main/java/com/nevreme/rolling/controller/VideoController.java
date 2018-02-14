@@ -62,18 +62,6 @@ public class VideoController {
 		modelAndView.setViewName("admin/staticalVideo");
 		return modelAndView;
 	}
-//	
-//	@RequestMapping(value = "manualplay/{name}/vid", method = RequestMethod.GET)
-//	public ModelAndView staticalVidName(@RequestParam String vid, @RequestParam String plName) {
-//		ModelAndView modelAndView = new ModelAndView();
-//		Long playlist_id = playlistService.getPlaylistByName(plName);
-//		modelAndView.addObject("playlist_id",playlist_id);
-//		modelAndView.addObject("vid_id",vid);
-//		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
-//		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
-//		modelAndView.setViewName("admin/staticalVideo");
-//		return modelAndView;
-//	}
 	
 	@RequestMapping(value = "manualplay/vid", method = RequestMethod.GET)
 	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName) {

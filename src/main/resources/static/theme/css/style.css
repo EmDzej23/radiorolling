@@ -322,6 +322,17 @@ hr {
 	cursor:pointer;
 	color:green;
 }
+.textcenter {
+	text-align: center!important;
+}
+.imagecenter {
+	width:50%!important;
+	margin-left: 25%!important;
+}
+.image-left-custom {
+	width: 120px!important;
+	height: 86px!important;
+}
 .blog-comment h3,
 .blog-comment-form h3{
 	margin-bottom: 40px;

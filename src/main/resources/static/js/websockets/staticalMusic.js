@@ -19,7 +19,7 @@ $(document).ready(function() {
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
 	$("#autoplaySelect").click(function(){
-		window.location.href = "http://radiorolling.com/video/autoplay/"+plName;
+		window.location.href = "http://radiorolling.com/music/autoplay/"+plName;
 	});
 });
 var shareDetails={};
@@ -27,17 +27,17 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "http://radiorolling.com/public/api/playlist/t?type=2"
+				url : "http://radiorolling.com/public/api/playlist/t?type=1"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/video/manualplay/'
+									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/manualplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/video/manualplay/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/music/manualplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -62,8 +62,8 @@ function goToVideo(opt) {
 		if (i===(pUrl.length-1)) urlName += pUrl[i];
 		else urlName += pUrl[i] + "%20";
 	}
-	shareDetails.url = "http://radiorolling.com/video/manualplay/vid?vid="+opt.id+"&plName="+urlName;
-	shareDetails.description = "Video : "+opt.title;
+	shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
+	shareDetails.description = "Song : "+opt.title;
 	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
 	document.title = opt.title;
 	addVideoToDivAfterFinishedManual(opt);
@@ -80,7 +80,7 @@ var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
 	
-	shareDetails.title = "Rolling Video ("+pl.name+")";
+	shareDetails.title = "Rolling Music ("+pl.name+")";
 	
 	var pUrl = [];
 	var urlName = "";
@@ -111,8 +111,8 @@ function afterPlaylistRequested(pl) {
 				off : current.offset,
 				vid_id:current.id
 		}
-		shareDetails.url = "http://radiorolling.com/video/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
-		shareDetails.description = "Video : "+current.description;
+		shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
+		shareDetails.description = "Song : "+current.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+current.ytId+"/hqdefault.jpg";
 	}
 	else {
@@ -132,8 +132,8 @@ function afterPlaylistRequested(pl) {
 				off : chosenVid.offset,
 				vid_id:chosenVid.id
 		}
-		shareDetails.url = "http://radiorolling.com/video/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
-		shareDetails.description = "Video : "+chosenVid.description;
+		shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
+		shareDetails.description = "Song : "+chosenVid.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+chosenVid.ytId+"/hqdefault.jpg";
 	}
 	addVideoToDivManual(opts);
@@ -151,13 +151,9 @@ function afterPlaylistRequested(pl) {
 		var zero = new Date(currentSong).getMinutes() < 10 ? "0" : "";
 		var zeroH = new Date(currentSong).getHours() < 10 ? "0" : "";
 		$("#songs").append(
-				'<li class="vidstoplay" id = "vid_'+i+'"><div class="media"><div class="media-left image-left-custom"><img alt="No Image" src="https://i.ytimg.com/vi/'
-				+ sortedList[i].ytId
-				+ '/hqdefault.jpg"></div><div class="media-body">'
+				'<li class="vidstoplay" id = "vid_'+i+'">'
 				+ sortedList[i].description
 				+ '</div></div></li>');
-//		$("#songs").append(
-//				"<li class='vidstoplay' id = 'vid_"+i+"'><span>"+ sortedList[i].description + "</span></li>");
 		$("#vid_"+i).click(function(){
 			var ind = parseInt(this.id.split("_")[1]);
 			var options = {
@@ -191,7 +187,7 @@ function afterVideoRequested(payload) {
 function addVideoToDivAfterFinishedManual(options) {
 	$(".embed-responsive-item").attr(
 			"src",
-			"//www.youtube.com/embed/" + options.id + "?start=0"
+			"//www.youtube.com/embed/" + options.id + "?start="+options.off
 					+ "&showinfo=0&controls=1&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
@@ -215,7 +211,7 @@ function addVideoToDivManual(options) {
 	$(".single_post_content")
 			.append(
 					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
-					+ options.id + "?start=0"
+					+ options.id + '?start='+options.off
 							+ '&rel=1&amp;&showinfo=0&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
