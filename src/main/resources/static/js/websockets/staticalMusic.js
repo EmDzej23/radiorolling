@@ -19,7 +19,7 @@ $(document).ready(function() {
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
 	$("#autoplaySelect").click(function(){
-		window.location.href = "http://radiorolling.com/music/autoplay/"+plName;
+		window.location.href = "http://localhost:8081/music/autoplay/"+plName;
 	});
 });
 var shareDetails={};
@@ -27,17 +27,17 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "http://radiorolling.com/public/api/playlist/t?type=1"
+				url : "http://localhost:8081/public/api/playlist/t?type=1"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/music/manualplay/'
+									'<li><div class="media"><a class="media-left" href="http://localhost:8081/music/manualplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/music/manualplay/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://localhost:8081/music/manualplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -62,7 +62,7 @@ function goToVideo(opt) {
 		if (i===(pUrl.length-1)) urlName += pUrl[i];
 		else urlName += pUrl[i] + "%20";
 	}
-	shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
+	shareDetails.url = "http://localhost:8081/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
 	shareDetails.description = "Song : "+opt.title;
 	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
 	document.title = opt.title;
@@ -111,7 +111,7 @@ function afterPlaylistRequested(pl) {
 				off : current.offset,
 				vid_id:current.id
 		}
-		shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
+		shareDetails.url = "http://localhost:8081/music/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
 		shareDetails.description = "Song : "+current.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+current.ytId+"/hqdefault.jpg";
 	}
@@ -132,7 +132,7 @@ function afterPlaylistRequested(pl) {
 				off : chosenVid.offset,
 				vid_id:chosenVid.id
 		}
-		shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
+		shareDetails.url = "http://localhost:8081/music/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
 		shareDetails.description = "Song : "+chosenVid.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+chosenVid.ytId+"/hqdefault.jpg";
 	}

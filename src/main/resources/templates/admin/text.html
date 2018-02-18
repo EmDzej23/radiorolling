@@ -18,7 +18,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="fb:app_id" content="1498376340278074" />
-<meta property="og:url" content="http://radiorolling.com" >
+<meta property="og:url" content="http://localhost:8081" >
 <meta property="og:type" content="article" >
 <meta property="og:title" content="Radio Rolling" >
 <meta property="og:description" content="Music, Video, Text and Recommended content from around the web" >
@@ -82,19 +82,19 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/">Video</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
+									<li><a href="http://localhost:8081/music/">Music</a></li>
+									<li><a href="http://localhost:8081/video/">Video</a></li>
+									<li><a href="http://localhost:8081/logout">Logout</a></li>
+									<li><a href="http://localhost:8081/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/">Video</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
+									<li><a href="http://localhost:8081/music/">Music</a></li>
+									<li><a href="http://localhost:8081/video/">Video</a></li>
+									<li><a href="http://localhost:8081/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -145,7 +145,7 @@
 									data-href="" data-numposts="5"></div>
 								<script>
 										var id = window.location.href.split("/")[window.location.href.split("/").length-1];
-										var strLink = "http://radiorolling.com/video/" + id;
+										var strLink = "http://localhost:8081/video/" + id;
 										console.log(strLink);
 										document.getElementById("link2").setAttribute("data-href",strLink);
 										</script>
@@ -158,7 +158,7 @@
 							<div class="right_bar">
 								<div class="single_leftbar wow fadeInDown">
 									<h2>
-										<span>Now rolling</span> <span id="clock"></span>
+										<span>Tekstovi</span> <span id="clock"></span>
 									</h2>
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
@@ -174,7 +174,7 @@
 							<div class="right_bar">
 								<div class="playLists single_leftbar wow fadeInDown">
 									<h2>
-										<span>Ostale oblasti</span>
+										<span>Oblasti</span>
 									</h2>
 									<div class="singleleft_inner">
 										<ul id="plists" class="catg3_snav ppost_nav wow fadeInDown">
@@ -220,7 +220,8 @@
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
        var ws = [[${ws}]];
-//        var playlist_id = [[${playlist_id}]];
+       var playlist_id = [[${playlist_id}]];
+       var vid_id = [[${vid_id}]];
 //        var lastStartedTime = 0;
        
 //        function updateClock() {
@@ -287,6 +288,6 @@
        
 	</script>
 
-<!-- 	<script src="../js/websockets/text.js"></script> -->
+	<script src="../js/websockets/text.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ $(document).ready(function() {
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
 	$("#manualplaySelect").click(function(){
-		window.location.href = "http://radiorolling.com/video/manualplay/"+plName;
+		window.location.href = "http://localhost:8081/video/manualplay/"+plName;
 	});
 });
 var plName;
@@ -29,17 +29,17 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "http://radiorolling.com/public/api/playlist/t?type=2"
+				url : "http://localhost:8081/public/api/playlist/t?type=2"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/video/autoplay/'
+									'<li><div class="media"><a class="media-left" href="http://localhost:8081/video/autoplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/video/autoplay/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://localhost:8081/video/autoplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -112,7 +112,7 @@ function afterPlaylistRequested(pl) {
 		else urlName += pUrl[i] + "%20";
 	}
 	plName = urlName;
-	shareDetails.url = "http://radiorolling.com/video/autoplay/"+urlName;
+	shareDetails.url = "http://localhost:8081/video/autoplay/"+urlName;
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();
