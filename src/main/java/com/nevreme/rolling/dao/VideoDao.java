@@ -63,6 +63,13 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		}
 		return tq.getSingleResult();
 	}
+	
+	public Video findVideoByYtId(String ytId) {
+		TypedQuery<Video> tq = entityManager
+				.createQuery(new SqlBuilder().select(Video.class, true).where("ytId").build(), Video.class);
+		tq.setParameter("ytId", ytId);
+		return tq.getSingleResult();
+	}
 
 	public void insertNewVideo(Video video) {
 		Video latestVideo = entityManager

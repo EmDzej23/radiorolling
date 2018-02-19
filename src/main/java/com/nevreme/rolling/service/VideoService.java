@@ -46,4 +46,8 @@ public class VideoService extends AbstractService<Video, Long> {
 	public Video findNextVideoForPlaylist(int state, Long playlist_id) {
 		return dao.findNextVideoForPlaylist(state, playlist_id);
 	}
+	
+	public Video findVideoByYtId(String ytId) {
+		return dao.findVideoByYtId(ytId);
+	}
 }

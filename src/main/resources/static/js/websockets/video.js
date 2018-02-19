@@ -144,10 +144,9 @@ function afterPlaylistRequested(pl) {
 		var zero = new Date(currentSong).getMinutes() < 10 ? "0" : "";
 		var zeroH = new Date(currentSong).getHours() < 10 ? "0" : "";
 		$("#songs").append(
-				"<a target='_blank' href='http://youtube.com/watch?v="
-						+ sortedList[i].ytId + "'><li><span style='color:gray'>"+zeroH+new Date(currentSong).getHours()+":"+zero+new Date(currentSong).getMinutes()+"</span><span style='color:"
+				"<li><span style='color:gray'>"+zeroH+new Date(currentSong).getHours()+":"+zero+new Date(currentSong).getMinutes()+"</span><span style='color:"
 						+ background + "'>"
-						+" "+sortedList[i].description + "</span></li></a>");
+						+" "+sortedList[i].description + "</span></li>");
 		if (i<sortedList.length-1) currentSong += sortedList[i].duration * 1000;
 	}
 }
@@ -209,7 +208,7 @@ function addVideoToDiv(options) {
 					+ options.id.split("?")[0] + "?start="+offset
 							+ '&rel=0&amp;&showinfo=0&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
-	$("#videoQuote").text("\""+options.videoQuote+"\"");
+	$("#videoQuote").text(""+options.videoQuote+"");
 	ytp();
 }
 var player;

@@ -55,18 +55,19 @@ function connect() {
 
 var plName;
 function goToVideo(opt) {
-	var pUrl = [];
-	var urlName = "";
-	pUrl = plName.split(" ");
-	for (var i = 0;i<pUrl.length;i++) {
-		if (i===(pUrl.length-1)) urlName += pUrl[i];
-		else urlName += pUrl[i] + "%20";
-	}
-	shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
-	shareDetails.description = "Song : "+opt.title;
-	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
-	document.title = opt.title;
-	addVideoToDivAfterFinishedManual(opt);
+//	var pUrl = [];
+//	var urlName = "";
+//	pUrl = plName.split(" ");
+//	for (var i = 0;i<pUrl.length;i++) {
+//		if (i===(pUrl.length-1)) urlName += pUrl[i];
+//		else urlName += pUrl[i] + "%20";
+//	}
+//	shareDetails.url = "http://radiorolling.com/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
+//	shareDetails.description = "Song : "+opt.title;
+//	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
+//	document.title = opt.title;
+//	addVideoToDivAfterFinishedManual(opt);
+	window.location.href = "http://radiorolling.com/music/manualplay/vid?vid="+opt.id+"&plName="+plName;
 }
 
 function getPlaylist() {
