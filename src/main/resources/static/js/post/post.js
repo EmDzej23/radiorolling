@@ -73,7 +73,7 @@ $(document).ready(function(){
 	    $.ajax({
 	        type: "POST",
 	        enctype: 'multipart/form-data',
-	        url: appRoot+"/admin/api/user/saveImg",
+	        url: appRoot+"/admin/api/post/saveImg",
 	        data: data,
 	        processData: false,
 	        contentType: false,
@@ -94,29 +94,17 @@ $(document).ready(function(){
     
 });
 function sendPostData() {
-	var postDto = {};
-	postDto.title = $('#title').val();
-	postDto.post_html = $('#preview').text();
-	postDto.date = new Date();
-	postDto.author_id = 1;
-	postDto.body = "";
-	postDto.images = [];
-	var tags = $("#tags").val().split(",");
-	var imagePost = {};
+	var videoDto = {};
+	videoDto.description = $('#title').val();
+	videoDto.quote = $('#preview').text();
+	videoDto.started = new Date();
 	var imagePost = $($("img")[0]).attr("src");
 	var tagsToSend = [];
 	var imgsToSend = [];
-	for (var i = 0;i<tags.length;i++) {
-		tagsToSend.push({id:null,name:tags[i]});
-	}
-	postDto.tags = tagsToSend;
-	postDto.image = {id:null,url:imagePost};
-	postDto.comments = [];
-	postDto.postType = $("input[type=radio]:checked").val();
-	
+	videoDto.ytId = imagePost;
 	PostData({
-		url: appRoot+"/admin/api/post/add",
-		data: JSON.stringify(postDto)
+		url: appRoot+"/admin/api/post/add?playlist_id="+$('#pl_id').val(),
+		data: JSON.stringify(videoDto)
 	},writeData,function(response) {
 		console.log("error");
 		console.log(response);

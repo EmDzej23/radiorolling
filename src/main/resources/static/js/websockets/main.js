@@ -207,7 +207,7 @@ function addVideoToDiv(options) {
 					+ options.id.split("?")[0] + "?start="+offset
 							+ '&rel=0&amp;&showinfo=0&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
-	$("#videoQuote").text("\""+options.videoQuote+"\"");
+	$("#videoQuote").text(""+options.videoQuote+"");
 	ytp();
 }
 var player;

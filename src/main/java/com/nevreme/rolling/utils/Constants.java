@@ -4,6 +4,7 @@ import java.io.File;
 
 public class Constants {
 	public final static String APP_ROOT = "http://radiorolling.com";
-	public final static String IMAGE_PATH = "C:"+ File.separator + "Users" +File.separator +"Marko" +File.separator + "Documents" +File.separator +"temp";
-	public final static String IMAGES_CONFIG_LOCATION = "file:///C:/Users/Marko/Documents/temp/";
+	public final static String IMAGE_PATH = File.separator + "var" + File.separator + "lib" + File.separator + "rolling"
+			+ File.separator + "res" + File.separator + "images";
+	public final static String IMAGES_CONFIG_LOCATION = "file:///var/lib/rolling/res/images/";
 }

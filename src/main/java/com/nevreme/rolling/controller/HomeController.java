@@ -87,7 +87,7 @@ public class HomeController {
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.addObject("m_title","Rolling Music ("+plName+")");
 		modelAndView.addObject("m_url","http://radiorolling.com/music/manualplay/vid?vid="+vid+"&plName="+plName);
-		modelAndView.addObject("m_desc","Song:"+video.getDescription());
+		modelAndView.addObject("m_desc",video.getDescription());
 		modelAndView.addObject("m_image","https://i.ytimg.com/vi/"+vid+"/hqdefault.jpg");
 		modelAndView.setViewName("admin/staticalMusic");
 		return modelAndView;

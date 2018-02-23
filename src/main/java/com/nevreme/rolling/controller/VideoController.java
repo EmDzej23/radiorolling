@@ -87,7 +87,7 @@ public class VideoController {
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.addObject("m_title","Rolling Video ("+plName+")");
 		modelAndView.addObject("m_url","http://radiorolling.com/video/manualplay/vid?vid="+vid+"&plName="+plName);
-		modelAndView.addObject("m_desc","Video:"+video.getDescription());
+		modelAndView.addObject("m_desc",video.getDescription());
 		modelAndView.addObject("m_image","https://i.ytimg.com/vi/"+vid+"/hqdefault.jpg");
 		modelAndView.setViewName("admin/staticalVideo");
 		return modelAndView;

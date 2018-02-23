@@ -152,7 +152,9 @@ function afterPlaylistRequested(pl) {
 		var zero = new Date(currentSong).getMinutes() < 10 ? "0" : "";
 		var zeroH = new Date(currentSong).getHours() < 10 ? "0" : "";
 		$("#songs").append(
-				'<li class="vidstoplay" id = "vid_'+i+'">'
+				'<li class="vidstoplay" id = "vid_'+i+'"><div class="media"><div class="media-left image-left-custom"><img alt="No Image" src="https://i.ytimg.com/vi/'
+				+ sortedList[i].ytId
+				+ '/hqdefault.jpg"></div><div class="media-body">'
 				+ sortedList[i].description
 				+ '</div></div></li>');
 		$("#vid_"+i).click(function(){

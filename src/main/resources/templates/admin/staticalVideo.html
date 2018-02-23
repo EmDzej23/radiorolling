@@ -26,7 +26,14 @@
 <meta property="og:image:url" th:content="${m_image}" >
 <meta property="og:image:secure_url" th:content="${m_image}" >
 <meta property="og:image:width" content="1200" >
-<meta property="og:image:height" content="800" >
+<meta property="og:image:height" content="900" >
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Radio__Rolling">
+<meta name="twitter:title" th:content="${m_title}">
+<meta name="twitter:description" th:content="${m_desc}">
+<meta name="twitter:image" th:content="${m_image}">
+
 <link rel="stylesheet" type="text/css"
 	href="../../theme/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -75,6 +82,7 @@
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
 									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
+									<li><a href="http://radiorolling.com/text/">Text</a></li>
 									<li><a href="http://radiorolling.com/logout">Logout</a></li>
 									<li><a href="http://radiorolling.com/admin/setup">Videos
 											setup</a></li>
@@ -85,6 +93,7 @@
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
 									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
+									<li><a href="http://radiorolling.com/text/">Text</a></li>
 									<li><a href="http://radiorolling.com/login">Login</a></li>
 								</ul>
 							</div>
@@ -129,7 +138,7 @@
 											href="https://www.facebook.com/sharer/sharer.php?u=${m_url};src=sdkpreparse"
 											class="fb-xfbml-parse-ignore">Share</a>
 									</div>
-									<div id="autoplaySelect" class="btn btn-default">Autoplay</div>
+									<div id="autoplaySelect" class="btn btn-default">Radio mode</div>
 								</div>
 
 							</div>

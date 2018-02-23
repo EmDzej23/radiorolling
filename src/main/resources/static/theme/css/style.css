@@ -119,7 +119,7 @@ a.logo b{color:#09c}
 .catg3_snav li{border-top:1px solid #f1f1f1; display:block; padding-top:15px; padding-bottom:5px}
 .catg3_snav .media-left{width:100px; height:70px}
 .catg3_snav .media-left:hover{opacity:0.75}
-.catg3_snav .media-left > img{width:100%; height:100%}
+.catg3_snav .media-left > img{width:100%; height:auto}
 .catg5_nav li{border-top:medium none; float:left; padding-bottom:0; padding-top:5px; width:49%}
 .right_bar{float:left; display:inline; width:100%}
 .ppost_nav li{border-top:none}

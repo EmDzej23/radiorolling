@@ -50,4 +50,20 @@ public class AdminController {
 		modelAndView.setViewName("admin/playlistAdd");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = { "/postAdd/", "/postAdd" }, method = RequestMethod.GET)
+	public ModelAndView postAdd() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot", System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/post");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/recommendAdd/", "/recommendAdd" }, method = RequestMethod.GET)
+	public ModelAndView recommendAdd() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot", System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/postR");
+		return modelAndView;
+	}
 }
