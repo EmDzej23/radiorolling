@@ -1,169 +1,605 @@
-
 <!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-111192516-2"></script>
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-111192516-2"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
 
-  gtag('config', 'UA-111192516-2');
+	gtag('config', 'UA-111192516-2');
 </script>
-<meta content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc" name="google-site-verification" />
-<meta content="Best Music, Video and Text content from all around the web." name="description" />
+<meta content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc"
+	name="google-site-verification">
+<meta
+	content="Ovaj web sajt predstavlja početak razvoja nove radio stanice u Srbiji. 
+Rolling je svako kotrljanje koje ne može da se zaustavi. 
+Rolling je svako kretanje koje nema kraj. 
+Rolling je okretanje i pomeranje uz okretački ritam muzike. 
+Rolling je lagano zaobilaženje svih malih svakodnevnih prepreka. 
+Rolling je širenje pozitivne energije, ljubavi, kulture, lepote, druženja, osmeha... 
+Rolling su ljudi koji se kreću, kotrljaju, okreću i igraju tako da ih niko i ništa nikada ne može zaustaviti. 
+Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
+	name="description">
 <title>Rolling Radio</title>
-<meta charset="utf-8" />
-<meta content="IE=edge" http-equiv="X-UA-Compatible" />
-<meta content="width=device-width, initial-scale=1" name="viewport" />
-<meta content="1498376340278074" property="fb:app_id" />
-<meta content="http://radiorolling.com" property="og:url" />
-<meta content="article" property="og:type" />
-<meta content="Radio Rolling" property="og:title" />
-<meta content="Music, Video, Text and Recommended content from around the web" property="og:description" />
-<meta content="http://nevreme.com/res/images/20182101446/rolllogo.png" property="og:image" />
-<meta content="1200" property="og:image:width" />
-<meta content="630" property="og:image:height" />
-<link href="../theme/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/animate.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/li-scroller.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/slick.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/theme.css" rel="stylesheet" type="text/css" />
-<link href="../theme/css/style.css" rel="stylesheet" type="text/css" />
-<link href="../css/jquery-comments.css" rel="stylesheet" type="text/css" />
-<link href="../../images/favicon.ico" rel="icon" />
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="1498376340278074" property="fb:app_id">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="radiorolling.com">
+<meta property="og:title" content="Radio Rolling">
+<meta property="og:description"
+	content="Muzika, Video, Tekstovi i Preporuke na jednom mestu">
+<meta property="og:image"
+	content="http://radiorolling.com/res/images/20182101446/rolllogo.png">
+<meta property="og:image:url"
+	content="http://radiorolling.com/res/images/20182101446/rolllogo.png">
+<meta property="og:image:secure_url"
+	content="http://radiorolling.com/res/images/20182101446/rolllogo.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="radiorolling.com">
+<meta name="twitter:title" content="Radio Rolling">
+<meta name="twitter:description"
+	content="Muzika, Video, Tekstovi i Preporuke na jednom mestu">
+<meta name="twitter:image"
+	content="http://radiorolling.com/res/images/20182101446/rolllogo.png">
+
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+<link href="../theme/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="../theme/css/animate.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/li-scroller.css" rel="stylesheet"
+	type="text/css">
+<link href="../theme/css/slick.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/jquery-comments.css" rel="stylesheet" type="text/css">
+<link href="../../images/favicon.ico" rel="icon">
 <script type="text/javascript">
 	var timerStart = Date.now();
 </script>
 <script>
-  window.fbAsyncInit = function() {
-	FB.init({
-	  appId            : '1498376340278074',
-	  autoLogAppEvents : true,
-	  xfbml            : true,
-	  version          : 'v2.10'
-	});
-	FB.AppEvents.logPageView();
-  };
- 
-  (function(d, s, id){
-	 var js, fjs = d.getElementsByTagName(s)[0];
-	 if (d.getElementById(id)) {return;}
-	 js = d.createElement(s); js.id = id;
-	 js.src = "//connect.facebook.net/en_US/sdk.js";
-	 fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+	window.fbAsyncInit = function() {
+		FB.init({
+			appId : '1498376340278074',
+			autoLogAppEvents : true,
+			xfbml : true,
+			version : 'v2.10'
+		});
+		FB.AppEvents.logPageView();
+	};
+
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 </script>
+<style>
+.dropdownPlaylistMusic {
+	font-size: 0.86em;
+	font-weight: bold;
+}
+</style>
 </head>
-<body>
-	<div id="preloader">
-		<div id="status">&nbsp;</div>
+<body style="overflow: visible;">
+	<div id="preloader" style="display: none;">
+		<div id="status" style="display: none;">&nbsp;</div>
 	</div>
 	<div class="container">
 		<div class="box_wrapper">
 			<header id="header">
 				<div class="header_top">
 					<nav class="navbar navbar-default" role="navigation">
-						<div class="container-fluid">
-							<div class="navbar-header">
-								<button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar" data-toggle="collapse" type="button">
-									<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-								</button>
-							</div>
-							
-							<div class="navbar-collapse collapse" id="navbar">
-								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/">Video</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
-								</ul>
-							</div>
+						<div sec:authorize="isAnonymous()" class="container-fluid">
+							<a href="/login" style="">Login</a> <a
+								href="/music/random" style="">Random
+								pesma</a><a href="/contact" style="">O
+								nama i kontakt</a>
+						</div>
+						<div sec:authorize="isAuthenticated()" class="container-fluid">
+							<a href="/admin/setup" style="">Edit
+								playlist</a> <a href="/music/random" style="">Random
+								pesma</a> <a href="/contact" style="">O
+								nama i kontakt</a>
 						</div>
 					</nav>
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="#"><b>Rolling</b> Tekstovi<span id="playlistName">USKORO!!!</span></a>
+						<a class="logo" href="#"><b>Radio</b> Rolling</a> <img
+							src="/res/images/20182101446/rolllogo.png" style="width: 41px;">
 					</div>
 				</div>
 			</header>
 			<section id="contentbody">
 				<div class="row">
-					<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="row">
 							<div class="middle_bar">
+								<div class="single_post_content" id="gotoradio">
+									<h4 id="nr" class="song_title post_title wow  animated animated animated animated animated animated" style="visibility: visible; font-size: 1.55em;"></h4>
+								</div>
+								<div class="single_post_content">
+									<h4
+										class="quoteOfTheDay song_title post_title wow  animated animated animated animated"
+										style="visibility: visible; font-size: 1.55em;"></h4>
+								</div>
 								<div class="single_post_area">
-									<!-- 									<div class="row"> -->
-									<!-- 										<div class="col-md-9"> -->
-									<!-- 											<h2 class="song_title wow  animated" -->
-									<!-- 												style="visibility: visible;"></h2> -->
-									<!-- 										</div> -->
-									<!-- 										<div class="col-md-3"> -->
-									<!-- 											<img id = "tv_kanal_slika" src="" -->
-									<!-- 												style="width: 30%; float: right;"> -->
-									<!-- 										</div> -->
-									<!-- 									</div> -->
-									<h2 class="song_title wow "></h2>
+									<h2 class="song_title wow  animated"
+										style="visibility: visible;"></h2>
 									<div class="single_post_content">
-									USKORO, ROLLING TEKSTOVI
+										<h2 class="song_title post_title wow  animated animated"
+											style="visibility: visible;">PREDLOZI</h2>
+										<div class="row">
+
+											<!-- Grid column -->
+											<div class="col-lg-3 col-md-12 mb-3" id="content2">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay">
+														<img id="songImg" src="" class="img-fluid" alt="wider">
+														<a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong id="dSongTitle">Pesma dana</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong id="dSongDesc"></strong>
+														</h5>
+
+														<p class="card-text" id="dSongPl"></p>
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3 " id="content3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay">
+														<img id="videoImg" src="" class="img-fluid" alt="wider">
+														<a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong id="dVideoTitle">Video dana</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong id="dVideoDesc"></strong>
+														</h5>
+
+														<p class="card-text" id="dVideoPl"></p>
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3" id="content1">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay">
+														<img id="textImg" src="" class="img-fluid" alt="wider">
+														<a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong id="dTextTitle">Tekst dana</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong id="dTextDesc"></strong>
+														</h5>
+
+														<p class="card-text" id="dTextPl"></p>
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3" id="content4">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider"
+													style="text-align: center;">
+
+													<!--Card image-->
+													<div class="view overlay">
+														<img id="recommendImg" src="" class="img-fluid"
+															alt="wider"> <a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Preporuka dana</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong id="dRecName">Preporuka dana</strong>
+														</h5>
+
+														<p class="card-text" id="dRecPl"></p>
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+										</div>
+
+									</div>
+									<div class="single_post_content">
+										<h2
+											class="song_title post_title wow  animated animated animated animated animated"
+											style="visibility: visible;">SCROLLING</h2>
+										<div class="row">
+
+											<!-- Grid column -->
+											<div class="col-lg-4 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider" id="scrolling1">
+
+													<!--Card image-->
+													<div class="view overlay" style="text-align: center;">
+														<img alt="wider" class="img-fluid"
+															src="/res/images/20183252342/muzika.jpg" style="max-height: 250px;"> <a
+															href="#!" >
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Muzika</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Zanimljivosti</strong>
+														</h5>
+
+														<p class="card-text">Čitajte zanimljivosti iz muzike</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<!-- Grid column -->
+											<div class="col-lg-4 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider" id="scrolling2">
+
+													<!--Card image-->
+													<div class="view overlay" style="text-align: center;">
+														<img alt="wider" class="img-fluid"
+															src="/res/images/20183231327/sport.jpg" style="max-height: 250px;"> <a
+															href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Sport</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Zanimljivosti</strong>
+														</h5>
+
+														<p class="card-text">Čitajte zanimljivosti iz sporta</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-4 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider" id="scrolling3">
+
+													<!--Card image-->
+													<div class="view overlay" style="text-align: center;">
+														<img alt="wider" class="img-fluid"
+															src="/res/images/2018431224/Movie.jpg" style="max-height: 250px;"> <a
+															href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Filmovi</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Zanimljivosti</strong>
+														</h5>
+
+														<p class="card-text">Čitajte zanimljivosti iz sveta filma</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+										</div>
+
+									</div>
+									<div class="single_post_content">
+										<h2
+											class="song_title post_title wow  animated animated animated"
+											style="visibility: visible;">SADRŽAJ</h2>
+										<div class="row">
+
+											<!-- Grid column -->
+											<div class="col-lg-3 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay" id="musicContent">
+														<img src="/res/images/2018362217/4.png" class="img-fluid"
+															alt="wider"> <a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Muzika</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Plejlista:</strong><select
+																class="dropdownPlaylistMusic form-control"
+																id="dropdownMusic" style="font-size: 13px;"></select>
+														</h5>
+
+														<p class="card-text">Slušajte automatski uređenu
+															muziku u radio modu ili sami puštajte u manual modu</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay" id="videoContent">
+														<img src="/res/images/2018362217/2.png" class="img-fluid"
+															alt="wider"> <a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Video snimci</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Plejlista:</strong><select
+																class="dropdownPlaylistMusic form-control"
+																id="dropdownVideo" style="font-size: 13px;"></select>
+														</h5>
+
+														<p class="card-text">Slušajte automatski uređene video
+															snimke u radio modu ili sami puštajte u manual modu</p>
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay" id="textContent">
+														<img src="/res/images/2018362216/1.png" class="img-fluid"
+															alt="wider"> <a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Tekstovi</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Oblast:</strong><select
+																class="dropdownPlaylistMusic form-control"
+																id="dropdownTekst" style="font-size: 13px;"></select>
+														</h5>
+
+														<p class="card-text">Čitajte odabranu poeziju,
+															autorske tekstove, intervjue...</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<div class="col-lg-3 col-md-12 mb-3">
+
+												<!--Card Wider-->
+												<div class="card card-cascade wider">
+
+													<!--Card image-->
+													<div class="view overlay" id="recContent">
+														<img src="/res/images/2018362217/3.png" class="img-fluid"
+															alt="wider"> <a href="#!">
+															<div
+																class="mask rgba-white-slight waves-effect waves-light"></div>
+														</a>
+													</div>
+													<!--/Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Title-->
+														<h4 class="card-title">
+															<strong>Preporuke</strong>
+														</h4>
+														<h5 class="indigo-text">
+															<strong>Oblast:</strong><select
+																class="dropdownPlaylistMusic form-control"
+																id="dropdownRec" style="font-size: 13px;"></select>
+														</h5>
+
+														<p class="card-text">Preporuka za knjige, filmove,
+															kulturne događaje, tv program...</p>
+
+													</div>
+													<!--/.Card content-->
+
+												</div>
+												<!--/.Card Wider-->
+
+											</div>
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+											<!-- Grid column -->
+
+										</div>
+
 									</div>
 									<div class="post_footer">
-										<br />
-										<p id="videoQuote" style="text-align: center; font-size: 25px;"></p>
+										<br>
+										<p id="videoQuote"
+											style="text-align: center; font-size: 25px;"></p>
 									</div>
-									<div class="btn btn-default" id="fb_share_btn">Share</div>
+
 								</div>
 
 							</div>
 
 						</div>
-						<div class="row">
-							<div class=" wow fadeInLeft animated animated animated" style="visibility: visible; animation-name: fadeInLeft;">
-								<div class="fb-comments" data-href="" data-numposts="5" data-width="100%" id="link2"></div>
-								<script>
-										var id = window.location.href.split("/")[window.location.href.split("/").length-1];
-										var strLink = "http://radiorolling.com/video/" + id;
-										console.log(strLink);
-										document.getElementById("link2").setAttribute("data-href",strLink);
-										</script>
 
-							</div>
-						</div>
 					</div>
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="row">
-							<div class="right_bar">
-								<div class="single_leftbar wow fadeInDown">
-									<h2>
-										<span>Now rolling</span> <span id="clock"></span>
-									</h2>
-									<div class="singleleft_inner">
-										<ul class="catg3_snav ppost_nav wow fadeInDown" id="songs">
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="row">
-							<div class="right_bar">
-								<div class="playLists single_leftbar wow fadeInDown">
-									<h2>
-										<span>Ostale oblasti</span>
-									</h2>
-									<div class="singleleft_inner">
-										<ul class="catg3_snav ppost_nav wow fadeInDown" id="plists">
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</section>
 			<footer id="footer">
@@ -188,7 +624,8 @@
 	<script src="../theme/js/jquery.min.js"></script>
 	<script src="../theme/js/jquery-ui.min.js"></script>
 	<script src="../theme/js/wow.min.js"></script>
-	<script src="../theme/js/bootstrap.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="../theme/js/slick.min.js"></script>
 	<script src="../theme/js/jquery.li-scroller.1.0.js"></script>
 	<script src="../theme/js/custom.js"></script>
@@ -196,76 +633,75 @@
 	<script src="../js/dynamicHtmlLib.js" type="text/javascript"></script>
 	<script src="../js/websockets/sock.min.js"></script>
 	<script src="../js/websockets/stomp.min.js"></script>
-	<script type="text/javascript">
-       var appRoot = null;
-       var ws = null;
-//        var playlist_id = null;
-//        var lastStartedTime = 0;
-       
-//        function updateClock() {
-//     	    var currentTime = new Date();
-//     	    var currentHoursAP = currentTime.getHours();
-//     	    var currentHours = currentTime.getHours();
-//     	    var currentMinutes = currentTime.getMinutes();
-//     	    var currentSeconds = currentTime.getSeconds();
-    	    
-//     	    // Pad the minutes and seconds with leading zeros, if required
-//     	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-//     	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-    	    
-//     	    // Choose either "AM" or "PM" as appropriate
-//     	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
-    	    
-//     	    // Convert the hours component to 12-hour format if needed
-//     	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
-    	    
-//     	    // Convert an hours component of "0" to "12"
-//     	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
-    	    
-//     	    // Compose the string for display
-//     	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
-    	    
-//     	    $("#clock").html(currentTimeString);
-//     	}
-       
-//        function updateRollingTime() {
-    	
-//    	    var myTime = new Date(lastStartedTime);
-//    	    var currentMinutes = myTime.getMinutes();
-//    	    var currentSeconds = myTime.getSeconds();
-//    	 	var currentTimeString = "...Roll on...";
-// 	    if (currentMinutes !== 0 || currentSeconds !== 0) {
-// 	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-// 	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-// 	 		lastStartedTime -= 1000;
-// 	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
-// 	 	}
-//    	    // Pad the minutes and seconds with leading zeros, if required
-//    	    $("#clock").html(currentTimeString);
-   	    
-   	    
-//    	}
-//        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
-//        {
-//        	FB.ui({
-//        		method: 'share_open_graph',
-//        		action_type: 'og.shares',
-//        		action_properties: JSON.stringify({
-//        			object: {
-//        				'og:url': overrideLink,
-//        				'og:title': overrideTitle,
-//        				'og:description': overrideDescription,
-//        				'og:image': overrideImage
-//        			}
-//        		})
-//        	},
-//        	function (response) {
-//        	// Action after response
-//        	});
-//        }
-       
+	<script type="text/javascript" th:inline="javascript">
+       var appRoot = [[${appRoot}]];
+		var ws = null;
+		//        var playlist_id = null;
+		//        var lastStartedTime = 0;
+
+		//        function updateClock() {
+		//     	    var currentTime = new Date();
+		//     	    var currentHoursAP = currentTime.getHours();
+		//     	    var currentHours = currentTime.getHours();
+		//     	    var currentMinutes = currentTime.getMinutes();
+		//     	    var currentSeconds = currentTime.getSeconds();
+
+		//     	    // Pad the minutes and seconds with leading zeros, if required
+		//     	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+		//     	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+
+		//     	    // Choose either "AM" or "PM" as appropriate
+		//     	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
+
+		//     	    // Convert the hours component to 12-hour format if needed
+		//     	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
+
+		//     	    // Convert an hours component of "0" to "12"
+		//     	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
+
+		//     	    // Compose the string for display
+		//     	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
+
+		//     	    $("#clock").html(currentTimeString);
+		//     	}
+
+		//        function updateRollingTime() {
+
+		//    	    var myTime = new Date(lastStartedTime);
+		//    	    var currentMinutes = myTime.getMinutes();
+		//    	    var currentSeconds = myTime.getSeconds();
+		//    	 	var currentTimeString = "...Roll on...";
+		// 	    if (currentMinutes !== 0 || currentSeconds !== 0) {
+		// 	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+		// 	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
+		// 	 		lastStartedTime -= 1000;
+		// 	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
+		// 	 	}
+		//    	    // Pad the minutes and seconds with leading zeros, if required
+		//    	    $("#clock").html(currentTimeString);
+
+		//    	}
+		//        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
+		//        {
+		//        	FB.ui({
+		//        		method: 'share_open_graph',
+		//        		action_type: 'og.shares',
+		//        		action_properties: JSON.stringify({
+		//        			object: {
+		//        				'og:url': overrideLink,
+		//        				'og:title': overrideTitle,
+		//        				'og:description': overrideDescription,
+		//        				'og:image': overrideImage
+		//        			}
+		//        		})
+		//        	},
+		//        	function (response) {
+		//        	// Action after response
+		//        	});
+		//        }
 	</script>
 
-<!-- 	<script src="../js/websockets/text.js"></script> -->
+	<script src="../js/websockets/startPage.js"></script>
 
-</body></html>
+</body>
+</html>

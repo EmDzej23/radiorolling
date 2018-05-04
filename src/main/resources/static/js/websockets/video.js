@@ -20,7 +20,7 @@ $(document).ready(function() {
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
 	$("#manualplaySelect").click(function(){
-		window.location.href = "http://radiorolling.com/video/manualplay/"+plName;
+		window.location.href = "/video/manualplay/"+plName;
 	});
 });
 var plName;
@@ -29,17 +29,17 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "http://radiorolling.com/public/api/playlist/t?type=2"
+				url : "/public/api/playlist/t?type=2"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/video/autoplay/'
+									'<li><div class="media"><a class="media-left" href="/video/autoplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/video/autoplay/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="/video/autoplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -88,14 +88,14 @@ function getVideo() {
 		requestType : '1'
 	};
 	FetchData({
-		url : appRoot + "/public/nowPlaying/" + playlist_id
+		url : "/public/nowPlaying/" + playlist_id
 	}, afterVideoRequested);
 }
 
 function getPlaylist() {
 	// todo add playlists logic
 	FetchData({
-		url : appRoot + "/public/api/playlist/" + playlist_id
+		url : "/public/api/playlist/" + playlist_id
 	}, afterPlaylistRequested);
 }
 
@@ -112,7 +112,7 @@ function afterPlaylistRequested(pl) {
 		else urlName += pUrl[i] + "%20";
 	}
 	plName = urlName;
-	shareDetails.url = "http://radiorolling.com/video/autoplay/"+urlName;
+	shareDetails.url = "/video/autoplay/"+urlName;
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();

@@ -1,6 +1,11 @@
 package com.nevreme.rolling.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nevreme.rolling.dao.mapping.MapperConfig;
+import com.nevreme.rolling.dto.VideoDto;
 import com.nevreme.rolling.model.Playlist;
 import com.nevreme.rolling.model.Video;
 import com.nevreme.rolling.service.PlaylistService;
@@ -20,6 +29,9 @@ public class HomeController {
 	
 	@Autowired
 	VideoService videoService;
+	
+	@Autowired
+	MapperConfig mapper;
 	
 	@Autowired
 	PlaylistService playlistService;
@@ -55,6 +67,7 @@ public class HomeController {
 		modelAndView.addObject("m_title","Rolling Music (Rolling)");
 		modelAndView.addObject("m_url","http://radiorolling.com/music/manualplay/Rolling");
 		modelAndView.addObject("m_desc","Manual Mode");
+		modelAndView.addObject("filter","");
 		modelAndView.addObject("m_image",playlistService.findOne(playlist_id).getImage());
 		modelAndView.setViewName("admin/staticalMusic");
 		return modelAndView;
@@ -71,13 +84,14 @@ public class HomeController {
 		modelAndView.addObject("m_title","Rolling Music ("+name+")");
 		modelAndView.addObject("m_url","http://radiorolling.com/music/manualplay/"+name);
 		modelAndView.addObject("m_desc","Manual Mode");
+		modelAndView.addObject("filter","");
 		modelAndView.addObject("m_image",playlistService.findOne(playlist_id).getImage());
 		modelAndView.setViewName("admin/staticalMusic");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "manualplay/vid", method = RequestMethod.GET)
-	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName) {
+	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName, @RequestParam String filter) {
 		ModelAndView modelAndView = new ModelAndView();
 		Video video = videoService.findVideoByYtId(vid);
 		Long playlist_id = playlistService.getPlaylistByName(plName);
@@ -88,6 +102,7 @@ public class HomeController {
 		modelAndView.addObject("m_title","Rolling Music ("+plName+")");
 		modelAndView.addObject("m_url","http://radiorolling.com/music/manualplay/vid?vid="+vid+"&plName="+plName);
 		modelAndView.addObject("m_desc",video.getDescription());
+		modelAndView.addObject("filter",filter);
 		modelAndView.addObject("m_image","https://i.ytimg.com/vi/"+vid+"/hqdefault.jpg");
 		modelAndView.setViewName("admin/staticalMusic");
 		return modelAndView;
@@ -105,6 +120,38 @@ public class HomeController {
 		modelAndView.addObject("m_desc","Radio Mode");
 		modelAndView.addObject("m_image",playlistService.findOne(playlist_id).getImage());
 		modelAndView.setViewName("admin/home");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "random", method = RequestMethod.GET)
+	public ModelAndView random() throws JsonProcessingException {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/random");
+		modelAndView.addObject("m_title","Rolling Random Song");
+		modelAndView.addObject("m_url","http://radiorolling.com/music/random");
+		modelAndView.addObject("m_desc","Listen to random song from our playlists");
+		modelAndView.addObject("m_image","http://radiorolling.com/res/images/2018323936/dd.png");
+		List<Video> videos = videoService.findAll();
+		Random rand = new Random();
+		int randomNum = rand.nextInt(videos.size());
+		while (videos.get(randomNum).getPlaylist().getPlaylist_type()!=1) {
+			randomNum = rand.nextInt(videos.size());
+		}
+		modelAndView.addObject("vidd",new ObjectMapper().writeValueAsString(mapper.getMapper().map(videos.get(randomNum), VideoDto.class)));
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "scrolling", method = RequestMethod.GET)
+	public ModelAndView scrolling() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/scrolling");
+		modelAndView.addObject("playlist_id","1298");
+		modelAndView.addObject("m_title","ScRolling Music");
+		modelAndView.addObject("m_url","http://radiorolling.com/music/scrolling");
+		modelAndView.addObject("m_desc","Let it ScRoll");
+		modelAndView.addObject("m_image","http://radiorolling.com/res/images/20183252342/muzika.jpg");
 		return modelAndView;
 	}
 	

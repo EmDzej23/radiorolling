@@ -1,7 +1,9 @@
 package com.nevreme.rolling.model;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -22,6 +28,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "video", indexes = { @Index(columnList = "playlist_id", name = "idx_playlist_id"),
 		@Index(columnList = "state", name = "idx_state") })
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
 public class Video {
 
 	@Id
@@ -32,6 +39,7 @@ public class Video {
 
 	private Timestamp started;
 
+	@Column(name="yt_id")
 	private String ytId;
 
 	private int duration;
@@ -42,8 +50,15 @@ public class Video {
 	
 	private String quote;
 	
+	@Column(name="daily_recommend")
+	private int dailyRecommend;
+	
 	@Column(name="video_offset")
 	private int offset;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "post_tag",  joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	private Set<Tag> tags;
 
 	@ManyToOne
 	@JoinColumn(name = "playlist_id")
@@ -128,7 +143,21 @@ public class Video {
 	public void setOffset(int offset) {
 		this.offset = offset;
 	}
-	
-	
 
+	public int getDailyRecommend() {
+		return dailyRecommend;
+	}
+
+	public void setDailyRecommend(int dailyRecommend) {
+		this.dailyRecommend = dailyRecommend;
+	}
+
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+	
 }

@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nevreme.rolling.dto.TagDto;
 import com.nevreme.rolling.dto.VideoDto;
+import com.nevreme.rolling.model.Tag;
 import com.nevreme.rolling.model.Video;
 import com.nevreme.rolling.service.AbstractService;
 import com.nevreme.rolling.service.PlaylistService;
+import com.nevreme.rolling.service.TagService;
 import com.nevreme.rolling.service.VideoService;
 
 @Controller
@@ -34,6 +37,9 @@ public class TextRestController extends AbstractRestController<Video, VideoDto, 
 
 	@Autowired
 	VideoService videoService;
+	
+	@Autowired
+	TagService tagService;
 	
 	@Autowired
 	PlaylistService playlistService;
@@ -48,10 +54,29 @@ public class TextRestController extends AbstractRestController<Video, VideoDto, 
 	@RequestMapping(value = "/add")
 	public @ResponseBody String get2PtsShotsForAPlayer(@RequestBody VideoDto videoDto, @RequestParam Long playlist_id) {
 		Video video = new Video();
+		
+		List<Tag> allTags = tagService.findAll();
+		for (TagDto tagDto : videoDto.getTags()) {
+			for (Tag tag : allTags) {
+				if (tag.getName().equals(tagDto.getName())) {
+					tagDto.setId(tag.getId());
+				}
+			}
+		}
+		Set<Tag> postTags = new HashSet<>();
+		for (TagDto tagDto : videoDto.getTags()) {
+			Tag newTag = new Tag();
+			newTag.setId(tagDto.getId());
+			newTag.setName(tagDto.getName());
+			postTags.add(newTag);
+		}
+		
 		video.setStarted(new Timestamp(new Date().getTime()));
 		video.setDescription(videoDto.getDescription());
 		video.setQuote(videoDto.getQuote());
 		video.setYtId(videoDto.getYtId());
+		video.setState(1);
+		video.setTags(postTags);
 		video.setPlaylist(playlistService.findOne(playlist_id));
 		videoService.insertNewVideo(video);
 

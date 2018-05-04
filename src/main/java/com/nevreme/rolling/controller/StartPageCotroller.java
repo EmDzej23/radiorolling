@@ -30,7 +30,7 @@ public class StartPageCotroller {
 		ModelAndView modelAndView = new ModelAndView();
 //		Long playlist_id = playlistService.getPlaylistByName("Inserti Iz Filmova");
 //		modelAndView.addObject("playlist_id",playlist_id);
-//		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 //		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
 		modelAndView.setViewName("startPage");
 		return modelAndView;

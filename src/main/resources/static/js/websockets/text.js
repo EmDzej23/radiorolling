@@ -18,23 +18,72 @@ $(document).ready(function() {
 	$("#fb_share_btn").click(function(){
 		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
 	});
+	$("#searchBox").keyup(function() {
+		$("#songs").children().remove();
+		var tekst = $("#searchBox").val();
+		filter = tekst;
+		newList = getFilteredSongs();
+		
+		for (var i = 0;i<newList.length;i++) { 
+			$("#songs").append(
+					'<li class="vidstoplay" id = "vid_'+i+'"><div class="media"><div class="media-left image-left-custom"><img alt="No Image" src="'
+					+ newList[i].ytId
+					+ '"></div><div class="media-body">'
+					+ newList[i].description
+					+ '</div></div></li>');
+		$("#vid_"+i).click(function(){
+			var ind = parseInt(this.id.split("_")[1]);
+			var options = {
+					duration : newList[ind].duration,
+					title : newList[ind].description,
+					id : newList[ind].id,
+					videoQuote : newList[ind].quote,
+					off : newList[ind].offset
+			}
+			goToVideo(options);
+		});
+		}
+		});
 });
 var shareDetails={};
+var newList = [];
+function getFilteredSongs() {
+	newList = [];
+	var filters = [];
+	if (filter.indexOf(",")>-1) {
+		filters = filter.split(",");
+	}
+	else {
+		filters.push(filter);
+	}
+	for (var i = 0;i<myVideos.length;i++) {
+		var isItContained = false;
+		for (var j = 0;j<filters.length;j++) {
+			if (myVideos[i].description.toUpperCase().indexOf(filters[j].toUpperCase())>-1) {
+				isItContained = true;
+			}
+		}
+		if (isItContained) {
+			newList.push(myVideos[i]);
+		}
+	}
+	return newList;
+}
 function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "http://radiorolling.com/public/api/playlist/t?type=3"
+				url : "/public/api/playlist/t?type=3"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="http://radiorolling.com/text/'
+									'<li><div class="media"><a class="media-left" href="/text/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="http://radiorolling.com/text/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="/text/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -52,13 +101,13 @@ function connect() {
 
 var plName;
 function goToVideo(opt) {
-	window.location.href = "http://radiorolling.com/text/t?text="+opt.id+"&plName="+plName;
+	window.location.href = "/text/t?text="+opt.id+"&plName="+plName;
 }
 
 function getPlaylist() {
 	// todo add playlists logic
 	FetchData({
-		url : appRoot + "/public/api/playlist/" + playlist_id
+		url : "/public/api/playlist/" + playlist_id
 	}, afterPlaylistRequested);
 }
 
@@ -97,7 +146,7 @@ function afterPlaylistRequested(pl) {
 				off : current.offset,
 				vid_id:current.id
 		}
-		shareDetails.url = "http://radiorolling.com/text/t?text="+current.id+"&plName="+urlName;
+		shareDetails.url = "/text/t?text="+current.id+"&plName="+urlName;
 		shareDetails.description = "Naslov : "+current.description;
 		//TODO:Add image to video
 		shareDetails.image = current.image
@@ -118,7 +167,7 @@ function afterPlaylistRequested(pl) {
 				videoQuote : chosenVid.quote,
 				off : chosenVid.offset
 		}
-		shareDetails.url = "http://radiorolling.com/text/t?text="+chosenVid.id+"&plName="+urlName;
+		shareDetails.url = "/text/t?text="+chosenVid.id+"&plName="+urlName;
 		shareDetails.description = "Video : "+chosenVid.description;
 		shareDetails.image = chosenVid.image;
 	}

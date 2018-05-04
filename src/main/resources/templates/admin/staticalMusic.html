@@ -20,8 +20,8 @@
 <meta property="fb:app_id" content="1498376340278074" />
 <meta property="og:type" content="article" >
 <meta property="og:url" th:content="${m_url}" >
-<meta property="og:title" th:content="${m_title}" >
-<meta property="og:description" th:content="${m_desc}" >
+<meta property="og:title" th:content="${m_desc}">
+<meta property="og:description" th:content="${m_title}">
 <meta property="og:image" th:content="${m_image}" >
 <meta property="og:image:url" th:content="${m_image}" >
 <meta property="og:image:secure_url" th:content="${m_image}" >
@@ -30,8 +30,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Radio__Rolling">
-<meta name="twitter:title" th:content="${m_title}">
-<meta name="twitter:description" th:content="${m_desc}">
+<meta name="twitter:title" th:content="${m_desc}">
+<meta name="twitter:description" th:content="${m_title}">
 <meta name="twitter:image" th:content="${m_image}">
 
 <link rel="stylesheet" type="text/css"
@@ -80,23 +80,23 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="#"><b>Rolling</b> Music<span
+						<a class="logo" href="/"><b>Rolling</b> Music<span
 							id="playlistName">Radio for all</span></a>
 					</div>
 				</div>
@@ -141,6 +141,7 @@
 											class="fb-xfbml-parse-ignore">Share</a>
 									</div>
 									<div id="autoplaySelect" class="btn btn-default">Radio mode</div>
+									<div id="randomSelect" class="btn btn-primary">Random song</div>
 								</div>
 
 							</div>
@@ -167,7 +168,11 @@
 								<div class="single_leftbar wow fadeInDown">
 									<h2>
 										<span>Now rolling</span>
+										<span id="totalSongs">All</span>
 									</h2>
+									<input id="searchBox" title="FILTRIRAJ KOJE PESME ZELIS DA IDU SLEDECE" placeholder="Type to filter" type="text" value="">
+									<input type="submit" onclick="updateSelection()" value="Primeni selektovano" title="Desnim klikom selektuj pesme koje zelis da slusas, pa pritisni ovo dugme.">
+									<input type="submit" onclick="deleteSelections()" value="Sve pesme" title="Slusaj sve pesme sa plejliste.">
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
 
@@ -228,10 +233,12 @@
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
        var vid_id = [[${vid_id}]];
+       var filter = [[${filter}]];
+       filter = filter.replace(/aanndd/g , "&");
        var ws = [[${ws}]];
        var playlist_id = [[${playlist_id}]];
        var lastStartedTime = 0;
-       var urll = [[${m_url}]];
+       var urll = window.location.href;//[[${m_url}]];
 		$("#fbshare").attr("data-href",urll);
 		$("#afbs").attr("href","https://www.facebook.com/sharer/sharer.php?u="+urll+";src=sdkpreparse");
        

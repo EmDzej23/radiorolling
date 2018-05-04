@@ -73,7 +73,7 @@ $(document).ready(function(){
 	    $.ajax({
 	        type: "POST",
 	        enctype: 'multipart/form-data',
-	        url: appRoot+"/admin/api/post/saveImg",
+	        url: "/admin/api/post/saveImg",
 	        data: data,
 	        processData: false,
 	        contentType: false,
@@ -91,6 +91,7 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+	FetchData({url:"/public/api/template/"},function(s){$(".note-codable").val((s[0].hTemplate))})
     
 });
 function sendPostData() {
@@ -98,12 +99,18 @@ function sendPostData() {
 	videoDto.description = $('#title').val();
 	videoDto.quote = $('#preview').text();
 	videoDto.started = new Date();
-	var imagePost = $($("img")[0]).attr("src");
+	
+	var tags = $("#tags").val().split(",");
 	var tagsToSend = [];
-	var imgsToSend = [];
+	for (var i = 0;i<tags.length;i++) {
+		tagsToSend.push({id:null,name:tags[i]});
+	}
+	videoDto.tags = tagsToSend;
+	
+	var imagePost = $($("img")[0]).attr("src");
 	videoDto.ytId = imagePost;
 	PostData({
-		url: appRoot+"/admin/api/post/add?playlist_id="+$('#pl_id').val(),
+		url: "/admin/api/post/add?playlist_id="+$('#pl_id').val(),
 		data: JSON.stringify(videoDto)
 	},writeData,function(response) {
 		console.log("error");

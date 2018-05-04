@@ -6,6 +6,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.nevreme.rolling.dto.TagDto;
 import com.nevreme.rolling.dto.VideoDto;
+import com.nevreme.rolling.model.Tag;
 import com.nevreme.rolling.model.Video;
 import com.nevreme.rolling.service.AbstractService;
 import com.nevreme.rolling.service.PlaylistService;
+import com.nevreme.rolling.service.TagService;
 import com.nevreme.rolling.service.VideoService;
 
 @Controller
@@ -28,6 +34,9 @@ public class RecommendRestController extends AbstractRestController<Video, Video
 
 	@Autowired
 	VideoService videoService;
+	
+	@Autowired
+	TagService tagService;
 	
 	@Autowired
 	PlaylistService playlistService;
@@ -42,10 +51,29 @@ public class RecommendRestController extends AbstractRestController<Video, Video
 	@RequestMapping(value = "/add")
 	public @ResponseBody String get2PtsShotsForAPlayer(@RequestBody VideoDto videoDto, @RequestParam Long playlist_id) {
 		Video video = new Video();
+		
+		List<Tag> allTags = tagService.findAll();
+		for (TagDto tagDto : videoDto.getTags()) {
+			for (Tag tag : allTags) {
+				if (tag.getName().equals(tagDto.getName())) {
+					tagDto.setId(tag.getId());
+				}
+			}
+		}
+		Set<Tag> postTags = new HashSet<>();
+		for (TagDto tagDto : videoDto.getTags()) {
+			Tag newTag = new Tag();
+			newTag.setId(tagDto.getId());
+			newTag.setName(tagDto.getName());
+			postTags.add(newTag);
+		}
+		
 		video.setStarted(new Timestamp(new Date().getTime()));
 		video.setDescription(videoDto.getDescription());
 		video.setQuote(videoDto.getQuote());
 		video.setYtId(videoDto.getYtId());
+		video.setState(1);
+		video.setTags(postTags);
 		video.setPlaylist(playlistService.findOne(playlist_id));
 		videoService.insertNewVideo(video);
 
@@ -81,7 +109,7 @@ public class RecommendRestController extends AbstractRestController<Video, Video
 
 				System.out.println("Server File Location=" + serverFile.getAbsolutePath());
 
-				return System.getProperty("APP_ROOT")+"/res/images/"+foldName+"/"+name;
+				return "/res/images/"+foldName+"/"+name;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				return "You failed to upload " + name + " => " + e.getMessage();

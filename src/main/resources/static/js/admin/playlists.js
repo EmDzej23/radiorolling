@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	initPlaylist();
 	connect();
@@ -6,7 +7,7 @@ $(document).ready(function() {
 		console.log(table);
 		alert(JSON.stringify(table));
 		PostData({
-			url : appRoot + "/public/api/video/updatePlaylist?pl="+playlist_id,
+			url : "/public/api/video/updatePlaylist?pl="+playlist_id,
 			data : JSON.stringify(table)
 		}, playlistInserted, onError);
 	});
@@ -15,12 +16,30 @@ $(document).ready(function() {
 	});
 	
 	document.oncontextmenu = function() {return false;};
+	appendAllPls();
 });
 var stompClient = null;
 function initPlaylist() {
 	fetchSongs();
 }
-
+function appendAllPls() {
+	FetchData({
+		url : "/public/api/playlist/"
+	}, function(response){
+		var list = [];
+		for (var i = 0;i<response.length;i++) {
+			var className = "btn-default";
+			if (response[i].id===playlist_id) {
+				className = "btn-primary";
+			}
+			$("body").prepend("<a href='/admin/setupp?id="+response[i].id+"'><div class='btn "+className+"'>"+response[i].name+"</div></a>");
+		}
+	},
+	function(response) {
+		alert("ERROR");
+		console.log(response);
+	});
+}
 function connect() {
 	var socket = new SockJS('/ws');
 	stompClient = Stomp.over(socket);
@@ -48,7 +67,7 @@ function playlistInserted(response) {
 }
 function fetchSongs() {
 	FetchData({
-		url : appRoot + "/public/api/playlist/"+playlist_id
+		url : "/public/api/playlist/"+playlist_id
 	}, setSongs);
 }
 
@@ -61,6 +80,9 @@ function setSongs(response) {
 	})
 	for (var i = 0;i<songs.length;i++) {
 		delete songs[i].offset;
+		delete songs[i].dailyRecommend;
+		delete songs[i].plName;
+		delete songs[i].tags;
 	}
 	$("#table_div").children().remove();
 	$("#table_div").append(MakeResponsiveDHTable(songs).html);
@@ -141,7 +163,7 @@ function tableEvents() {
 			        		return;
 			        	}
 			        	PostData({
-		        			  url:appRoot+"/public/api/video/deleteVideo?pl="+playlist_id,
+		        			  url:"/public/api/video/deleteVideo?pl="+playlist_id,
 		        		      data:JSON.stringify({id:$(m).find('td:first').text(),
 		        		      index_num:$(m).find('td:last').prev("td").prev("td").text(),
 		        		      started:"",
@@ -159,9 +181,36 @@ function tableEvents() {
 		}
     });
 }
+function isVideoAvailable(idUrl) {
+	var ytkey = 'AIzaSyAohq-i1Ee_8ei5PLKyMkHYqX9KUDV9Gq8';
+	$.ajax({
+		cache : false,
+		data : $.extend({
+			key : ytkey,
+			part : 'snippet,contentDetails,statistics'
+		}, {
+			id : idUrl
+		}),
+		dataType : 'json',
+		type : 'GET',
+		timeout : 5000,
+		fields : "items(id,contentDetails,statistics,snippet(title))",
+		url : 'https://www.googleapis.com/youtube/v3/videos'
+	}).done(function(data) {
+		if (data.items.length==0) {
+			return false;
+		}
+		if (data.items[0].contentDetails.licensedContent) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	});
+}
 function saveSong() {
 	PostData({
-		url : appRoot + "/public/api/video/newVideo?pl="+playlist_id,
+		url : "/public/api/video/newVideo?pl="+playlist_id,
 		data : JSON.stringify({
 			id : "",
 			index_num : "",
@@ -202,6 +251,23 @@ function getVideoDetails() {
 		fields : "items(id,contentDetails,statistics,snippet(title))",
 		url : 'https://www.googleapis.com/youtube/v3/videos'
 	}).done(function(data) {
+		var e = false;
+		if (data.items.length==0) {
+			alert("Ovaj id ne postoji na youtube-u!")
+			return;
+			
+		}
+		for (var i = 0;i<songs.length;i++) {
+			if (songs[i].ytId==data.items[0].id) {
+				e = true;
+				break;
+			}
+		}
+		if (e) {
+			alert("Ne mozes da uneses ovaj video, postoji vec!")
+			return;
+			
+		}
 		if (data.items[0].contentDetails.licensedContent) {
 			alert("Ne mozes da uneses ovaj video, zasticen je autorskim pravima!")
 		}
@@ -225,4 +291,7 @@ function YTDurationToSeconds(duration) {
 	var seconds = ((parseInt(match[3]) || 0) !== 0) ? parseInt(match[3]) : 0;
 	var total = hours * 60 * 60 + minutes * 60 + seconds;
 	return total;
+}
+function gun() {
+	AppendInfoModal("Uputstvo","1. Nađite video na youtube-u <br> 2. Iskopirajte id koji sledi posle <i style='background-color:green;color:white'>www.youtube.com/watch?v=</i> u url-u svakog YouTube videa (sadrzi 11 karaktera) <br> 3. Nalepite taj id na polje Youtube id: na ovoj stranici. <br> 4. Pritisnite dugme Popuni ostala polja. <br> 5. Ukoliko je video zaštićen autorskim pravima ili već postoji, izaberite drugi video na YouTube - u. <br> 6. Hvala što doprinosite da RadioRolling bude bolji!","info");
 }

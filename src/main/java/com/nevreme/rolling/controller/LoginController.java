@@ -34,9 +34,40 @@ public class LoginController {
 		return viewName;
 	}
 	
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	public String contact() {
+		return "contact";
+	}
+	
+	@RequestMapping(value = "/sport/scrolling", method = RequestMethod.GET)
+	public ModelAndView scrolling() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/scrolling");
+		modelAndView.addObject("playlist_id","1256");
+		modelAndView.addObject("m_title","ScRolling Sport");
+		modelAndView.addObject("m_url","http://radiorolling.com/sport/scrolling");
+		modelAndView.addObject("m_desc","Let it ScRoll");
+		modelAndView.addObject("m_image","http://radiorolling.com/res/images/20183231327/sport.jpg");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/movies/scrolling", method = RequestMethod.GET)
+	public ModelAndView moviesScrolling() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
+		modelAndView.setViewName("admin/scrolling");
+		modelAndView.addObject("playlist_id","915");
+		modelAndView.addObject("m_title","ScRolling Movies");
+		modelAndView.addObject("m_url","http://radiorolling.com/movies/scrolling");
+		modelAndView.addObject("m_desc","Let it ScRoll");
+		modelAndView.addObject("m_image","http://radiorolling.com/res/images/2018431224/Movie.jpg");
+		return modelAndView;
+	}
+	
 	@RequestMapping(value = {"/",""}, method = RequestMethod.GET)
 	public String hom() {
-		return "redirect:"+System.getProperty("APP_ROOT")+"/music/autoplay/Rolling";
+		return "redirect:"+System.getProperty("APP_ROOT")+"/home/";
 	}
 	
 	private boolean isCurrentAuthenticationAnonymous() {

@@ -66,7 +66,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.dataSource(secondDatasource);
 //				.passwordEncoder(bCryptPasswordEncoder);
 	}
-
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		if (System.getProperty("APP_ROOT") == null) {
@@ -83,6 +84,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/public/**").permitAll()
 				.antMatchers("/home/**").permitAll()
 				.antMatchers("/music/**").permitAll()
+				.antMatchers("/contact/**").permitAll()
+				.antMatchers("/movies/**").permitAll()
+				.antMatchers("/sport/**").permitAll()
+				.antMatchers("/culture/**").permitAll()
 				.antMatchers("/video/**").permitAll()
 				.antMatchers("/recommend/**").permitAll()
 				.antMatchers("/text/**").permitAll()

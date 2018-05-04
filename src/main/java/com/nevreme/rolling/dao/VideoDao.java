@@ -113,4 +113,12 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		return false;
 	}
 
+	public Video findRecommendedVideoByPlaylist(int playlist_type) {
+		TypedQuery<Video> tq = entityManager.createQuery("SELECT v FROM Video v WHERE v.playlist.playlist_type = (:type) AND v.dailyRecommend = (:daily)",
+				Video.class);
+		tq.setParameter("daily", 1);
+		tq.setParameter("type", playlist_type);
+		return tq.getSingleResult();
+	}
+
 }

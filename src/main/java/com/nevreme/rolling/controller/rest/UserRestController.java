@@ -57,7 +57,7 @@ public class UserRestController extends AbstractRestController<User, UserDto, Lo
 
 				System.out.println("Server File Location=" + serverFile.getAbsolutePath());
 
-				return Constants.APP_ROOT+"/res/images/"+foldName+"/"+name;
+				return "/res/images/"+foldName+"/"+name;
 			} catch (Exception e) {
 				return "You failed to upload " + name + " => " + e.getMessage();
 			}

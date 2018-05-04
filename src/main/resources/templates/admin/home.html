@@ -14,7 +14,14 @@
 <meta name="google-site-verification"
 	content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc" />
 <meta name="description"
-	content="Best Music, Video and Text content from all around the web.">
+	content="Ovaj web sajt predstavlja početak razvoja nove radio stanice u Srbiji. 
+Rolling je svako kotrljanje koje ne može da se zaustavi. 
+Rolling je svako kretanje koje nema kraj. 
+Rolling je okretanje i pomeranje uz okretački ritam muzike. 
+Rolling je lagano zaobilaženje svih malih svakodnevnih prepreka. 
+Rolling je širenje pozitivne energije, ljubavi, kulture, lepote, druženja, osmeha... 
+Rolling su ljudi koji se kreću, kotrljaju, okreću i igraju tako da ih niko i ništa nikada ne može zaustaviti. 
+Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja.">
 <title>Rolling Radio</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +29,8 @@
 <meta property="fb:app_id" content="1498376340278074" />
 <meta property="og:type" content="article">
 <meta property="og:url" th:content="${m_url}">
-<meta property="og:title" th:content="${m_title}">
-<meta property="og:description" th:content="${m_desc}">
+<meta property="og:title" th:content="${m_desc}">
+<meta property="og:description" th:content="${m_title}">
 <meta property="og:image" th:content="${m_image}">
 <meta property="og:image:url" th:content="${m_image}">
 <meta property="og:image:secure_url" th:content="${m_image}">
@@ -32,8 +39,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Radio__Rolling">
-<meta name="twitter:title" th:content="${m_title}">
-<meta name="twitter:description" th:content="${m_desc}">
+<meta name="twitter:title" th:content="${m_desc}">
+<meta name="twitter:description" th:content="${m_title}">
 <meta name="twitter:image" th:content="${m_image}">
 
 <link rel="stylesheet" type="text/css"
@@ -84,23 +91,22 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
-											setup</a></li>
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -108,7 +114,7 @@
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="#"><b>Rolling</b> Radio<span
+						<a class="logo" href="/"><b>Rolling</b> Radio<span
 							id="playlistName">Radio for all</span></a>
 					</div>
 				</div>

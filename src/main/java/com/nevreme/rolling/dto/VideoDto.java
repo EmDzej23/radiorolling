@@ -1,8 +1,10 @@
 package com.nevreme.rolling.dto;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
+
 
 
 @Component
@@ -16,6 +18,9 @@ public class VideoDto {
 	private int state;
 	private int offset;
 	private String quote;
+	private int dailyRecommend;
+	private String plName;
+	private Set<TagDto> tags;
 	
 	public Long getId() {
 		return id;
@@ -70,6 +75,24 @@ public class VideoDto {
 	}
 	public void setOffset(int offset) {
 		this.offset = offset;
+	}
+	public int getDailyRecommend() {
+		return dailyRecommend;
+	}
+	public void setDailyRecommend(int dailyRecommend) {
+		this.dailyRecommend = dailyRecommend;
+	}
+	public String getPlName() {
+		return plName;
+	}
+	public void setPlName(String plName) {
+		this.plName = plName;
+	}
+	public Set<TagDto> getTags() {
+		return tags;
+	}
+	public void setTags(Set<TagDto> tags) {
+		this.tags = tags;
 	}
 	
 }

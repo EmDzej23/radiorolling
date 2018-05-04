@@ -87,6 +87,14 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		return new ResponseEntity<Set<Video>>(new HashSet<Video>(), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/getRecommendedVideo")
+	@ResponseBody
+	public synchronized ResponseEntity<VideoDto> getRecommendedVideo(@RequestParam int type) {
+		Video video = videoService.getRecommendedVideo(type);
+		VideoDto dto = mapper.getMapper().map(video, VideoDto.class);
+		return new ResponseEntity<VideoDto>(dto, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = {"/updatePlaylist","/updatePlaylist/"})
 	@ResponseBody
 	public synchronized ResponseEntity<VideoDto[]> updateVideos(@RequestBody VideoDto[] videosDto, @RequestParam Long pl) {

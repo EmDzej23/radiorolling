@@ -2,9 +2,10 @@ package com.nevreme.rolling.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.nevreme.rolling.dao.VideoDao;
 import com.nevreme.rolling.model.Video;
@@ -39,6 +40,7 @@ public class VideoService extends AbstractService<Video, Long> {
 		dao.updateList(videos);
 	}
 	
+//	@Cacheable("sitecache")
 	public Video findVideoByStateForPlaylist(int state, Long playlist_id) {
 		return dao.findVideoByStateForPlaylist(state, playlist_id);
 	}
@@ -47,7 +49,18 @@ public class VideoService extends AbstractService<Video, Long> {
 		return dao.findNextVideoForPlaylist(state, playlist_id);
 	}
 	
+	@Cacheable("sitecache")
 	public Video findVideoByYtId(String ytId) {
 		return dao.findVideoByYtId(ytId);
+	}
+
+	@Cacheable("sitecache")
+	public Video getRecommendedVideo(int type) {
+		return dao.findRecommendedVideoByPlaylist(type);
+	}
+	@Override
+	public Video findOne(Long primaryKey) {
+		System.out.println("******ONE*********\n\n\n\n\n\n********ONE*******");
+		return dao.findOne(primaryKey);
 	}
 }

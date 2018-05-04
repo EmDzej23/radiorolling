@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<script type="text/javascript" async=""
+	src="https://www.google-analytics.com/analytics.js"></script>
+<script id="facebook-jssdk"
+	src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&amp;version=v2.12&amp;appId=1498376340278074&amp;autoLogAppEvents=1"></script>
+<script async=""
+	src="https://www.googletagmanager.com/gtag/js?id=UA-111192516-2"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-111192516-2');
+</script>
+<meta content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc"
+	name="google-site-verification">
+<title>Rolling Radio</title>
+<meta charset="utf-8">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta property="og:type" content="article" >
+<meta property="og:url" th:content="${m_url}" >
+<meta property="og:title" th:content="${m_desc}">
+<meta property="og:description" th:content="${m_title}">
+<meta property="og:image" th:content="${m_image}" >
+<meta property="og:image:url" th:content="${m_image}" >
+<meta property="og:image:secure_url" th:content="${m_image}" >
+<meta property="og:image:width" content="1200" >
+<meta property="og:image:height" content="900" >
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="${m_url}">
+<meta name="twitter:title" th:content="${m_title}">
+<meta name="twitter:description" th:content="${m_desc}">
+<meta name="twitter:image" th:content="${m_image}">
+
+<link href="../theme/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css">
+<link href="../theme/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link href="../theme/css/animate.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/li-scroller.css" rel="stylesheet"
+	type="text/css">
+<link href="../theme/css/slick.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/theme.css" rel="stylesheet" type="text/css">
+<link href="../theme/css/style.css" rel="stylesheet" type="text/css">
+<link href="../css/jquery-comments.css" rel="stylesheet" type="text/css">
+<link href="../../images/favicon.ico" rel="icon">
+<script type="text/javascript">
+	var timerStart = Date.now();
+</script>
+<body style="overflow: visible;">
+
+	<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id))
+				return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12&appId=1498376340278074&autoLogAppEvents=1';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	<div id="preloader" style="display: none;">
+		<div id="status" style="display: none;">&nbsp;</div>
+	</div>
+	<div class="container"
+		style="background-color: #eee !important; width: 100%;">
+		<div class="box_wrapper"
+			style="height: 1053px; min-height: 1053px; position: fixed;">
+			<header id="header"
+				style="position: relative !important; background-color: white; z-index: 2;">
+				<div class="header_top">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button aria-controls="navbar" aria-expanded="false"
+									class="navbar-toggle collapsed" data-target="#navbar"
+									data-toggle="collapse" type="button">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+
+							<div class="navbar-collapse collapse" id="navbar">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/login">Login</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="header_bottom">
+					<div class="logo_area">
+						<a class="logo" href="/"><b>scRolling</b>
+							Zanimljivosti</a>
+					</div>
+				</div>
+			</header>
+			<section id="contentbody" style=""  onmousedown="stopAnimation()" onmouseup="resumeAnimation()">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="row">
+							<div id="mydiv" class="middle_bar" style="text-align:center;"></div>
+							<h1 id="loadText">...Učitavanje...</h1>
+						</div>
+
+
+					</div>
+			</section>
+
+		</div>
+	</div>
+	<script src="../theme/js/jquery.min.js"></script>
+	<script src="../theme/js/jquery-ui.min.js"></script>
+	<script src="../theme/js/wow.min.js"></script>
+	<script src="../theme/js/bootstrap.min.js"></script>
+	<script src="../theme/js/slick.min.js"></script>
+	<script src="../theme/js/jquery.li-scroller.1.0.js"></script>
+	<script src="../theme/js/custom.js"></script>
+	<script src="../js/date.js" type="text/javascript"></script>
+	<script src="../js/dynamicHtmlLib.js" type="text/javascript"></script>
+	<script src="../js/websockets/sock.min.js"></script>
+	<script src="../js/websockets/stomp.min.js"></script>
+	<script src="http://html2canvas.hertzen.com/dist/html2canvas.js"
+		type="text/javascript"></script>
+
+	<script type="text/javascript"  th:inline="javascript">
+		var appRoot = "http://radiorolling.com";
+		var ws = '';
+		var playlist_id = [[${playlist_id}]];
+		var br = 0;
+		var vid_id = -1;
+		FetchData({
+			url : "/public/api/playlist/" + playlist_id
+		}, afterPlaylistRequested);
+		function afterPlaylistRequested(resp) {
+			resp.videos.sort(function(a, b) {
+				return a.index_num - b.index_num;
+			});
+			for (var i = 0; i < resp.videos.length; i++) {
+				$("#mydiv").append(
+						"<div class='single_post_content ggg' id='fact_"
+								+ (i + 1) + "'>" + resp.videos[i].quote
+								+ "<br></div>");
+			}
+			$(".ggg").css({
+				top : "-5000px"
+			});
+			$(".ggg").offset({
+				top : "-5000px"
+			});
+			$(".ggg").css("pointer-events","none");
+			$('img').load(function() {
+				br++;
+				if (br == $('img').length) {
+					$('img').css("width","500px")
+					$("#loadText").remove();
+					something();
+					setStartPos();
+					go(false);
+					console.log("----IaMGes LOADED----");
+				 	$('#contentbody').on('touchstart', function(){
+					 stopAnimation();
+				    });
+				    $('#contentbody').on('touchend', function(){
+				    	resumeAnimation();
+				    });
+				    
+				}
+			});
+
+		}
+
+		function something() {
+			$("#mydiv").height(window.outerHeight);
+			$(".box_wrapper").css("min-height", window.outerHeight);
+			$(".box_wrapper").css("height", window.outerHeight);
+		};
+		function setStartPos() {
+			var children = $("#mydiv").children();
+			for (var i = 0; i < children.length; i++) {
+				var k = 0;
+				for (var j = i; j > 0; j--) {
+					k += $(children[j - 1]).height();
+				}
+				$($(children[i])).css({
+					top : $("#mydiv").height()/2 + k
+				});
+				$($(children[i])).offset({
+					top : $("#mydiv").height()/2 + k
+				});
+			}
+
+		}
+		function reset() {
+			var children = $("#mydiv").children();
+			for (var i = 0; i < children.length; i++) {
+				var k = 0;
+				for (var j = i; j > 0; j--) {
+					k += $(children[j - 1]).height();
+				}
+				$($(children[i])).css({
+					top : $("#mydiv").height()/2 + k
+				});
+				$($(children[i])).offset({
+					top : $("#mydiv").height()/2 + k
+				});
+			}
+
+		}
+		
+		function go(first) {
+			var children = $("#mydiv").children();
+			var destination = 0;
+			var k = 0;
+			for (var j = 0; j < children.length; j++) {
+				k += $(children[j]).height();
+			}
+
+			destination = $("#mydiv").height()/2 + k - $("#header").height();
+			var p = 0;
+			for (var i = 0; i < children.length; i++) {
+				//$($(children[i])).offset({top:-k});
+				$($(children[i])).animate({
+					top : "-=" + destination + "px"
+				}, {
+					easing : 'linear',
+					duration : destination * 21,
+					complete : function() {
+						p++;
+						if (p === children.length) {
+							reset();
+							go(false);
+						}
+					}
+				});
+			}
+		}
+		function stopAnimation() {
+			var chd = $("#mydiv").children();
+			for (var i = 0; i < chd.length; i++) {
+				var myDiv = $(chd[i]);
+
+				myDiv.clearQueue();
+
+				myDiv.stop();
+			}
+		}
+		function resumeAnimation() {
+			var children = $("#mydiv").children();
+			var destination = $("#header").height();
+			var topp = 0;
+			var offset = 0;
+			for (var j = children.length - 1; j > -1; j--) {
+				if ($(children[j]).height() + $(children[j]).offset().top > 0)
+					offset += $(children[j]).height();
+			}
+			for (var j = 0; j < children.length; j++) {
+				if ($(children[j]).height() + $(children[j]).offset().top > 0)
+					topp = $(children[j]).offset().top;
+				break;
+			}
+			console.log("off" + offset)
+			destination = offset + topp - $("#header").height();
+			var p = 0;
+			for (var i = 0; i < children.length; i++) {
+				//$($(children[i])).offset({top:-k});
+				$($(children[i])).animate({
+					top : "-=" + (destination) + "px"
+				}, {
+					easing : 'linear',
+					duration : (destination) * 21,
+					complete : function() {
+						p++;
+						if (p === children.length) {
+							reset();
+							go(false);
+						}
+					}
+				});
+			}
+		}
+	</script>
+
+
+</body>
+</html>

@@ -20,8 +20,8 @@
 <meta property="fb:app_id" content="1498376340278074" />
 <meta property="og:type" content="article" >
 <meta property="og:url" th:content="${m_url}" >
-<meta property="og:title" th:content="${m_title}" >
-<meta property="og:description" th:content="${m_desc}" >
+<meta property="og:title" th:content="${m_desc}">
+<meta property="og:description" th:content="${m_title}">
 <meta property="og:image" th:content="${m_image}" >
 <meta property="og:image:url" th:content="${m_image}" >
 <meta property="og:image:secure_url" th:content="${m_image}" >
@@ -80,23 +80,23 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="#"><b>Rolling</b> Tekstovi<span
+						<a class="logo" href="/"><b>Rolling</b> Tekstovi<span
 							id="playlistName">USKORO!!!</span></a>
 					</div>
 				</div>
@@ -128,6 +128,8 @@
 									<h2 class="song_title post_title wow "></h2>
 									<div class="single_post_content">
 									</div>
+									<button id="saveImg" onclick="saveImage()">Download</button>
+									
 									<div class="post_footer">
 										<br>
 										<p id="videoQuote"
@@ -168,6 +170,7 @@
 									<h2>
 										<span>Tekstovi</span>
 									</h2>
+									<input id="searchBox" placeholder="Trazi tekstove" title="PRETRAZI TEKSTOVE" type="text" value="">
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
 
@@ -225,7 +228,24 @@
 	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
 	<script src="../js/websockets/sock.min.js"></script>
 	<script src="../js/websockets/stomp.min.js"></script>
+	<script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+	
 	<script type="text/javascript" th:inline="javascript">
+	   function saveImage() {
+		   html2canvas(document.getElementsByClassName('single_post_content')[0],{allowTaint:true}).then(function(canvas) {
+			    $('body').append(canvas);
+			    $(canvas).attr("id","canid");    
+			    downloadCanvas(this, 'canid', 'RadioRollingImage.png');
+			});
+	   }
+	   
+	   function downloadCanvas(link, canvasId, filename) {
+		   var link = document.createElement('a');
+       link.href = document.getElementById(canvasId).toDataURL();
+       link.download = 'RR.png';
+       document.body.appendChild(link);
+       link.click();   
+	   }
        var appRoot = [[${appRoot}]];
        var ws = [[${ws}]];
        var playlist_id = [[${playlist_id}]];

@@ -32,8 +32,8 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="#">Naslovna strana</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
@@ -41,7 +41,7 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="#">Naslovna strana</a></li>
-									<li><a href="http://radiorolling.com/login">Login</a></li>
+									<li><a href="/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -80,7 +80,30 @@
 										<label>Id videa</label> <input type="text" id="vidIdTitle">
 
 										<button onclick="updateTitle()">Izmeni naslov</button>
+										<br>
+										<label>Citat dana</label> <input type="text" id="quoteDay">
 
+										<label>Autor citata</label> <input type="text" id="quoteDayAuthor">
+
+										<button onclick="addNewQuote()">Unesi citat dana</button>
+										<br>
+										<br>
+										<label>Daily Video</label> <input type="text" id="dailyVidId">
+										<br>
+										<label>On or of (1 or 0)</label> <input type="text" id="on_off">
+										<button onclick="changeDaily()">Izmeni dnevno</button>
+										<br>
+										<br>
+										<button onclick="setAllDailyRecToNullMusic()">Obrisi dnevne preporuke [muzika]</button>
+										<br>
+										<button onclick="setAllDailyRecToNullVideo()">Obrisi dnevne preporuke [video]</button>
+										<br>
+										<button onclick="setAllDailyRecToNullTekst()">Obrisi dnevne preporuke [tekst]</button>
+										<br>
+										<button onclick="setAllDailyRecToNullRecommend()">Obrisi dnevne preporuke [preporuka]</button>
+										<br>
+										<button onclick="setAllDailyRecToNullQuote()">Obrisi dnevne preporuke [citat]</button>
+										
 									</div>
 									<div class="post_footer"></div>
 									<div class=" wow fadeInLeft animated animated animated"
@@ -124,7 +147,7 @@
 			});
 			PostData(
 					{
-						url : "http://radiorolling.com/public/api/video/addNewPlaylist/",
+						url : "/public/api/video/addNewPlaylist/",
 						data : json
 					}, function(res) {
 						alert("Sacuvano");
@@ -132,7 +155,7 @@
 		}
 		function updateQuote() {
 			PostData({
-				url : "http://radiorolling.com/public/api/video/"
+				url : "/public/api/video/"
 						+ $("#vidId").val(),
 				data : JSON.stringify({
 					quote : $("#citat").val()
@@ -141,12 +164,98 @@
 		}
 		function updateTitle() {
 			PostData({
-				url : "http://radiorolling.com/public/api/video/"
+				url : "/public/api/video/"
 						+ $("#vidIdTitle").val(),
 				data : JSON.stringify({
 					description : $("#naslov").val()
 				})
 			},function(resp){alert("Azurirano")}, function(error){console.log("Greska");console.log(error)});
+		}
+		
+		function addNewQuote() {
+			PostData({
+				url : "/public/api/video/newVideo?pl=2",
+				data : JSON.stringify({
+					id : "",
+					index_num : "",
+					started : "",
+					state : "",
+					description : $("#quoteDayAuthor").val(),
+					ytId : '',
+					duration : 1,
+					quote: $("#quoteDay").val(),
+					offset:0,
+					dailyRecommend:0
+				})
+			}, function(r){alert("Ok");}, function(r){alert("not ok");});
+		}
+		
+		function setAllDailyRecToNullMusic() {
+			FetchData({
+				url : "/public/api/video/getRecommendedVideo?type=1"
+			}, function(response){
+				PostData({url:"/public/api/video/"+response.id, data:JSON.stringify({daily_recommend:0})},
+						function(r){alert("OK")},function(r){alert("NOT OK")});
+			},
+			function(response) {
+				console.log(response);
+			});
+		}
+		
+		function setAllDailyRecToNullVideo() {
+			FetchData({
+				url : "/public/api/video/getRecommendedVideo?type=2"
+			}, function(response){
+				PostData({url:"/public/api/video/"+response.id, data:JSON.stringify({daily_recommend:0})},
+						function(r){alert("OK")},function(r){alert("NOT OK")});
+			},
+			function(response) {
+				console.log(response);
+			});
+		}
+		
+		function setAllDailyRecToNullTekst() {
+			FetchData({
+				url : "/public/api/video/getRecommendedVideo?type=3"
+			}, function(response){
+				PostData({url:"/public/api/video/"+response.id, data:JSON.stringify({daily_recommend:0})},
+						function(r){alert("OK")},function(r){alert("NOT OK")});
+			},
+			function(response) {
+				console.log(response);
+			});
+		}
+		
+		function setAllDailyRecToNullRecommend() {
+			FetchData({
+				url : "/public/api/video/getRecommendedVideo?type=4"
+			}, function(response){
+				PostData({url:"/public/api/video/"+response.id, data:JSON.stringify({daily_recommend:0})},
+						function(r){alert("OK")},function(r){alert("NOT OK")});
+			},
+			function(response) {
+				console.log(response);
+			});
+		}
+		
+		function setAllDailyRecToNullQuote() {
+			FetchData({
+				url : "/public/api/video/getRecommendedVideo?type=5"
+			}, function(response){
+				PostData({url:"/public/api/video/"+response.id, data:JSON.stringify({daily_recommend:0})},
+						function(r){alert("OK")},function(r){alert("NOT OK")});
+			},
+			function(response) {
+				console.log(response);
+			});
+		}
+		
+		function changeDaily() {
+			
+			var id = $("#dailyVidId").val();
+			var on_off = $("#on_off").val(); 
+			PostData({url:"/public/api/video/"+id, data:JSON.stringify({daily_recommend:on_off})},
+				function(r){alert("OK")},function(r){alert("NOT OK")});
 		}
 	</script>
 </body>

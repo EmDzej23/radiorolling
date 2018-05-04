@@ -20,8 +20,8 @@
 <meta property="fb:app_id" content="1498376340278074" />
 <meta property="og:type" content="article" >
 <meta property="og:url" th:content="${m_url}" >
-<meta property="og:title" th:content="${m_title}" >
-<meta property="og:description" th:content="${m_desc}" >
+<meta property="og:title" th:content="${m_desc}">
+<meta property="og:description" th:content="${m_title}">
 <meta property="og:image" th:content="${m_image}" >
 <meta property="og:image:url" th:content="${m_image}" >
 <meta property="og:image:secure_url" th:content="${m_image}" >
@@ -30,8 +30,8 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="${m_url}">
-<meta name="twitter:title" th:content="${m_title}">
-<meta name="twitter:description" th:content="${m_desc}">
+<meta name="twitter:title" th:content="${m_desc}">
+<meta name="twitter:description" th:content="${m_title}">
 <meta name="twitter:image" th:content="${m_image}">
 
 <link rel="stylesheet" type="text/css"
@@ -80,22 +80,22 @@
 							<div sec:authorize="isAuthenticated()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
-									<li><a href="http://radiorolling.com/logout">Logout</a></li>
-									<li><a href="http://radiorolling.com/admin/setup">Videos
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos
 											setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
-									<li><a href="http://radiorolling.com/music/autoplay/">Music</a></li>
-									<li><a href="http://radiorolling.com/video/autoplay/">Video</a></li>
-									<li><a href="http://radiorolling.com/text/">Text</a></li>
-									<li><a href="http://radiorolling.com/recommend/">Preporuke</a></li>
+									<li><a href="/music/autoplay/">Music</a></li>
+									<li><a href="/video/autoplay/">Video</a></li>
+									<li><a href="/text/">Text</a></li>
+									<li><a href="/recommend/">Preporuke</a></li>
 <!-- 									<li><a href="http://radiorolling.com/login">Login</a></li> -->
 								</ul>
 							</div>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="#"><b>Rolling</b> Preporuke<span
+						<a class="logo" href="/"><b>Rolling</b> Preporuke<span
 							id="playlistName">USKORO!!!</span></a>
 					</div>
 				</div>
@@ -168,6 +168,7 @@
 									<h2>
 										<span>Preporuke</span>
 									</h2>
+									<input id="searchBox" placeholder="Trazi preporuke" title="PRETRAZI PREPORUKE" type="text" value="">
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
 

@@ -18,4 +18,5 @@ public class RollingApplication extends SpringBootServletInitializer {
 		}
 		SpringApplication.run(RollingApplication.class, args);
 	}
+
 }

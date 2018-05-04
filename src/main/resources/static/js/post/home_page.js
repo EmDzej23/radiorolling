@@ -5,7 +5,7 @@ var userId = "2";
 var userImg = 'https://app.viima.com/static/media/user_profiles/user-icon.png';
 function getLogedUser() {
 	FetchData({
-		url : appRoot+"/admin/api/post/getUser"
+		url : "/admin/api/post/getUser"
 	}, function(response) {
 		user = response.name;
 		userId = response.id;
@@ -20,12 +20,12 @@ function getLogedUser() {
 }
 function getPPosts() {
 	FetchData({
-		url : appRoot+"/public/post/popularStories"
+		url : "/public/post/popularStories"
 	}, addDataToPost);
 }
 function getSPosts() {
 	FetchData({
-		url : appRoot+"/public/post/latestSO"
+		url : "/public/post/latestSO"
 	}, addArticles);
 }
 function addArticles(response) {

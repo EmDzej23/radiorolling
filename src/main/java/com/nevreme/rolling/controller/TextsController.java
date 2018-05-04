@@ -50,8 +50,8 @@ public class TextsController {
 		modelAndView.addObject("vid_id",-1);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
 		modelAndView.addObject("ws",System.getProperty("WS")==null?"":System.getProperty("WS"));
-		modelAndView.addObject("m_title","Rolling Texts (Poezija)");
-		modelAndView.addObject("m_url","http://radiorolling.com/text/");
+		modelAndView.addObject("m_title","Rolling Texts ("+name+")");
+		modelAndView.addObject("m_url","http://radiorolling.com/text/"+name);
 		modelAndView.addObject("m_desc","Tekstovi, kratke priče i poezija");
 		modelAndView.addObject("m_image",playlistService.findOne(playlist_id).getImage());
 		modelAndView.setViewName("admin/text");

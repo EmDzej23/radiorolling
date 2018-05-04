@@ -6,41 +6,36 @@
 //var messageArea = document.querySelector('#messageArea');
 //var connectingElement = document.querySelector('.connecting');
 $(document).ready(function() {
-	connect();
-	appendPLists();
-	if (playlist_id == 287) {
-		$("body").css("cursor","url('../../images/darko.cur'), auto");
-	}
-	
-	if (playlist_id == 281) {
-		$("body").css("cursor","url('../../images/pavel.cur'), auto");
-	}
-	$("#fb_share_btn").click(function(){
-		shareOverrideOGMeta(shareDetails.url, shareDetails.title, shareDetails.description, shareDetails.image)
-	});
-	$("#autoplaySelect").click(function(){
-		window.location.href = "/video/autoplay/"+plName;
-	});
 	$("#randomSelect").click(function(){
-		window.location.href = "/video/manualplay/vid?vid="+myVideos[Math.floor(Math.random()*myVideos.length)].ytId+"&plName="+plName;
+		window.location.href = "/music/manualplay/vid?vid="+newList[Math.floor(Math.random()*newList.length)].ytId+"&plName="+plName+"&filter="+$("#searchBox").val();
 	});
+	var opts = {
+			duration : theVid.duration,
+			title : theVid.description,
+			id : theVid.ytId,
+			videoQuote : theVid.quote,
+			off : theVid.offset,
+			vid_id:theVid.id
+	}
+	addVideoToDivManual(opts);
+	
 });
 var shareDetails={};
 function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "/public/api/playlist/t?type=2"
+				url : "/public/api/playlist/t?type=1"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
 					$("#plists")
 							.append(
-									'<li><div class="media"><a class="media-left" href="/video/manualplay/'
+									'<li><div class="media"><a class="media-left" href="/music/manualplay/'
 											+ res[i].name
 											+ '"> <img alt="No Image" src="'
 											+ res[i].image
-											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="/video/manualplay/'
+											+ '"></a><div class="media-body"><a class="glyphicon glyphicon-menu-left" href="/music/manualplay/'
 											+ res[i].name
 											+ '">'
 											+ res[i].name
@@ -65,12 +60,12 @@ function goToVideo(opt) {
 //		if (i===(pUrl.length-1)) urlName += pUrl[i];
 //		else urlName += pUrl[i] + "%20";
 //	}
-//	shareDetails.url = "http://radiorolling.com/video/manualplay/vid?vid="+opt.id+"&plName="+urlName;
-//	shareDetails.description = "Video : "+opt.title;
+//	shareDetails.url = "/music/manualplay/vid?vid="+opt.id+"&plName="+urlName;
+//	shareDetails.description = "Song : "+opt.title;
 //	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
 //	document.title = opt.title;
 //	addVideoToDivAfterFinishedManual(opt);
-	window.location.href = "/video/manualplay/vid?vid="+opt.id+"&plName="+plName;
+	window.location.href = "/music/manualplay/vid?vid="+opt.id+"&plName="+plName+"&filter="+$("#searchBox").val();
 }
 
 function getPlaylist() {
@@ -80,11 +75,40 @@ function getPlaylist() {
 	}, afterPlaylistRequested);
 }
 
+function getFilteredSongs() {
+	newList = [];
+	var filters = [];
+	if (filter.indexOf(",")>-1) {
+		filters = filter.split(",");
+	}
+	else {
+		filters.push(filter);
+	}
+	for (var i = 0;i<myVideos.length;i++) {
+		var isItContained = false;
+		for (var j = 0;j<filters.length;j++) {
+			if (myVideos[i].description.toUpperCase().indexOf(filters[j].toUpperCase())>-1) {
+				isItContained = true;
+			}
+		}
+		if (isItContained) {
+			newList.push(myVideos[i]);
+		}
+	}
+	return newList;
+}
+
 var myVideos;
 function afterPlaylistRequested(pl) {
 	myVideos = pl.videos;
-	
-	shareDetails.title = "Rolling Video ("+pl.name+")";
+	newList = myVideos;
+	if (filter!=="") {
+		newList = getFilteredSongs();
+		$("#searchBox").val(filter);
+	}
+	var totalSongsTitle = newList.length!==myVideos.length?newList.length+"/"+myVideos.length:"ALL";
+	$("#totalSongs").text(totalSongsTitle);	
+	shareDetails.title = "Rolling Music ("+pl.name+")";
 	
 	var pUrl = [];
 	var urlName = "";
@@ -98,12 +122,12 @@ function afterPlaylistRequested(pl) {
 //	$("#tv_kanal_slika").attr("src",pl.image);
 	$("#playlistName").text(""+pl.name);
 	$("#songs").children().remove();
-	myVideos.sort(function(a, b) {
+	newList.sort(function(a, b) {
 		return a.index_num - b.index_num;
 	});
 	
 	var sortedList = [];
-	var current = myVideos[0];
+	var current = newList[0];
 	
 	var opts = {};
 	if (vid_id===-1) {
@@ -115,15 +139,15 @@ function afterPlaylistRequested(pl) {
 				off : current.offset,
 				vid_id:current.id
 		}
-		shareDetails.url = "/video/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
-		shareDetails.description = "Video : "+current.description;
+		shareDetails.url = "/music/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
+		shareDetails.description = "Song : "+current.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+current.ytId+"/hqdefault.jpg";
 	}
 	else {
 		var chosenVid = {};
-		for (var i = 0;i<myVideos.length;i++) {
-			if (myVideos[i].ytId===vid_id) {
-				chosenVid = myVideos[i];
+		for (var i = 0;i<newList.length;i++) {
+			if (newList[i].ytId===vid_id) {
+				chosenVid = newList[i];
 				break;
 			}
 			
@@ -136,19 +160,22 @@ function afterPlaylistRequested(pl) {
 				off : chosenVid.offset,
 				vid_id:chosenVid.id
 		}
-		shareDetails.url = "/video/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
-		shareDetails.description = "Video : "+chosenVid.description;
+		shareDetails.url = "/music/manualplay/vid?vid="+chosenVid.ytId+"&plName="+urlName;
+		shareDetails.description = "Song : "+chosenVid.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+chosenVid.ytId+"/hqdefault.jpg";
 	}
 	addVideoToDivManual(opts);
-	if (current) sortedList.push(current);
-	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
-	for (var i = current.index_num;i<myVideos.length;i++) {
-		sortedList.push(myVideos[i]);
-	}
-	for (var i = 0;i<current.index_num-1;i++) {
-		sortedList.push(myVideos[i]);
-	}
+	sortedList = newList;
+//	else {
+//		if (current) sortedList.push(current);
+//		lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
+//		for (var i = current.index_num;i<newList.length;i++) {
+//			sortedList.push(newList[i]);
+//		}
+//		for (var i = 0;i<current.index_num-1;i++) {
+//			sortedList.push(newList[i]);
+//		}
+//	}
 	var currentSong = sortedList[0].started;
 	for (var i = 0; i < sortedList.length; i++) {
 		var background = sortedList[i].state == "1" ? "black" : "green";
@@ -160,8 +187,6 @@ function afterPlaylistRequested(pl) {
 				+ '/hqdefault.jpg"></div><div class="media-body">'
 				+ sortedList[i].description
 				+ '</div></div></li>');
-//		$("#songs").append(
-//				"<li class='vidstoplay' id = 'vid_"+i+"'><span>"+ sortedList[i].description + "</span></li>");
 		$("#vid_"+i).click(function(){
 			var ind = parseInt(this.id.split("_")[1]);
 			var options = {
@@ -195,10 +220,12 @@ function afterVideoRequested(payload) {
 function addVideoToDivAfterFinishedManual(options) {
 	$(".embed-responsive-item").attr(
 			"src",
-			"//www.youtube.com/embed/" + options.id + "?start=0"
-					+ "&showinfo=0&controls=1&enablejsapi=1&html5=1");
+			"//www.youtube.com/embed/" + options.id + "?start="+options.off
+					+ "&showinfo=0&controls=1&autoplay=1&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
+	document.title = options.title;
+	onYouTubeIframeAPIReady();
 }
 
 function addVideoToDiv(options) {
@@ -219,7 +246,7 @@ function addVideoToDivManual(options) {
 	$(".single_post_content")
 			.append(
 					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
-					+ options.id + "?start=0"
+					+ options.id + '?start='+options.off
 							+ '&rel=1&amp;&showinfo=0&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
@@ -238,10 +265,26 @@ function ytp() {
 function onYouTubeIframeAPIReady() {
 	player = new YT.Player('existing-iframe-example', {
 		events : {
-			'onReady' : onPlayerReady
+			'onReady' : onPlayerReady,
+			'onStateChange' : onPlayerStateChange
 		}
 	});
 }
+var newList=[];
+function onPlayerStateChange(event) {        
+	var video = newList[Math.floor(Math.random()*newList.length)];
+    if(event.data === 0) {          
+    	addVideoToDivAfterFinishedManual(
+		{
+			duration : video.duration,
+    		title : video.description,
+    		id : video.ytId,
+    		videoQuote : video.quote,
+    		off : 0
+    	});
+    }
+}
+
 function onPlayerReady(event) {
 	player.playVideo();
 }

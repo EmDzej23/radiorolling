@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nevreme.rolling.dao.sql.SqlBuilder;
 import com.nevreme.rolling.model.Playlist;
+import com.nevreme.rolling.model.User;
 
 @Repository
 public class PlaylistDao extends AbstractDao<Playlist, Long>{
@@ -28,6 +29,12 @@ public class PlaylistDao extends AbstractDao<Playlist, Long>{
 				.createQuery(new SqlBuilder().select(Playlist.class, true).where("name").build(), Playlist.class);
 		tq.setParameter("name", name);
 		return tq.getSingleResult().getId();
+	}
+	
+	@Override
+	public Playlist findOneEagerly(Long primaryKey) {
+		String sql = new SqlBuilder().select(Playlist.class, true).fetch("tags").fetch("videos").build();
+		return entityManager.createQuery(sql, Playlist.class).getSingleResult();
 	}
 	
 
