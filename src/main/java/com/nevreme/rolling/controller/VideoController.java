@@ -1,6 +1,5 @@
 package com.nevreme.rolling.controller;
 
-import org.hibernate.validator.internal.util.IgnoreJava6Requirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,8 +78,8 @@ public class VideoController {
 	@RequestMapping(value = "manualplay/vid", method = RequestMethod.GET)
 	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName) {
 		ModelAndView modelAndView = new ModelAndView();
-		Video video = videoService.findVideoByYtId(vid);
 		Long playlist_id = playlistService.getPlaylistByName(plName);
+		Video video = videoService.findVideoByYtId(vid, playlist_id);
 		modelAndView.addObject("playlist_id",playlist_id);
 		modelAndView.addObject("vid_id",vid);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));

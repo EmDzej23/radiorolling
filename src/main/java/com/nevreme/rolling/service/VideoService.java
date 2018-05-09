@@ -50,8 +50,8 @@ public class VideoService extends AbstractService<Video, Long> {
 	}
 	
 	@Cacheable("sitecache")
-	public Video findVideoByYtId(String ytId) {
-		return dao.findVideoByYtId(ytId);
+	public Video findVideoByYtId(String ytId, Long plId) {
+		return dao.findVideoByYtId(ytId, plId);
 	}
 
 	@Cacheable("sitecache")

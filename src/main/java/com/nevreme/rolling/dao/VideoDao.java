@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.nevreme.rolling.dao.sql.SqlBuilder;
 import com.nevreme.rolling.model.Video;
-import com.nevreme.rolling.model.VideoState;
 
 @Repository
 public class VideoDao extends AbstractDao<Video, Long> {
@@ -64,10 +63,11 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		return tq.getSingleResult();
 	}
 	
-	public Video findVideoByYtId(String ytId) {
+	public Video findVideoByYtId(String ytId, Long plId) {
 		TypedQuery<Video> tq = entityManager
-				.createQuery(new SqlBuilder().select(Video.class, true).where("ytId").build(), Video.class);
+				.createQuery(new SqlBuilder().select(Video.class, true).wheres(new String[] { "ytId", "playlist.id" }, new String[] { "ytId", "playlist_id" }).build(), Video.class);
 		tq.setParameter("ytId", ytId);
+		tq.setParameter("playlist_id", plId);
 		return tq.getSingleResult();
 	}
 

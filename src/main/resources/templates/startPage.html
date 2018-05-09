@@ -107,16 +107,13 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 				<div class="header_top">
 					<nav class="navbar navbar-default" role="navigation">
 						<div sec:authorize="isAnonymous()" class="container-fluid">
-							<a href="/login" style="">Login</a> <a
-								href="/music/random" style="">Random
-								pesma</a><a href="/contact" style="">O
-								nama i kontakt</a>
+							<a href="/login" style="">Login</a> <a href="/music/random"
+								style="">Random pesma</a><a href="/contact" style="">O nama</a>
 						</div>
 						<div sec:authorize="isAuthenticated()" class="container-fluid">
-							<a href="/admin/setup" style="">Edit
-								playlist</a> <a href="/music/random" style="">Random
-								pesma</a> <a href="/contact" style="">O
-								nama i kontakt</a>
+							<a href="/admin/setup" style="">Edit playlist</a> <a
+								href="/music/random" style="">Random pesma</a> <a
+								href="/contact" style="">O nama</a>
 						</div>
 					</nav>
 				</div>
@@ -133,7 +130,9 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 						<div class="row">
 							<div class="middle_bar">
 								<div class="single_post_content" id="gotoradio">
-									<h4 id="nr" class="song_title post_title wow  animated animated animated animated animated animated" style="visibility: visible; font-size: 1.55em;"></h4>
+									<h4 id="nr"
+										class="song_title post_title wow  animated animated animated animated animated animated"
+										style="visibility: visible; font-size: 1.55em;"></h4>
 								</div>
 								<div class="single_post_content">
 									<h4
@@ -290,6 +289,12 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 											<!-- Grid column -->
 
 										</div>
+										<div class="row" id="other"></div>
+										<div class="row justify-content-center"
+											style="text-align: center;">
+											<div class="btn btn-primary" id="btnload" style="display: inline-block;"
+												onclick="showNewCards()">Prikaži još</div>
+										</div>
 
 									</div>
 									<div class="single_post_content">
@@ -307,8 +312,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 													<!--Card image-->
 													<div class="view overlay" style="text-align: center;">
 														<img alt="wider" class="img-fluid"
-															src="/res/images/20183252342/muzika.jpg" style="max-height: 250px;"> <a
-															href="#!" >
+															src="/res/images/20183252342/muzika.jpg"
+															style="max-height: 250px;"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -343,8 +348,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 													<!--Card image-->
 													<div class="view overlay" style="text-align: center;">
 														<img alt="wider" class="img-fluid"
-															src="/res/images/20183231327/sport.jpg" style="max-height: 250px;"> <a
-															href="#!">
+															src="/res/images/20183231327/sport.jpg"
+															style="max-height: 250px;"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -378,8 +383,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 													<!--Card image-->
 													<div class="view overlay" style="text-align: center;">
 														<img alt="wider" class="img-fluid"
-															src="/res/images/2018431224/Movie.jpg" style="max-height: 250px;"> <a
-															href="#!">
+															src="/res/images/2018431224/Movie.jpg"
+															style="max-height: 250px;"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -396,7 +401,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 															<strong>Zanimljivosti</strong>
 														</h5>
 
-														<p class="card-text">Čitajte zanimljivosti iz sveta filma</p>
+														<p class="card-text">Čitajte zanimljivosti iz sveta
+															filma</p>
 
 													</div>
 													<!--/.Card content-->

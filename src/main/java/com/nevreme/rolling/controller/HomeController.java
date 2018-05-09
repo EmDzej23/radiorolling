@@ -1,11 +1,9 @@
 package com.nevreme.rolling.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +15,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nevreme.rolling.dao.mapping.MapperConfig;
 import com.nevreme.rolling.dto.VideoDto;
-import com.nevreme.rolling.model.Playlist;
 import com.nevreme.rolling.model.Video;
 import com.nevreme.rolling.service.PlaylistService;
 import com.nevreme.rolling.service.VideoService;
@@ -91,10 +88,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "manualplay/vid", method = RequestMethod.GET)
-	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName, @RequestParam String filter) {
+	public ModelAndView staticalVid(@RequestParam String vid, @RequestParam String plName, @RequestParam String filter) throws JsonProcessingException {
 		ModelAndView modelAndView = new ModelAndView();
-		Video video = videoService.findVideoByYtId(vid);
 		Long playlist_id = playlistService.getPlaylistByName(plName);
+		Video video = videoService.findVideoByYtId(vid, playlist_id);
 		modelAndView.addObject("playlist_id",playlist_id);
 		modelAndView.addObject("vid_id",vid);
 		modelAndView.addObject("appRoot",System.getProperty("APP_ROOT"));
@@ -103,6 +100,7 @@ public class HomeController {
 		modelAndView.addObject("m_url","http://radiorolling.com/music/manualplay/vid?vid="+vid+"&plName="+plName);
 		modelAndView.addObject("m_desc",video.getDescription());
 		modelAndView.addObject("filter",filter);
+		modelAndView.addObject("videoDto",new ObjectMapper().writeValueAsString(mapper.getMapper().map(video, VideoDto.class)));
 		modelAndView.addObject("m_image","https://i.ytimg.com/vi/"+vid+"/hqdefault.jpg");
 		modelAndView.setViewName("admin/staticalMusic");
 		return modelAndView;

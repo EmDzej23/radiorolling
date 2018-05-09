@@ -103,6 +103,16 @@
 										<button onclick="setAllDailyRecToNullRecommend()">Obrisi dnevne preporuke [preporuka]</button>
 										<br>
 										<button onclick="setAllDailyRecToNullQuote()">Obrisi dnevne preporuke [citat]</button>
+										<br>
+										<br>
+										<hr>
+										<label>Naslov kartice</label> <input type="text" id="titleCard">
+										<label>Opis kartice</label> <input type="text" id="descCard">
+										<label>Link kartice</label> <input type="text" id="linkCard">
+										<label>Slika kartice</label> <input type="text" id="imgCard">
+										<label>Plejlista kartice</label> <input type="text" id="plCard">
+
+										<button onclick="addNewCard()">Unesi novu karticu</button>
 										
 									</div>
 									<div class="post_footer"></div>
@@ -256,6 +266,13 @@
 			var on_off = $("#on_off").val(); 
 			PostData({url:"/public/api/video/"+id, data:JSON.stringify({daily_recommend:on_off})},
 				function(r){alert("OK")},function(r){alert("NOT OK")});
+		}
+		
+		function addNewCard() {
+			PostData({
+				url : "http://radiorolling.com/public/api/card/newCard",
+				data : JSON.stringify({title:$("#titleCard").val(),description:$("#descCard").val(),link:$("#linkCard").val(),img:$("#imgCard").val(),playlistName:$("#plCard").val()})
+			}, function(r){console.log("Success")}, function(r) {console.log(r)});
 		}
 	</script>
 </body>

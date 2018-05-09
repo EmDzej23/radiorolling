@@ -6,8 +6,20 @@
 //var messageArea = document.querySelector('#messageArea');
 //var connectingElement = document.querySelector('.connecting');
 $(document).ready(function() {
+	if (vid_id!=-1) {
+		opts = {
+				duration : videoDto.duration,
+				title : videoDto.description,
+				id : videoDto.ytId,
+				videoQuote : videoDto.quote,
+				off : videoDto.offset,
+				vid_id:videoDto.id
+		}
+		addVideoToDivManual(opts);
+	}
 	connect();
 	appendPLists();
+	
 	if (playlist_id == 287) {
 		$("body").css("cursor","url('../../images/darko.cur'), auto");
 	}
@@ -205,6 +217,7 @@ function afterPlaylistRequested(pl) {
 		shareDetails.url = "/music/manualplay/vid?vid="+current.ytId+"&plName="+urlName;
 		shareDetails.description = "Song : "+current.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+current.ytId+"/hqdefault.jpg";
+		addVideoToDivManual(opts);
 	}
 	else {
 		var chosenVid = {};
@@ -228,7 +241,7 @@ function afterPlaylistRequested(pl) {
 		shareDetails.description = "Song : "+chosenVid.description;
 		shareDetails.image = "https://i.ytimg.com/vi/"+chosenVid.ytId+"/hqdefault.jpg";
 	}
-	addVideoToDivManual(opts);
+	//addVideoToDivManual(opts);
 	
 	sortedList = newList;
 //	else {

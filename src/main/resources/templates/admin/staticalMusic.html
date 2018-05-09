@@ -233,6 +233,7 @@
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
        var vid_id = [[${vid_id}]];
+       var videoDto = JSON.parse([[${videoDto}]]);
        var filter = [[${filter}]];
        filter = filter.replace(/aanndd/g , "&");
        var ws = [[${ws}]];
