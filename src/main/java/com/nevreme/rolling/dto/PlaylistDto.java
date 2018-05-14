@@ -1,5 +1,6 @@
 package com.nevreme.rolling.dto;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Component;
@@ -13,7 +14,8 @@ public class PlaylistDto {
 	private boolean start;
 	private String image;
 	private int playlist_type;
-	
+	private List<UserDto> userDto;
+
 	public Long getId() {
 		return id;
 	}
@@ -50,5 +52,6 @@ public class PlaylistDto {
 	public void setPlaylist_type(int playlist_type) {
 		this.playlist_type = playlist_type;
 	}
-	
+	public List<UserDto> getUserDto() { return userDto; }
+	public void setUserDto(List<UserDto> userDto) { this.userDto = userDto; }
 }
