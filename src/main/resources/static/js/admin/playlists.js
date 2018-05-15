@@ -24,7 +24,7 @@ function initPlaylist() {
 }
 function appendAllPls() {
 	FetchData({
-		url : "/public/api/playlist/"
+		url : "/public/api/playlist/user"
 	}, function(response){
 		var list = [];
 		for (var i = 0;i<response.length;i++) {

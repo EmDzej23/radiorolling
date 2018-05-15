@@ -1,8 +1,11 @@
 package com.nevreme.rolling.controller;
 
+import com.nevreme.rolling.dao.mapping.MapperConfig;
+import com.nevreme.rolling.service.PlaylistService;
+import com.nevreme.rolling.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +19,10 @@ public class AdminController {
 
 	@Autowired
 	PlaylistService playlistService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	MapperConfig mapper;
 
 	@RequestMapping(value = { "/playlistEdit", "/playlistEdit/" }, method = RequestMethod.GET)
 	public ModelAndView addPost() {
@@ -25,17 +32,26 @@ public class AdminController {
 		return modelAndView;
 	}
 
+//	@RequestMapping(value = { "/setup", "/setup/" }, method = RequestMethod.GET)
+//	public ModelAndView setup() {
+//		Long playlist_id = playlistService.getPlaylistByName("Rolling");
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.addObject("appRoot", System.getProperty("APP_ROOT"));
+//		modelAndView.addObject("playlist_id", playlist_id);
+//		modelAndView.setViewName("admin/playlist");
+//		return modelAndView;
+//	}
+
 	@RequestMapping(value = { "/setup", "/setup/" }, method = RequestMethod.GET)
 	public ModelAndView setup() {
-		Long playlist_id = playlistService.getPlaylistByName("Rolling");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("appRoot", System.getProperty("APP_ROOT"));
-		modelAndView.addObject("playlist_id", playlist_id);
-		modelAndView.setViewName("admin/playlist");
+		modelAndView.setViewName("admin/playlists");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/setupp", method = RequestMethod.GET)
+	@PreAuthorize("hasPermission(#id, 'id', 'read')")
 	public ModelAndView setupid(@RequestParam Long id) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("playlist_id", id);

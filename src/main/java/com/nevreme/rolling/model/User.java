@@ -1,26 +1,23 @@
 package com.nevreme.rolling.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Component
 @Entity
@@ -53,7 +50,11 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-	
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "user_playlist", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+	private List<Playlist> playlists;
+
 	public Long getId() {
 		return id;
 	}
@@ -117,7 +118,12 @@ public class User {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
 
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
 }
