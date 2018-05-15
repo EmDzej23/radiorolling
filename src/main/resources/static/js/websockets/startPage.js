@@ -197,6 +197,8 @@ $(document).ready(function() {
 
 	stompClient.connect({}, onConnected, function(r){console.log("error "+r)});
 	
+	showNewCards();
+	
 });
 
 function onConnected() {

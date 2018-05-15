@@ -11,22 +11,24 @@
 
   gtag('config', 'UA-111192516-2');
 </script>
-<meta name="google-site-verification" content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc" />
-<meta name="description" content="Best Music, Video and Text content from all around the web.">
+<meta name="google-site-verification"
+	content="oscYpTP3fI-W1-hNNuiu3vRLdJv9XBIZlp67OBnswBc" />
+<meta name="description"
+	content="Best Music, Video and Text content from all around the web.">
 <title>Rolling Radio</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="fb:app_id" content="1498376340278074" />
-<meta property="og:type" content="article" >
-<meta property="og:url" th:content="${m_url}" >
+<meta property="og:type" content="article">
+<meta property="og:url" th:content="${m_url}">
 <meta property="og:title" th:content="${m_desc}">
 <meta property="og:description" th:content="${m_title}">
-<meta property="og:image" th:content="${m_image}" >
-<meta property="og:image:url" th:content="${m_image}" >
-<meta property="og:image:secure_url" th:content="${m_image}" >
-<meta property="og:image:width" content="1200" >
-<meta property="og:image:height" content="900" >
+<meta property="og:image" th:content="${m_image}">
+<meta property="og:image:url" th:content="${m_image}">
+<meta property="og:image:secure_url" th:content="${m_image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="900">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="${m_url}">
@@ -85,8 +87,7 @@
 									<li><a href="/text/">Text</a></li>
 									<li><a href="/recommend/">Preporuke</a></li>
 									<li><a href="/logout">Logout</a></li>
-									<li><a href="/admin/setup">Videos
-											setup</a></li>
+									<li><a href="/admin/setup">Videos setup</a></li>
 								</ul>
 							</div>
 							<div sec:authorize="isAnonymous()" id="navbar"
@@ -125,18 +126,18 @@
 									<!-- 												style="width: 30%; float: right;"> -->
 									<!-- 										</div> -->
 									<!-- 									</div> -->
-									<h2 class="song_title post_title wow "></h2>
-									<div class="single_post_content">
-									</div>
+									<h2 class="song_title post_title wow ">
+										
+									</h2>
+									<div class="single_post_content"></div>
 									<button id="saveImg" onclick="saveImage()">Download</button>
-									
+
 									<div class="post_footer">
 										<br>
 										<p id="videoQuote"
 											style="text-align: center; font-size: 25px;"></p>
 									</div>
-									<div id="fbshare" class="fb-share-button"
-										data-href="${m_url}"
+									<div id="fbshare" class="fb-share-button" data-href="${m_url}"
 										data-layout="button_count" data-size="large"
 										data-mobile-iframe="true">
 										<a id="afbs" target="_blank"
@@ -170,7 +171,8 @@
 									<h2>
 										<span>Tekstovi</span>
 									</h2>
-									<input id="searchBox" placeholder="Trazi tekstove" title="PRETRAZI TEKSTOVE" type="text" value="">
+									<input id="searchBox" placeholder="Trazi tekstove"
+										title="PRETRAZI TEKSTOVE" type="text" value="">
 									<div class="singleleft_inner">
 										<ul id="songs" class="catg3_snav ppost_nav wow fadeInDown">
 
@@ -228,8 +230,9 @@
 	<script type="text/javascript" src="../js/dynamicHtmlLib.js"></script>
 	<script src="../js/websockets/sock.min.js"></script>
 	<script src="../js/websockets/stomp.min.js"></script>
-	<script type="text/javascript" src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-	
+	<script type="text/javascript"
+		src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
 	<script type="text/javascript" th:inline="javascript">
 	   function saveImage() {
 		   html2canvas(document.getElementsByClassName('single_post_content')[0],{allowTaint:true}).then(function(canvas) {

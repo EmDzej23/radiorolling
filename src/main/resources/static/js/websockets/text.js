@@ -144,7 +144,8 @@ function afterPlaylistRequested(pl) {
 				id : current.id,
 				videoQuote : current.quote,
 				off : current.offset,
-				vid_id:current.id
+				vid_id:current.id,
+				started:current.started
 		}
 		shareDetails.url = "/text/t?text="+current.id+"&plName="+urlName;
 		shareDetails.description = "Naslov : "+current.description;
@@ -165,7 +166,8 @@ function afterPlaylistRequested(pl) {
 				title : chosenVid.description,
 				id : chosenVid.id,
 				videoQuote : chosenVid.quote,
-				off : chosenVid.offset
+				off : chosenVid.offset,
+				started: chosenVid.started
 		}
 		shareDetails.url = "/text/t?text="+chosenVid.id+"&plName="+urlName;
 		shareDetails.description = "Video : "+chosenVid.description;
@@ -218,4 +220,5 @@ function addVideoToDivManual(options) {
 	$(".single_post_content")
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);
+	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+new Date(options.started)+'</span>');
 }
