@@ -191,8 +191,8 @@ function addVideoToDivAfterFinished(options) {
 	var offset = parseInt(options.id.split("?")[1].split("=")[1]) + parseInt(options.off);
 	$(".embed-responsive-item").attr(
 			"src",
-			"//www.youtube.com/embed/" + options.id.split("?")[0] + "?start="+offset
-					+ "&showinfo=0&controls=0&enablejsapi=1&html5=1");
+			"http://www.youtube.com/embed/" + options.id.split("?")[0] + "?start="+offset
+					+ "&showinfo=0&autoplay=1controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
 	$("#videoQuote").text(""+options.videoQuote+"");
@@ -203,9 +203,9 @@ function addVideoToDiv(options) {
 	$("#video_frame").remove();
 	$(".single_post_content")
 			.append(
-					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
+					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="http://www.youtube.com/embed/'
 					+ options.id.split("?")[0] + "?start="+offset
-							+ '&rel=0&amp;&showinfo=0&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
+							+ '&rel=0&amp;&showinfo=0&autoplay=1&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
 	ytp();

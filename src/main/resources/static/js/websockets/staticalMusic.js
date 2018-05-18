@@ -6,6 +6,7 @@
 //var messageArea = document.querySelector('#messageArea');
 //var connectingElement = document.querySelector('.connecting');
 $(document).ready(function() {
+	ytp();
 	if (vid_id!=-1) {
 		opts = {
 				duration : videoDto.duration,
@@ -303,7 +304,7 @@ function afterVideoRequested(payload) {
 function addVideoToDivAfterFinishedManual(options) {
 	$(".embed-responsive-item").attr(
 			"src",
-			"//www.youtube.com/embed/" + options.id + "?start="+options.off
+			"http://www.youtube.com/embed/" + options.id + "?start="+options.off
 					+ "&showinfo=0&controls=1&autoplay=1&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
@@ -316,9 +317,9 @@ function addVideoToDiv(options) {
 	$("#video_frame").remove();
 	$(".single_post_content")
 			.append(
-					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
+					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="http://www.youtube.com/embed/'
 					+ options.id.split("?")[0] + "?start="+offset
-							+ '&rel=1&amp;&showinfo=0&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
+							+ '&rel=1&amp;&showinfo=0&autoplay=1&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
 	ytp();
@@ -328,19 +329,19 @@ function addVideoToDivManual(options) {
 	$("#video_frame").remove();
 	$(".single_post_content")
 			.append(
-					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="//www.youtube.com/embed/'
+					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="http://www.youtube.com/embed/'
 					+ options.id + '?start='+options.off
-							+ '&rel=1&amp;&showinfo=0&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
+							+ '&rel=1&amp;&showinfo=0&autoplay=1&controls=1&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
-	ytp();
+	
 }
 
 var player;
 function ytp() {
 	var tag = document.createElement('script');
 	tag.id = 'iframe-demo';
-	tag.src = 'https://www.youtube.com/iframe_api';
+	tag.src = 'http://www.youtube.com/iframe_api';
 	var firstScriptTag = document.getElementsByTagName('script')[0];
 	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
@@ -375,5 +376,5 @@ function onPlayerStateChange(event) {
 }
 
 function onPlayerReady(event) {
-	player.playVideo();
+	event.target.playVideo();
 }

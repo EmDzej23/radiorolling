@@ -56,7 +56,7 @@ public class PlaylistRestController extends AbstractRestController<Playlist, Pla
 
 		MyUserPrincipal principal = (MyUserPrincipal) authentication.getPrincipal();
 		if (principal.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
-			return new ObjectMapper().writeValueAsString(listAll());
+			return new ObjectMapper().writeValueAsString(listAllEagerly());
 		} else {
 			List<Playlist> pls = principal.getUser().getPlaylists();
 			for (Playlist p : pls) {

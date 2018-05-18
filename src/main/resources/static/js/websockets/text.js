@@ -220,5 +220,14 @@ function addVideoToDivManual(options) {
 	$(".single_post_content")
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);
-	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+new Date(options.started)+'</span>');
+	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+formatDate(options.started)+'</span>');
+}
+
+function formatDate(date) {
+	var days = ['Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota'];
+	var months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar']
+	var d = new Date(date);
+	var dayName = days[d.getDay()];
+	var ttdate = dayName + " " + d.getDate() +". "+months[d.getMonth()] + " " +d.getFullYear()+". "+d.getHours() + ":"+d.getMinutes()+":"+d.getSeconds();
+	return ttdate;
 }
