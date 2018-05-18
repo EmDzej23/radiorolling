@@ -1,8 +1,7 @@
 package com.nevreme.rolling.configuration;
 
-import com.nevreme.rolling.handler.CustomAccessDeniedHandler;
+import com.nevreme.rolling.utils.Constants;
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,10 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-import com.nevreme.rolling.utils.Constants;
 
 @Configuration
 @EnableWebSecurity
@@ -103,15 +99,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl(System.getProperty("APP_ROOT")).and().exceptionHandling()
-//				.accessDeniedPage("/access-denied")
-				.accessDeniedHandler(accessDeniedHandler());
+				.accessDeniedPage("/access-denied");
 	}
 
-	@Bean
-	public AccessDeniedHandler accessDeniedHandler() {
-		return new CustomAccessDeniedHandler();
-	}
-	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 	    web
