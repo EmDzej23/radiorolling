@@ -99,4 +99,17 @@ public class Playlist {
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
+
+	@Override
+	public String toString() {
+		return "Playlist{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", start=" + start +
+				", image='" + image + '\'' +
+				", playlist_type=" + playlist_type +
+				", videos=" + videos +
+				", users=" + users +
+				'}';
+	}
 }
