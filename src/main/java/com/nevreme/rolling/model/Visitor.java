@@ -12,9 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Component
 @Entity
 @Table(name = "visitor")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Visitor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

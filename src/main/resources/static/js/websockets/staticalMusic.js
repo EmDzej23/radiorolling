@@ -1,4 +1,5 @@
 //var usernamePage = "Marko";
+var sharing_url = window.location.href;
 //var chatPage = document.querySelector('#chat-page');
 //var usernameForm = document.querySelector('#usernameForm');
 //var messageForm = document.querySelector('#messageForm');
@@ -40,8 +41,19 @@ $(document).ready(function() {
 	$("#searchBox").keyup(function() {
 		onkeyupsearch();
 	});
+	$("#fbshare").click(function(){
+		fbshare();
+	});
 	
 });
+
+function fbshare() {
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t=Rolling Music", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+}
+function afterAppendedNewSong() {
+//	sharing_url = location.pathname+"/vid?vid="+id+"$plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+	history.pushState(null, null, sharing_url);
+}
 function refreshSongsSelection() {
 	$(".vidstoplay").contextmenu(function(e) {
 		e.preventDefault();
@@ -80,6 +92,13 @@ function onkeyupsearch() {
 					+ '</div></div></li>');
 	$("#vid_"+i).click(function(){
 		var ind = parseInt(this.id.split("_")[1]);
+		for (var i = 0;i<newList.length;i++) {
+			if (newList[i].ytId===newList[ind].ytId) {
+				chosenVid = newList[i];
+				currentSongIndex = i;
+				break;
+			}
+		}
 		var options = {
 				duration : newList[ind].duration,
 				title : newList[ind].description,
@@ -140,7 +159,15 @@ function goToVideo(opt) {
 //	shareDetails.image = "https://i.ytimg.com/vi/"+opt.id+"/hqdefault.jpg";
 //	document.title = opt.title;
 //	addVideoToDivAfterFinishedManual(opt);
-	window.location.href = "/music/manualplay/vid?vid="+opt.id+"&plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+//	window.location.href = "/music/manualplay/vid?vid="+opt.id+"&plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+	
+	sharing_url = "/music/manualplay/vid?vid="+opt.id+"&plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+	afterAppendedNewSong();
+	refreshSongsSelection();
+	$('.singleleft_inner').scrollTop($('.singleleft_inner').scrollTop() + $('#vid_'+currentSongIndex).position().top - $('#vid_'+currentSongIndex).height());
+	$('.vidstoplay').css("font-weight","normal");
+	$('#vid_'+currentSongIndex).css("font-weight","bold")
+	addVideoToDivAfterFinishedManual(opt);
 }
 var currentSongIndex = -1;
 function getPlaylist() {
@@ -275,6 +302,13 @@ function afterPlaylistRequested(pl) {
 					videoQuote : sortedList[ind].quote,
 					off : sortedList[ind].offset
 			}
+			for (var i = 0;i<newList.length;i++) {
+				if (newList[i].ytId===sortedList[ind].ytId) {
+					chosenVid = newList[i];
+					currentSongIndex = i;
+					break;
+				}
+			}
 			goToVideo(options);
 		});
 		
@@ -360,7 +394,7 @@ function onPlayerStateChange(event) {
     	currentSongIndex++;
     	if (currentSongIndex >= newList.length) currentSongIndex = 0;
     	var video = newList[currentSongIndex];
-    	addVideoToDivAfterFinishedManual(
+    	goToVideo(
 		{
 			duration : video.duration,
     		title : video.description,

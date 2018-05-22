@@ -1,5 +1,6 @@
 package com.nevreme.rolling.model;
 
+import java.sql.Timestamp;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,9 +15,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Component
 @Entity
 @Table(name = "answer")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +36,8 @@ public class Answer {
 
     @Column
     private int downVotes;
+    
+    private Timestamp date;
 
     @Column(columnDefinition = "TEXT")
     private String html;
@@ -113,5 +120,21 @@ public class Answer {
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
     }
+
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
+	}
 
 }

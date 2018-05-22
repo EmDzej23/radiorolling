@@ -1,5 +1,6 @@
 package com.nevreme.rolling.dto;
 
+import java.sql.Timestamp;
 import java.util.Set;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,8 @@ public class AnswerDto {
     private int upVotes;
     private int downVotes;
     private AnswerDto replyAnswer;
+    private Timestamp date;
+    private String html;
     private VisitorDto visitor;
     private Set<VoteDto> votes;
 
@@ -68,4 +71,21 @@ public class AnswerDto {
     public void setVotes(Set<VoteDto> votes) {
         this.votes = votes;
     }
+
+	public Timestamp getDate() {
+		return date;
+	}
+
+	public void setDate(Timestamp date) {
+		this.date = date;
+	}
+
+	public String getHtml() {
+		return html;
+	}
+
+	public void setHtml(String html) {
+		this.html = html;
+	}
+    
 }

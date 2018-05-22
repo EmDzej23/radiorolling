@@ -15,6 +15,9 @@ public class VoteService extends AbstractService<Vote, Long> {
     public VoteService(VoteDao voteDao) {
         super(voteDao);
     }
-
+    
+    public Vote findVoteByVisitorAndAnswer(Long visitorId,Long answerId) {
+    	return voteDao.findVoteByVisitorAndAnswer(visitorId,answerId);
+    }
 
 }

@@ -1104,95 +1104,11 @@ opacity
 		type="text/javascript"></script>
 
 	<script type="text/javascript" th:inline="javascript">
-	   function saveImage() {
-		   html2canvas(document.getElementsByClassName('single_post_content')[0],{allowTaint:true}).then(function(canvas) {
-			    $('body').append(canvas);
-			    $(canvas).attr("id","canid");    
-			    downloadCanvas(this, 'canid', 'RadioRollingImage.png');
-			});
-	   }
-	   
-	   function downloadCanvas(link, canvasId, filename) {
-		   var link = document.createElement('a');
-       link.href = document.getElementById(canvasId).toDataURL();
-       link.download = 'RR.png';
-       document.body.appendChild(link);
-       link.click();   
-	   }
-       var appRoot = [[${appRoot}]];
-       var ws = [[${ws}]];;
-       var playlist_id =[[${playlist_id}]];
-       var vid_id = [[${vid_id}]];
-       var urll = [[${url}]];;
-		$("#fbshare").attr("data-href",urll);
-		$("#afbs").attr("href","https://www.facebook.com/sharer/sharer.php?u="+urll+";src=sdkpreparse");
-//        var lastStartedTime = 0;
-       
-//        function updateClock() {
-//     	    var currentTime = new Date();
-//     	    var currentHoursAP = currentTime.getHours();
-//     	    var currentHours = currentTime.getHours();
-//     	    var currentMinutes = currentTime.getMinutes();
-//     	    var currentSeconds = currentTime.getSeconds();
-    	    
-//     	    // Pad the minutes and seconds with leading zeros, if required
-//     	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-//     	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-    	    
-//     	    // Choose either "AM" or "PM" as appropriate
-//     	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
-    	    
-//     	    // Convert the hours component to 12-hour format if needed
-//     	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
-    	    
-//     	    // Convert an hours component of "0" to "12"
-//     	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
-    	    
-//     	    // Compose the string for display
-//     	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
-    	    
-//     	    $("#clock").html(currentTimeString);
-//     	}
-       
-//        function updateRollingTime() {
-    	
-//    	    var myTime = new Date(lastStartedTime);
-//    	    var currentMinutes = myTime.getMinutes();
-//    	    var currentSeconds = myTime.getSeconds();
-//    	 	var currentTimeString = "...Roll on...";
-// 	    if (currentMinutes !== 0 || currentSeconds !== 0) {
-// 	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-// 	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-// 	 		lastStartedTime -= 1000;
-// 	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
-// 	 	}
-//    	    // Pad the minutes and seconds with leading zeros, if required
-//    	    $("#clock").html(currentTimeString);
-   	    
-   	    
-//    	}
-//        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
-//        {
-//        	FB.ui({
-//        		method: 'share_open_graph',
-//        		action_type: 'og.shares',
-//        		action_properties: JSON.stringify({
-//        			object: {
-//        				'og:url': overrideLink,
-//        				'og:title': overrideTitle,
-//        				'og:description': overrideDescription,
-//        				'og:image': overrideImage
-//        			}
-//        		})
-//        	},
-//        	function (response) {
-//        	// Action after response
-//        	});
-//        }
-       
+       var dto = [[${dto}]];
+       var username = [[${username}]];
 	</script>
 
-<!-- 	<script src="../js/websockets/text.js"></script> -->
+	<script src="../js/websockets/question.js"></script>
 
 </body>
 </html>

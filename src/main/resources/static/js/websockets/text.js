@@ -1,4 +1,5 @@
 //var usernamePage = "Marko";
+var sharing_url = window.location.href;
 //var chatPage = document.querySelector('#chat-page');
 //var usernameForm = document.querySelector('#usernameForm');
 //var messageForm = document.querySelector('#messageForm');
@@ -44,7 +45,13 @@ $(document).ready(function() {
 		});
 		}
 		});
+	$("#fbshare").click(function(){
+		fbshare();
+	});
 });
+function fbshare() {
+	window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t=Rolling Music", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;
+}
 var shareDetails={};
 var newList = [];
 function getFilteredSongs() {
@@ -98,10 +105,16 @@ var colors = [ '#2196F3', '#32c787', '#00BCD4', '#ff5652', '#ffc107',
 function connect() {
 	getPlaylist();
 }
-
+function afterAppendedNewSong() {
+//	sharing_url = location.pathname+"/vid?vid="+id+"$plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+	history.pushState(null, null, sharing_url);
+}
 var plName;
 function goToVideo(opt) {
-	window.location.href = "/text/t?text="+opt.id+"&plName="+plName;
+//	window.location.href = "/text/t?text="+opt.id+"&plName="+plName;
+	sharing_url = "/text/t?text="+opt.id+"&plName="+plName;
+	afterAppendedNewSong();
+	addVideoToDivManual(opt);
 }
 
 function getPlaylist() {
@@ -200,7 +213,8 @@ function afterPlaylistRequested(pl) {
 					title : sortedList[ind].description,
 					id : sortedList[ind].id,
 					videoQuote : sortedList[ind].quote,
-					off : sortedList[ind].offset
+					off : sortedList[ind].offset,
+					started:sortedList[ind].started
 			}
 			goToVideo(options);
 		});
@@ -217,6 +231,7 @@ function addVideoToDivAfterFinishedManual(options) {
 
 function addVideoToDivManual(options) {
 	$("#video_frame").remove();
+	$('.single_post_content').children().remove()
 	$(".single_post_content")
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);

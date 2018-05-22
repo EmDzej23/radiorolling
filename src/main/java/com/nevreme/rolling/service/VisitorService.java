@@ -15,6 +15,10 @@ public class VisitorService extends AbstractService<Visitor, Long> {
     public VisitorService(VisitorDao visitorDao) {
         super(visitorDao);
     }
+    
+    public Visitor findByVisitorId(String id) {
+    	return visitorDao.findByVisitorId(id);
+    }
 
 
 }
