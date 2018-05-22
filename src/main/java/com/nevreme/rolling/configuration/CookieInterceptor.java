@@ -34,8 +34,10 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         }
 
         for (Cookie cookie : cookies) {
-            if (cookie.getName().contentEquals(cookieName)) {
+            System.out.println("*** cookie " + cookie.getName());
+            if (cookie.getName().equals(cookieName)) {
                 found = true;
+                break;
             }
         }
 
@@ -49,7 +51,9 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         Visitor visitor = new Visitor();
         visitor.setVisitorId(UUID.randomUUID().toString());
         visitorService.save(visitor);
-        response.addCookie(new Cookie(cookieName, visitor.getVisitorId()));
+        Cookie cookie = new Cookie(cookieName, visitor.getVisitorId());
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 
 }

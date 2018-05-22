@@ -393,7 +393,10 @@ function InitAllDataTables() {
 function refreshTable() {
     outerTable.columns.adjust().draw();
 } 
-
+function CreateModalLabel(labelText) {
+    var label = DHElement("label","control-label col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2","",labelText);
+    return label.html;
+}
 
 function DHModalForm (options) {
     if (!(this instanceof DHModalForm)){
@@ -488,7 +491,7 @@ function AppendInfoModal(title, text, icon){
         title:title,
         buttonLabel:"OK",
         icon:iconClass,
-        data: CreateLabel(text)
+        data: CreateModalLabel(text)
     });
     AbstractDHElement.prototype.appendData("body", demoModal.html);
     $("#modal_large").modal("show");

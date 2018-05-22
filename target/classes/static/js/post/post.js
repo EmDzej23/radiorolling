@@ -73,7 +73,7 @@ $(document).ready(function(){
 	    $.ajax({
 	        type: "POST",
 	        enctype: 'multipart/form-data',
-	        url: appRoot+"/admin/api/user/saveImg",
+	        url: "/admin/api/post/saveImg",
 	        data: data,
 	        processData: false,
 	        contentType: false,
@@ -91,32 +91,27 @@ $(document).ready(function(){
 	        }
 	    });
 	});
+	FetchData({url:"/public/api/template/"},function(s){$(".note-codable").val((s[0].hTemplate))})
     
 });
 function sendPostData() {
-	var postDto = {};
-	postDto.title = $('#title').val();
-	postDto.post_html = $('#preview').text();
-	postDto.date = new Date();
-	postDto.author_id = 1;
-	postDto.body = "";
-	postDto.images = [];
+	var videoDto = {};
+	videoDto.description = $('#title').val();
+	videoDto.quote = $('#preview').text();
+	videoDto.started = new Date();
+	
 	var tags = $("#tags").val().split(",");
-	var imagePost = {};
-	var imagePost = $($("img")[0]).attr("src");
 	var tagsToSend = [];
-	var imgsToSend = [];
 	for (var i = 0;i<tags.length;i++) {
 		tagsToSend.push({id:null,name:tags[i]});
 	}
-	postDto.tags = tagsToSend;
-	postDto.image = {id:null,url:imagePost};
-	postDto.comments = [];
-	postDto.postType = $("input[type=radio]:checked").val();
+	videoDto.tags = tagsToSend;
 	
+	var imagePost = $($("img")[0]).attr("src");
+	videoDto.ytId = imagePost;
 	PostData({
-		url: appRoot+"/admin/api/post/add",
-		data: JSON.stringify(postDto)
+		url: "/admin/api/post/add?playlist_id="+$('#pl_id').val(),
+		data: JSON.stringify(videoDto)
 	},writeData,function(response) {
 		console.log("error");
 		console.log(response);
