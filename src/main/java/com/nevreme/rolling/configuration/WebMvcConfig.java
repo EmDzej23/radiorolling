@@ -89,7 +89,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter implements CachingConf
 		Properties properties = new Properties();
 		properties.put("hibernate.listeners.envers.autoRegister", "false");
 		properties.put("hibernate.format_sql", "false");
-		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.show_sql", "false");
 		properties.put("hibernate.default_batch_fetch_size", "9");
 		properties.put("hibernate.max_fetch_depth", "3");
 		properties.put("cache.use_second_level_cache", "true");

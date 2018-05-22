@@ -33,9 +33,9 @@
 </head>
 <body>
 	<h2>Unesi pesmu za plejlistu:</h2>
-	<select>
-		<option>Public</option>
-	</select>
+	<button onclick="gun()">
+		UPUTSTVO
+	</button>
 	<br>
 	<br>
 	<label for="url">Youtube id:</label>
@@ -48,11 +48,14 @@
 	<input class="form-control" id="duration" type="text" />
 	<label for="quote">Citat iz videa (pesme)</label>
 	<input class="form-control" id="quote" type="text" />
+	<label for="quote">Offset</label>
+	<input class="form-control" id="offset" type="number" value="0" />
 	<button onclick="saveSong()">Sacuvaj</button>
 	<br>
 	<br>
 	<div id="table_div"></div>
 	<button class="btn btn-primary" id="convert-table">Azuriraj!</button>
+	<button class="btn btn-primary" id="shuffle-playlist">Shuffle!</button>
 	<div style="display: none" id="dialog-message"
 		title="Brisanje pesme iz plejliste">
 		<p>

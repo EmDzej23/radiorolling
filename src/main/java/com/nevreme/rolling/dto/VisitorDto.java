@@ -19,8 +19,8 @@ public class VisitorDto {
     private Long id;
     private String visitorId;
     private String username;
-    private Set<AnswerDto> answers;
-    private Set<VoteDto> votes;
+//    private Set<AnswerDto> answers;
+//    private Set<VoteDto> votes;
 
     public Long getId() {
         return id;
@@ -46,19 +46,19 @@ public class VisitorDto {
         this.username = username;
     }
 
-    public Set<AnswerDto> getAnswers() {
-        return answers;
-    }
-
-    public void setAnswers(Set<AnswerDto> answers) {
-        this.answers = answers;
-    }
-
-    public Set<VoteDto> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Set<VoteDto> votes) {
-        this.votes = votes;
-    }
+//    public Set<AnswerDto> getAnswers() {
+//        return answers;
+//    }
+//
+//    public void setAnswers(Set<AnswerDto> answers) {
+//        this.answers = answers;
+//    }
+//
+//    public Set<VoteDto> getVotes() {
+//        return votes;
+//    }
+//
+//    public void setVotes(Set<VoteDto> votes) {
+//        this.votes = votes;
+//    }
 }
