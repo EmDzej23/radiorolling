@@ -344,6 +344,7 @@ function addVideoToDivAfterFinishedManual(options) {
 	$("#videoQuote").text(""+options.videoQuote+"");
 	document.title = options.title;
 	onYouTubeIframeAPIReady();
+	window.scrollTo(0,0);
 }
 
 function addVideoToDiv(options) {

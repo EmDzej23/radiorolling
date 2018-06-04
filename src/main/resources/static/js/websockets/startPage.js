@@ -199,7 +199,15 @@ $(document).ready(function() {
 	
 	showNewCards();
 	
+	FetchData({
+		url : "/public/api/question/active/ac?lidl=1"
+	}, function(r){console.log("Success");$("#questcont").append('<a id="question" class="logo" href="/question?id='+r.id+'"><b>'+r.name+'</b> <span id="quest">Rolling pitanje'+
+			'</span></a><a href="/qiestion?id='+r.id+'"</a>');console.log(r);$("#allcont").show('slow');$("#ldr").hide('slow');}, function(r) {console.log(r)});
 });
+//window.onload=function() {
+//	$(".box_wrapper").css("display","block");
+//	$(".loader").css("display","none");
+//}
 
 function onConnected() {
 	stompClient.subscribe('/channel/public/1',

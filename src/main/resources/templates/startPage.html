@@ -95,6 +95,24 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 	font-size: 0.86em;
 	font-weight: bold;
 }
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin-top:-60px;
+    margin-left:-60px;
+    position: fixed; /* or absolute */
+  	top: 50%;
+  	left: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 </head>
 <body style="overflow: visible;">
@@ -102,7 +120,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 		<div id="status" style="display: none;">&nbsp;</div>
 	</div>
 	<div class="container">
-		<div class="box_wrapper">
+		<div id="ldr" class="loader" style=""></div>
+		<div id="allcont" class="box_wrapper" style="display:none;">
 			<header id="header">
 				<div class="header_top">
 					<nav class="navbar navbar-default" role="navigation">
@@ -118,21 +137,20 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 					</nav>
 				</div>
 				<div class="header_bottom">
-					<div class="logo_area">
-						<a class="logo" href="#"><b>Radio</b> Rolling</a> <img
-							src="/res/images/20182101446/rolllogo.png" style="width: 41px;">
-					</div>
-
-<!-- 					<div class="row"> -->
-<!-- 						<div class="logo_area col-md-6"> -->
-<!-- 							<a class="logo" href="#"><b>Radio</b> Rolling</a> <img -->
-<!-- 								src="/res/images/20182101446/rolllogo.png" style="width: 41px;"> -->
-<!-- 						</div> -->
-<!-- 						<div class="logo_area col-md-6"> -->
-<!-- 							<a id="question" class="logo" href="#"><b>1. Pitanje:</b> Kako ste danas? -->
-<!-- 								Kako ste danas? Kako ste danas?</a> -->
-<!-- 						</div> -->
+<!-- 					<div class="logo_area"> -->
+<!-- 						<a class="logo" href="#"><b>Radio</b> Rolling</a> <img -->
+<!-- 							src="/res/images/20182101446/rolllogo.png" style="width: 41px;"> -->
 <!-- 					</div> -->
+
+					<div class="row">
+						<div class="logo_area col-md-6">
+							<a class="logo" href="#"><b>Radio</b> Rolling</a> <img
+								src="/res/images/20182101446/rolllogo.png" style="width: 41px;">
+						</div>
+						<div id="questcont" class="logo_area col-md-6">
+							
+						</div>
+					</div>
 
 				</div>
 			</header>

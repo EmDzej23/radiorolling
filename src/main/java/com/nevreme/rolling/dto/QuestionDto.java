@@ -8,6 +8,7 @@ public class QuestionDto {
     private Long id;
     private String name;
     private String image;
+    private int active;
     private Set<AnswerDto> answers;
 
     public Long getId() {
@@ -42,5 +43,13 @@ public class QuestionDto {
         this.answers = answers;
     }
 
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+    
 
 }

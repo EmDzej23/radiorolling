@@ -27,6 +27,9 @@ public class Question {
 
     @Column
     private String name;
+    
+    @Column
+    private int active;
 
     @Column
     private String image;
@@ -65,5 +68,14 @@ public class Question {
     public void setAnswers(Set<Answer> answers) {
         this.answers = answers;
     }
+
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+    
 
 }

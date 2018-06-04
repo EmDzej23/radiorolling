@@ -84,8 +84,15 @@
 										<label>Citat dana</label> <input type="text" id="quoteDay">
 
 										<label>Autor citata</label> <input type="text" id="quoteDayAuthor">
+										
+										
 
 										<button onclick="addNewQuote()">Unesi citat dana</button>
+										<br> <label>Tekst pitanja</label> <input type="text" id="quest_text">
+
+										<label>Slika pitanja</label> <input type="text" id="quest_image">
+
+										<button onclick="addQuestion()">Unesi pitanje</button>
 										<br>
 										<br>
 										<label>Daily Video</label> <input type="text" id="dailyVidId">
@@ -198,6 +205,13 @@
 					dailyRecommend:0
 				})
 			}, function(r){alert("Ok");}, function(r){alert("not ok");});
+		}
+		
+		function addQuestion() {
+			PostData({
+				url : "/public/api/question/add",
+				data : JSON.stringify({name:$("#quest_text").val(),image:$("#quest_image").val(),active:1})
+			}, function(r){console.log("Success")}, function(r) {console.log(r)});
 		}
 		
 		function setAllDailyRecToNullMusic() {

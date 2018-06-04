@@ -3,30 +3,7 @@ var index=0;
 var max = 10;
 
 $(document).ready(function(){
-//	$('#filebrow').change(function() {
-//		   var reader = new FileReader();
-//		   reader.onload = function(e) {
-//		   //this next line separates url from data
-//		   var iurl = e.target.result.substr(e.target.result.indexOf(",") + 1, e.target.result.length);
-//		   console.log(iurl);
-//		   var clientId = "74133e4f7e93563";               
-//		   $.ajax({
-//		    url: "https://api.imgur.com/3/upload",
-//		    type: "POST",
-//		    datatype: "json",
-//		    data: {
-//		    'image': iurl,
-//		    'type': 'base64'
-//		    },
-//		    success: fdone,//calling function which displays url
-//		    error: function(){alert("failed")},
-//		    beforeSend: function (xhr) {
-//		        xhr.setRequestHeader("Authorization", "Client-ID " + clientId);
-//		    }
-//		});
-//		};
-//		 reader.readAsDataURL(this.files[0]);
-//		});
+
 	$.ajax({
 		  url: 'https://api.github.com/emojis'
 		}).then(function(data) {
@@ -133,3 +110,33 @@ function fdone(data)
    $("#url").val(data);    
 }
 
+
+function addFact() {
+	var text = $("#fact_text").val();
+	var id = $("#fact_id").val();
+	var pic = $("#fact_pic").val();
+	var html = '<h4 style="text-align: center;"><img style="width: 1200px;" src="'+pic+'"><br></h4><h4 style="text-align: center;"><span class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3" style="text-align: center;"><font color="#000000">'+text+'</font></span></h4><h4 style="text-align: center;"><span class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-lg-6 col-lg-offset-3" style="text-align: center;"><div style="text-align: center;"><br></div></span></h4>';
+	
+	
+	var videoDto = {};
+	videoDto.description = $('#title').val();
+	videoDto.quote = html;
+	videoDto.started = new Date();
+	
+	var tags = $("#tags").val().split(",");
+	var tagsToSend = [];
+	for (var i = 0;i<tags.length;i++) {
+		tagsToSend.push({id:null,name:tags[i]});
+	}
+	videoDto.tags = tagsToSend;
+	
+	var imagePost = pic;
+	videoDto.ytId = imagePost;
+	PostData({
+		url: "/admin/api/post/add?playlist_id="+$('#pl_id').val(),
+		data: JSON.stringify(videoDto)
+	},writeData,function(response) {
+		console.log("error");
+		console.log(response);
+	});
+}

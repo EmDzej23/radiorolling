@@ -6,7 +6,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Component;
 
 import com.nevreme.rolling.dto.VideoDto;
+import com.nevreme.rolling.dto.VoteDto;
 import com.nevreme.rolling.model.Video;
+import com.nevreme.rolling.model.Vote;
 
 @Component
 public class MapperConfig {
@@ -17,6 +19,13 @@ public class MapperConfig {
 	private MapperConfig() {
 		initializeMapper();
 	}
+	
+	PropertyMap<Vote, VoteDto> voteDtoMap = new PropertyMap<Vote, VoteDto>() {
+		protected void configure() {
+			map(source.getVisitor().getId(), destination.getVisitorId());
+//			map(source.getDailyRecommend(), destination.getDailyRecommend());
+		};
+	};
 	
 	PropertyMap<Video, VideoDto> videoDtoMap = new PropertyMap<Video, VideoDto>() {
 		protected void configure() {
@@ -29,6 +38,7 @@ public class MapperConfig {
 		mapper = new ModelMapper();
 		mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 		mapper.addMappings(videoDtoMap);
+		mapper.addMappings(voteDtoMap);
 	}
 
 	public ModelMapper getMapper() {

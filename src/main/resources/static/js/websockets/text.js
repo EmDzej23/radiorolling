@@ -236,6 +236,7 @@ function addVideoToDivManual(options) {
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);
 	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+formatDate(options.started)+'</span>');
+	window.scrollTo(0,0);
 }
 
 function formatDate(date) {

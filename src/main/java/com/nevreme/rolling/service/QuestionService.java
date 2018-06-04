@@ -1,7 +1,14 @@
 package com.nevreme.rolling.service;
 
 import com.nevreme.rolling.dao.QuestionDao;
+import com.nevreme.rolling.dao.sql.SqlBuilder;
+import com.nevreme.rolling.model.Card;
 import com.nevreme.rolling.model.Question;
+
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +23,12 @@ public class QuestionService extends AbstractService<Question, Long> {
         super(questionDao);
     }
 
+    public List<Question> findAllInRange(int start, int max) {
+		return questionDao.findAllInRange(start, max);
+	}
+    
+    public Question findOneEagerlyActive() {
+    	return questionDao.findOneEagerlyActive();
+    }
 
 }

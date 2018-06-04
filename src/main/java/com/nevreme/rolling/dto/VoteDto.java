@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class VoteDto {
     private Long id;
     private boolean vote;
-//    private VisitorDto visitor;
+    private Long visitorId;
 //    private AnswerDto answer;
 
     public Long getId() {
@@ -35,6 +35,15 @@ public class VoteDto {
         this.vote = vote;
     }
 
+	public Long getVisitorId() {
+		return visitorId;
+	}
+
+	public void setVisitorId(Long visitorId) {
+		this.visitorId = visitorId;
+	}
+
+    
 //    public VisitorDto getVisitor() {
 //        return visitor;
 //    }

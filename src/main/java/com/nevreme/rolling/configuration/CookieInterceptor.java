@@ -19,7 +19,7 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
     private String cookieName = "visitorId";
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (visitorService == null) {
             ServletContext servletContext = request.getServletContext();
             WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
@@ -30,11 +30,10 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         boolean found = false;
         if (cookies == null) {
             addVisitor(response);
-            return;
+            return true;
         }
 
         for (Cookie cookie : cookies) {
-            System.out.println("*** cookie " + cookie.getName());
             if (cookie.getName().equals(cookieName)) {
                 found = true;
                 break;
@@ -44,7 +43,7 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         if (!found) {
             addVisitor(response);
         }
-
+        return true;
     }
 
     private void addVisitor(HttpServletResponse response) {
@@ -53,6 +52,7 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         visitorService.save(visitor);
         Cookie cookie = new Cookie(cookieName, visitor.getVisitorId());
         cookie.setPath("/");
+        cookie.setMaxAge(Integer.MAX_VALUE);
         response.addCookie(cookie);
     }
 
