@@ -36,7 +36,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		this.clazz = dto.getClass();
 	}
 
-	@CrossOrigin
+	@CrossOrigin(value="*")
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody List<T> listAll() {
 		List<T> all = this.repo.findAll();
@@ -48,6 +48,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		}
 		return all;
 	}
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/eager", method = RequestMethod.GET)
 	public @ResponseBody List<T> listAllEagerly() {
 		List<T> all = this.repo.findAllEagerly();
