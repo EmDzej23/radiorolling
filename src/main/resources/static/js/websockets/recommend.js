@@ -1,4 +1,5 @@
 //var usernamePage = "Marko";
+var sharing_url = window.location.href;
 //var chatPage = document.querySelector('#chat-page');
 //var usernameForm = document.querySelector('#usernameForm');
 //var messageForm = document.querySelector('#messageForm');
@@ -38,7 +39,8 @@ $(document).ready(function() {
 					title : newList[ind].description,
 					id : newList[ind].id,
 					videoQuote : newList[ind].quote,
-					off : newList[ind].offset
+					off : newList[ind].offset,
+					started:newList[ind].started
 			}
 			goToVideo(options);
 		});
@@ -73,7 +75,7 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "/public/api/playlist/t?type=4"
+				url : "/public/api/playlist/lazy?type=4"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
@@ -98,10 +100,15 @@ var colors = [ '#2196F3', '#32c787', '#00BCD4', '#ff5652', '#ffc107',
 function connect() {
 	getPlaylist();
 }
-
+function afterAppendedNewSong() {
+	history.pushState(null, null, sharing_url);
+}
 var plName;
 function goToVideo(opt) {
-	window.location.href = "/recommend/r?id="+opt.id+"&plName="+plName;
+	//window.location.href = "/recommend/r?id="+opt.id+"&plName="+plName;
+	sharing_url = "/recommend/r?id="+opt.id+"&plName="+plName;
+	afterAppendedNewSong();
+	addVideoToDivManual(opt);
 }
 
 function getPlaylist() {
@@ -143,7 +150,8 @@ function afterPlaylistRequested(pl) {
 				id : current.id,
 				videoQuote : current.quote,
 				off : current.offset,
-				vid_id:current.id
+				vid_id:current.id,
+				started:current.started
 		}
 		shareDetails.url = "/recommend/r?id="+current.id+"&plName="+urlName;
 		shareDetails.description = "Naslov : "+current.description;
@@ -163,7 +171,8 @@ function afterPlaylistRequested(pl) {
 				title : chosenVid.description,
 				id : chosenVid.id,
 				videoQuote : chosenVid.quote,
-				off : chosenVid.offset
+				off : chosenVid.offset,
+				started: chosenVid.started
 		}
 		shareDetails.url = "/recommend/r?id="+chosenVid.id+"&plName="+urlName;
 		shareDetails.description = "Video : "+chosenVid.description;
@@ -196,7 +205,8 @@ function afterPlaylistRequested(pl) {
 					title : sortedList[ind].description,
 					id : sortedList[ind].id,
 					videoQuote : sortedList[ind].quote,
-					off : sortedList[ind].offset
+					off : sortedList[ind].offset,
+					started:sortedList[ind].started
 			}
 			goToVideo(options);
 		});
@@ -207,13 +217,25 @@ function afterPlaylistRequested(pl) {
 function addVideoToDivAfterFinishedManual(options) {
 	$("#video_frame").remove();
 	$(".song_title").text(options.title);
+	$('.single_post_content').children().remove()
 	$(".single_post_content")
-	.append(options.videoQuote)
+			.append(options.videoQuote)
+	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+formatDate(options.started)+'</span>');
+	window.scrollTo(0,0);
 }
-
+function formatDate(date) {
+	var days = ['Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota'];
+	var months = ['januar','februar','mart','april','maj','jun','jul','avgust','septembar','oktobar','novembar','decembar']
+	var d = new Date(date);
+	var dayName = days[d.getDay()];
+	var ttdate = dayName + " " + d.getDate() +". "+months[d.getMonth()] + " " +d.getFullYear()+". "+d.getHours() + ":"+d.getMinutes()+":"+d.getSeconds();
+	return ttdate;
+}
 function addVideoToDivManual(options) {
 	$("#video_frame").remove();
+	$('.single_post_content').children().remove()
 	$(".single_post_content")
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);
+	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+formatDate(options.started)+'</span>');
 }

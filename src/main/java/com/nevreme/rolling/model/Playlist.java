@@ -38,7 +38,7 @@ public class Playlist {
 	@Column
 	private int playlist_type;
 	
-	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToMany(mappedBy="playlist",cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Video> videos;
 
 	@ManyToMany(mappedBy = "playlists")

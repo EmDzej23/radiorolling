@@ -87,6 +87,7 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		return new ResponseEntity<Set<Video>>(new HashSet<Video>(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/getRecommendedVideo")
 	@ResponseBody
 	public synchronized ResponseEntity<VideoDto> getRecommendedVideo(@RequestParam int type) {

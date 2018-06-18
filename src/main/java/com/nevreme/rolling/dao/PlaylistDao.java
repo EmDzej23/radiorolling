@@ -51,6 +51,13 @@ public class PlaylistDao extends AbstractDao<Playlist, Long>{
 
 	public List<Playlist> getPLaylstByType(int type) {
 		TypedQuery<Playlist> tq = entityManager
+				.createQuery(new SqlBuilder().select(Playlist.class, true).fetch("videos").fetch("users").where("playlist_type").build(), Playlist.class);
+		tq.setParameter("playlist_type", type);
+		return tq.getResultList();
+	}
+	
+	public List<Playlist> getPLaylstByTypeLazy(int type) {
+		TypedQuery<Playlist> tq = entityManager
 				.createQuery(new SqlBuilder().select(Playlist.class, true).where("playlist_type").build(), Playlist.class);
 		tq.setParameter("playlist_type", type);
 		return tq.getResultList();

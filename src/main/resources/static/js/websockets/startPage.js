@@ -67,7 +67,7 @@ $(document).ready(function() {
 		openInNewTab("/recommend/r?id="+contentRecommended);
 	});
 	FetchData({
-		url : "/public/api/playlist/t?type=1"
+		url : "/public/api/playlist/lazy?type=1"
 	}, function(response){
 		musicPlaylists = response.sort(function(a, b){return a.id-b.id});
 		var $dropdown = $("#dropdownMusic");
@@ -82,7 +82,7 @@ $(document).ready(function() {
 		console.log(response);
 	});
 	FetchData({
-		url : "/public/api/playlist/t?type=2"
+		url : "/public/api/playlist/lazy?type=2"
 	}, function(response){
 		videoPlaylists = response.sort(function(a, b){return a.id-b.id});
 		var $dropdown = $("#dropdownVideo");
@@ -97,7 +97,7 @@ $(document).ready(function() {
 		console.log(response);
 	});
 	FetchData({
-		url : "/public/api/playlist/t?type=3"
+		url : "/public/api/playlist/lazy?type=3"
 	}, function(response){
 		textPlaylists = response.sort(function(a, b){return a.id-b.id});
 		var $dropdown = $("#dropdownTekst");
@@ -112,7 +112,7 @@ $(document).ready(function() {
 		console.log(response);
 	});
 	FetchData({
-		url : "/public/api/playlist/t?type=4"
+		url : "/public/api/playlist/lazy?type=4"
 	}, function(response){
 		recommendPlaylists = response.sort(function(a, b){return a.id-b.id});
 		var $dropdown = $("#dropdownRec");

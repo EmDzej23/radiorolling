@@ -208,6 +208,25 @@ function isVideoAvailable(idUrl) {
 		}
 	});
 }
+function isVideoAvailabled(idUrl) {
+	var ytkey = 'AIzaSyAohq-i1Ee_8ei5PLKyMkHYqX9KUDV9Gq8';
+	$.ajax({
+		cache : false,
+		data : $.extend({
+			key : ytkey,
+			part : 'snippet,contentDetails,statistics'
+		}, {
+			id : idUrl
+		}),
+		dataType : 'json',
+		type : 'GET',
+		timeout : 5000,
+		//fields : "items(id,contentDetails,statistics,snippet(title))",
+		url : 'https://www.googleapis.com/youtube/v3/search?q='+idUrl
+	}).done(function(data) {
+		console.log(data);
+	});
+}
 function saveSong() {
 	PostData({
 		url : "/public/api/video/newVideo?pl="+playlist_id,
@@ -248,7 +267,7 @@ function getVideoDetails() {
 		dataType : 'json',
 		type : 'GET',
 		timeout : 5000,
-		fields : "items(id,contentDetails,statistics,snippet(title))",
+		fields : "items(id,contentDetails,statistics,snippet(title),status)",
 		url : 'https://www.googleapis.com/youtube/v3/videos'
 	}).done(function(data) {
 		var e = false;

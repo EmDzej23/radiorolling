@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -73,6 +74,7 @@ public class QuestionRestController extends AbstractRestController<Question, Que
 		return "Success";
 	}
 
+	@CrossOrigin(value="*")
 	@RequestMapping(value = { "like/", "like" }, method = RequestMethod.POST)
 	@ResponseBody
 	public synchronized ResponseEntity<AnswerDto>like(@RequestParam Long id, @RequestParam boolean type, HttpServletRequest request) {
@@ -103,6 +105,7 @@ public class QuestionRestController extends AbstractRestController<Question, Que
 		return new ResponseEntity<AnswerDto>(mapper.getMapper().map(answer, AnswerDto.class),HttpStatus.OK);
 	}
 	
+	@CrossOrigin(value="*")
 	@RequestMapping(value = { "addAnswer", "addAnswer/" })
 	@ResponseBody
 	public ResponseEntity<List<AnswerDto>> add(@RequestParam Long id, @RequestParam String username, @RequestBody AnswerDto dto, HttpServletRequest request) throws JsonProcessingException {
@@ -143,6 +146,7 @@ public class QuestionRestController extends AbstractRestController<Question, Que
 		return new ResponseEntity<List<AnswerDto>>(dtos,HttpStatus.OK);
 	}
 	
+	@CrossOrigin(value="*")
 	@RequestMapping(value = { "active/ac", "active/ac/" })
 	@ResponseBody
 	public synchronized ResponseEntity<QuestionDto>active(@RequestParam Long lidl) {

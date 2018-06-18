@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nevreme.rolling.dao.mapping.MapperConfig;
 import com.nevreme.rolling.dto.PlaylistDto;
+import com.nevreme.rolling.dto.PlaylistInfoDto;
 import com.nevreme.rolling.interceptors.MyUserPrincipal;
 import com.nevreme.rolling.model.Playlist;
 import com.nevreme.rolling.service.AbstractService;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +39,7 @@ public class PlaylistRestController extends AbstractRestController<Playlist, Pla
 		super(repo, dto);
 	}
 
+	@CrossOrigin(value="*")
 	@RequestMapping(value = { "t", "t/" })
 	@ResponseBody
 	public synchronized String getPlaylist(@RequestParam int type) throws JsonProcessingException {
@@ -44,6 +47,19 @@ public class PlaylistRestController extends AbstractRestController<Playlist, Pla
 		List<Playlist> pls = playlistService.getPLaylstByType(type);
 		for (Playlist p : pls) {
 			plDto.add(mapper.getMapper().map(p, PlaylistDto.class));
+		}
+		return new ObjectMapper()
+				.writeValueAsString(plDto);
+	}
+	
+	@CrossOrigin(value="*")
+	@RequestMapping(value = { "lazy", "t/" })
+	@ResponseBody
+	public synchronized String getPlaylistLazy(@RequestParam int type) throws JsonProcessingException {
+		List<PlaylistInfoDto> plDto = new ArrayList<>();
+		List<Playlist> pls = playlistService.getPLaylstByType(type);
+		for (Playlist p : pls) {
+			plDto.add(mapper.getMapper().map(p, PlaylistInfoDto.class));
 		}
 		return new ObjectMapper()
 				.writeValueAsString(plDto);

@@ -29,7 +29,7 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "/public/api/playlist/t?type=2"
+				url : "/public/api/playlist/lazy?type=2"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {

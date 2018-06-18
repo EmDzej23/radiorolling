@@ -28,7 +28,7 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "/public/api/playlist/t?type=1"
+				url : "/public/api/playlist/lazy?type=1"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
@@ -192,7 +192,7 @@ function addVideoToDivAfterFinished(options) {
 	$(".embed-responsive-item").attr(
 			"src",
 			"http://www.youtube.com/embed/" + options.id.split("?")[0] + "?start="+offset
-					+ "&showinfo=0&autoplay=1controls=0&enablejsapi=1&html5=1");
+					+ "&showinfo=0&allow=autoplay&controls=0&enablejsapi=1&html5=1");
 	$(".song_title").text(options.title);
 	getPlaylist();
 	$("#videoQuote").text(""+options.videoQuote+"");
@@ -205,7 +205,7 @@ function addVideoToDiv(options) {
 			.append(
 					'<div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" src="http://www.youtube.com/embed/'
 					+ options.id.split("?")[0] + "?start="+offset
-							+ '&rel=0&amp;&showinfo=0&autoplay=1&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
+							+ '&rel=0&amp;&showinfo=0&allow=autoplay&controls=0&enablejsapi=1&html5=1" frameborder="0" allowfullscreen></div>')
 	$(".song_title").text(options.title);
 	$("#videoQuote").text(""+options.videoQuote+"");
 	ytp();

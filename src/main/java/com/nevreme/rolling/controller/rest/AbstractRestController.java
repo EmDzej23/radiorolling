@@ -72,6 +72,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		return m;
 	}
 
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody T get(@PathVariable ID id) {
 		T obj = this.repo.findOne(id);
@@ -79,6 +80,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		return obj;
 	}
 	
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/eager/{id}", method = RequestMethod.GET)
 	public @ResponseBody T getEager(@PathVariable ID id) {
 		T obj = this.repo.findOneEagerly(id);
@@ -86,6 +88,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		return obj;
 	}
 
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody Map<String, Object> update(@PathVariable ID id, @RequestBody String json) {
 		logger.debug("update() of id#{} with body {}", id, json);
@@ -97,6 +100,7 @@ public abstract class AbstractRestController<T, TDTO, ID extends Serializable> {
 		return m;
 	}
 
+	@CrossOrigin(value="*")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody Map<String, Object> delete(@PathVariable ID id) {
 		this.repo.delete(id);

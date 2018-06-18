@@ -80,7 +80,7 @@ function appendPLists() {
 	FetchData(
 			{
 				//todo: add playlist_type
-				url : "/public/api/playlist/t?type=3"
+				url : "/public/api/playlist/lazy?type=3"
 			},
 			function(res) {
 				for (var i = 0; i < res.length; i++) {
@@ -241,7 +241,7 @@ function addVideoToDivManual(options) {
 
 function formatDate(date) {
 	var days = ['Nedelja', 'Ponedeljak', 'Utorak', 'Sreda', 'Četvrtak', 'Petak', 'Subota'];
-	var months = ['Januar','Februar','Mart','April','Maj','Jun','Jul','Avgust','Septembar','Oktobar','Novembar','Decembar']
+	var months = ['januar','februar','mart','april','maj','jun','jul','avgust','septembar','oktobar','novembar','decembar']
 	var d = new Date(date);
 	var dayName = days[d.getDay()];
 	var ttdate = dayName + " " + d.getDate() +". "+months[d.getMonth()] + " " +d.getFullYear()+". "+d.getHours() + ":"+d.getMinutes()+":"+d.getSeconds();

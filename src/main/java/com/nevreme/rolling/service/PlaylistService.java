@@ -31,5 +31,9 @@ public class PlaylistService extends AbstractService<Playlist, Long>{
 		return dao.getPLaylstByType(type);
 	}
 	
+	@Cacheable("sitecache")
+	public List<Playlist> getPLaylstByTypeLazy(int type) {
+		return dao.getPLaylstByTypeLazy(type);
+	}
 	
 }
