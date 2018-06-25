@@ -219,11 +219,13 @@ function openInNewTab(url) {
 var start = 0;
 var max = 4;
 function showNewCards() {
+	$("#btnload").css("display","none");
 	FetchData({url:"/public/api/card/range?start="+start+"&max="+max},
 			function(s){
 				for (var i = 0;i<s.length;i++){
 					var html = '<a href="'+s[i].link+'"><div class="col-lg-3 col-md-12 mb-3" id="content2"><div class="card card-cascade wider"><div class="view overlay"><img alt="wider" class="img-fluid" id="songImg" src="'+s[i].img+'"><a href="#!"><div class="mask rgba-white-slight waves-effect waves-light"></div></a></div><div class="card-body text-center"><h4 class="card-title"><strong id="dSongTitle">'+s[i].title+'</strong></h4><h5 class="indigo-text"><strong id="dSongDesc">'+s[i].description+'</strong></h5><p class="card-text" id="dSongPl">'+s[i].playlistName+'</p></div></div></div></a>';
 					$("#other").append(html);
+					$("#btnload").css("display","block");
 				}
 				if (s.length<4) {
 					$("#btnload").css("display","none");

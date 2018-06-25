@@ -1,13 +1,21 @@
 package com.nevreme.rolling.controller.rest;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,6 +73,27 @@ public class VideoRestController extends AbstractRestController<Video, VideoDto,
 		video.setQuote(videoDto.getQuote());
 		videoService.insertNewVideo(video);
 		return "{\"status\":\"ok\"}";
+	}
+	
+	
+	@CrossOrigin("*")
+	@Cacheable("sitecache")
+	@RequestMapping(value = {"/getImageFromUrl","/getImageFromUrl/"})
+	@ResponseBody
+	public synchronized String getImageFromUrl(@RequestParam String imageUrl) throws IOException {
+		URL url = new URL(imageUrl);
+		BufferedInputStream bis = new BufferedInputStream(url.openConnection().getInputStream());
+		byte[] buffer = new byte[1024];
+        int read = 0;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        while ((read = bis.read(buffer, 0, buffer.length)) != -1) {
+            baos.write(buffer, 0, read);
+        }
+        baos.flush();
+        StringBuilder sb = new StringBuilder();
+        sb.append("data:image/png;base64,");
+        sb.append(new String(java.util.Base64.getEncoder().encode(baos.toByteArray())));
+        return  sb.toString();
 	}
 	
 	@RequestMapping(value = {"/deleteVideo","/deleteVideo/"})

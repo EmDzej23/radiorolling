@@ -25,24 +25,37 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
             WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
             visitorService = webApplicationContext.getBean(VisitorService.class);
         }
-
+        System.out.println("addd");
+        System.out.println(request.getServerName());
+        System.out.println("addd");
         Cookie[] cookies = request.getCookies();
         boolean found = false;
         if (cookies == null) {
+        	System.out.println("adding 1");
             addVisitor(response);
             return true;
         }
 
         for (Cookie cookie : cookies) {
+        	System.out.println("--------COOKIE REQ-------");
+        	System.out.println(cookie.getName());
+        	System.out.println(cookie.getValue());
+        	System.out.println(cookie.getPath());
+        	System.out.println(cookie.getDomain());
+        	System.out.println(cookie.getMaxAge());
+        	System.out.println("--------COOKIE REQ-------");
             if (cookie.getName().equals(cookieName)) {
+            	System.out.println("found");
                 found = true;
                 break;
             }
         }
 
         if (!found) {
+        	System.out.println("adding 2");
             addVisitor(response);
         }
+
         return true;
     }
 
@@ -52,7 +65,16 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
         visitorService.save(visitor);
         Cookie cookie = new Cookie(cookieName, visitor.getVisitorId());
         cookie.setPath("/");
+        cookie.setDomain(".radiorolling.com");
         cookie.setMaxAge(Integer.MAX_VALUE);
+        
+        System.out.println("--------COOKIE RESPONSE-------");
+        System.out.println("*** "+cookie.getName());
+        System.out.println("*** "+cookie.getValue());
+        System.out.println("*** "+cookie.getPath());
+        System.out.println("*** "+cookie.getDomain());
+        System.out.println("--------COOKIE RESPONSE-------");
+        
         response.addCookie(cookie);
     }
 
