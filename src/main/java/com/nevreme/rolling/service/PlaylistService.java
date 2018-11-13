@@ -32,8 +32,18 @@ public class PlaylistService extends AbstractService<Playlist, Long>{
 	}
 	
 	@Cacheable("sitecache")
+	public List<Playlist> getPLaylstByTypeInRange(int type, int start, int end) {
+		return dao.getPLaylstByTypeInRange(type, start, end);
+	}
+	
+	@Cacheable("sitecache")
 	public List<Playlist> getPLaylstByTypeLazy(int type) {
 		return dao.getPLaylstByTypeLazy(type);
+	}
+	
+	@Cacheable("sitecache")
+	public Playlist findOneNoTags(long primaryKey) {
+		return dao.findOneNoTags(primaryKey);
 	}
 	
 }

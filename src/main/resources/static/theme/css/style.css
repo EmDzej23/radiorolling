@@ -237,6 +237,7 @@ a.logo b{color:#09c}
 body{
     cursor: url("../../images/rolling.cur"), auto;
     background:#eee;
+    padding-top:70px;
 }
 
 hr {

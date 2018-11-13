@@ -4,11 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VideoDetailsDto {
+	private String plId;
 	private String videoUrl;
 	private String videoDescription;
 	private String videoDuration;
 	private String videoQuote;
 	private int videoOffset;
+	private String plName;
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -39,6 +41,19 @@ public class VideoDetailsDto {
 	public void setVideoOffset(int videoOffset) {
 		this.videoOffset = videoOffset;
 	}
+	public String getPlName() {
+		return plName;
+	}
+	public void setPlName(String plName) {
+		this.plName = plName;
+	}
+	public String getPlId() {
+		return plId;
+	}
+	public void setPlId(String plId) {
+		this.plId = plId;
+	}
+	
 	
 	
 }

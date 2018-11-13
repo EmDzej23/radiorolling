@@ -53,6 +53,10 @@ public class VideoService extends AbstractService<Video, Long> {
 	public Video findVideoByYtId(String ytId, Long plId) {
 		return dao.findVideoByYtId(ytId, plId);
 	}
+	
+	public List<Video> findVideosForPlaylistByRange(Long plId,int start,int end) {
+		return dao.findVideosForPlaylistByRange(plId, start, end);
+	}
 
 	@Cacheable("sitecache")
 	public Video getRecommendedVideo(int type) {

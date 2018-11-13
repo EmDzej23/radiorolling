@@ -94,6 +94,15 @@ public class VideoDao extends AbstractDao<Video, Long> {
 		}
 		return videos;
 	}
+	
+	public List<Video> findVideosForPlaylistByRange(Long plId,int start,int end) {
+		TypedQuery<Video> tq = entityManager
+				.createQuery("SELECT v FROM Video v WHERE v.playlist.id = (:playlist) ORDER BY v.index_num DESC", Video.class);
+		tq.setParameter("playlist", plId);
+		tq.setFirstResult(start);
+		tq.setMaxResults(end);
+		return tq.getResultList();
+	}
 
 	public void updateList(List<Video> videos) {
 		for (Video video : videos) {

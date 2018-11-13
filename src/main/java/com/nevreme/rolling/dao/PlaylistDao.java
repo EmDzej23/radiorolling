@@ -33,9 +33,19 @@ public class PlaylistDao extends AbstractDao<Playlist, Long>{
 	
 	@Override
 	public Playlist findOneEagerly(Long primaryKey) {
-		String sql = new SqlBuilder().select(Playlist.class, true).fetch("tags").fetch("videos").build();
-		return entityManager.createQuery(sql, Playlist.class).getSingleResult();
+		String sql = new SqlBuilder().select(Playlist.class, true).fetch("tags").fetch("videos").where("id").build();
+		TypedQuery<Playlist> tq = entityManager.createQuery(sql, Playlist.class);
+		tq.setParameter("id", primaryKey);
+		return tq.getSingleResult();
 	}
+	
+	public Playlist findOneNoTags(Long primaryKey) {
+		String sql = new SqlBuilder().select(Playlist.class, true).fetch("videos").where("id").build();
+		TypedQuery<Playlist> tq = entityManager.createQuery(sql, Playlist.class);
+		tq.setParameter("id", primaryKey);
+		return tq.getSingleResult();
+	}
+	
 	
 
 	@Override
@@ -53,6 +63,15 @@ public class PlaylistDao extends AbstractDao<Playlist, Long>{
 		TypedQuery<Playlist> tq = entityManager
 				.createQuery(new SqlBuilder().select(Playlist.class, true).fetch("videos").fetch("users").where("playlist_type").build(), Playlist.class);
 		tq.setParameter("playlist_type", type);
+		return tq.getResultList();
+	}
+	
+	public List<Playlist> getPLaylstByTypeInRange(int type, int start, int end) {
+		TypedQuery<Playlist> tq = entityManager
+				.createQuery(new SqlBuilder().select(Playlist.class, true).fetch("videos").fetch("users").where("playlist_type").build(), Playlist.class);
+		tq.setParameter("playlist_type", type);
+		tq.setFirstResult(start);
+		tq.setMaxResults(end);
 		return tq.getResultList();
 	}
 	

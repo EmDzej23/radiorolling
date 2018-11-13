@@ -91,6 +91,13 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 	}(document, 'script', 'facebook-jssdk'));
 </script>
 <style>
+@media(min-width:993px) {
+	.ytp-watermark.yt-uix-sessionlink {
+		left:37%;
+		height:53px;
+	}
+	
+}
 .dropdownPlaylistMusic {
 	font-size: 0.86em;
 	font-weight: bold;
@@ -115,40 +122,64 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 }
 </style>
 </head>
-<body style="overflow: visible;">
+<body data-spy="scroll" data-target=".navbar" data-offset="50" style="overflow: visible;">
 	<div id="preloader" style="display: none;">
 		<div id="status" style="display: none;">&nbsp;</div>
 	</div>
 	<div class="container">
 		<div id="ldr" class="loader" style=""></div>
-		<div id="allcont" class="box_wrapper" style="display:none;">
+		<div id="allcont" class="box_wrapper" style="display: none;">
 			<header id="header">
 				<div class="header_top">
-					<nav class="navbar navbar-default" role="navigation">
-						<div sec:authorize="isAnonymous()" class="container-fluid">
-							<a href="/login" style="">Login</a> <a href="/music/random"
-								style="">Random pesma</a><a href="/contact" style="">O nama</a>
-						</div>
-						<div sec:authorize="isAuthenticated()" class="container-fluid">
-							<a href="/admin/setup" style="">Edit playlist</a> <a
-								href="/music/random" style="">Random pesma</a> <a
-								href="/contact" style="">O nama</a>
+					<nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top"
+						style="background-color:#252525;width:100%">
+						<a class="navbar-brand" href="#"></a>
+						<button class="navbar-toggler collapsed" type="button"
+							data-toggle="collapse" data-target="#navbarsExample03"
+							aria-controls="navbarsExample03" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+						<div class="navbar-collapse justify-content-md-center collapse"
+							id="navbarsExample03" style="">
+							<ul class="navbar-nav" style="">
+								<li class="nav-item active"><a class="nav-link" href="#">Citat
+										dana<span class="sr-only">(current)</span>
+								</a></li>
+								<li class="nav-item"><a class="nav-link" href="#pesmaDana">Pesma
+										dana</a></li>
+								<li class="nav-item"><a class="nav-link" href="#videoDana">Video
+										dana</a></li>
+								<li class="nav-item"><a class="nav-link" href="#tekstDana">Tekst
+										dana</a></li>
+								<li class="nav-item"><a class="nav-link" href="#predlozi">Predlozi</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="#papirici">Rolling
+										papiri</a></li>
+								<li class="nav-item"><a class="nav-link" href="#plejliste">Plejliste</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="#oNama">O
+										nama</a></li>
+
+							</ul>
+
 						</div>
 					</nav>
 				</div>
 				<div class="header_bottom">
-<!-- 					<div class="logo_area"> -->
-<!-- 						<a class="logo" href="#"><b>Radio</b> Rolling</a> <img -->
-<!-- 							src="/res/images/20182101446/rolllogo.png" style="width: 41px;"> -->
-<!-- 					</div> -->
+					<!-- 					<div class="logo_area"> -->
+					<!-- 						<a class="logo" href="#"><b>Radio</b> Rolling</a> <img -->
+					<!-- 							src="/res/images/20182101446/rolllogo.png" style="width: 41px;"> -->
+					<!-- 					</div> -->
 
 					<div class="row">
 						<div class="logo_area col-md-6">
 							<a class="logo" href="#"><b>Radio</b> Rolling</a> <img
 								src="/res/images/20182101446/rolllogo.png" style="width: 41px;">
 						</div>
-						<div id="questcont" class="logo_area col-md-6">
-							
+						<div class="logo_area col-md-6">
+							<span class="logo" href="#">Stvaraoci i dela koja traju</span>
 						</div>
 					</div>
 
@@ -159,11 +190,26 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="row">
 							<div class="middle_bar">
-								<div class="single_post_content" id="gotoradio">
-									<h4 id="nr"
-										class="song_title post_title wow  animated animated animated animated animated animated"
-										style="visibility: visible; font-size: 1.55em;"></h4>
+								<div class="single_post_content">
+									<h2 class="song_title post_title wow  animated animated"
+										style="visibility: visible;">
+										<b>NOW ROLLING </b><i style="font-size: 34px" class="fa">&#xf04b;</i>
+									</h2>
+									<div id="nowrolling" class="row"></div>
 								</div>
+								<!-- 								<div class="single_post_content"> -->
+								<!-- 								<h4 class="song_title post_title wow  animated animated animated animated animated" style="visibility: visible;font-size: 1.4em;"><b>Predložite pesmu/video sa YouTube-a, ili neki link ka drugom interesantom sadržaju sa interneta, samo ga iskopirajte u polje ispod i kliknite "Pošalji"!</b></h4> -->
+								<!-- 											<div class="row" id="ytlinkdiv"> -->
+
+
+								<!--                             <div class="col-lg-8 col-md-8 col-sm-12">                                 -->
+								<!--                                 <input id="ytlink" type="text" class="form-control ml-4"> -->
+								<!--                             </div> -->
+								<!-- <div class="col-lg-3 col-md-3 col-sm-12">                                 -->
+								<!--                                 <button id="ytsendbtn" value="Posalji pesmu" class="ml-4 btn btn-primary form-control">Pošalji</button> -->
+								<!--                             </div> -->
+								<!-- 											</div> -->
+								<!-- 								</div> -->
 								<div class="single_post_content">
 									<h4
 										class="quoteOfTheDay song_title post_title wow  animated animated animated animated"
@@ -172,7 +218,7 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 								<div class="single_post_area">
 									<h2 class="song_title wow  animated"
 										style="visibility: visible;"></h2>
-									<div class="single_post_content">
+									<div id="sug" class="single_post_content">
 										<h2 class="song_title post_title wow  animated animated"
 											style="visibility: visible;">PREDLOZI</h2>
 										<div class="row">
@@ -182,11 +228,20 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 
 												<!--Card Wider-->
 												<div class="card card-cascade wider">
+													<style>
+.fitimage {
+	height: 200px;
+	object-fit: cover;
+}
 
+.centerimage {
+	text-align: center;
+}
+</style>
 													<!--Card image-->
-													<div class="view overlay">
-														<img id="songImg" src="" class="img-fluid" alt="wider">
-														<a href="#!">
+													<div class="view overlay centerimage">
+														<img id="songImg" src="" class="img-fluid fitimage"
+															alt="wider"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -214,9 +269,9 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 												<div class="card card-cascade wider">
 
 													<!--Card image-->
-													<div class="view overlay">
-														<img id="videoImg" src="" class="img-fluid" alt="wider">
-														<a href="#!">
+													<div class="view overlay centerimage">
+														<img id="videoImg" src="" class="img-fluid fitimage"
+															alt="wider"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -247,9 +302,9 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 												<div class="card card-cascade wider">
 
 													<!--Card image-->
-													<div class="view overlay">
-														<img id="textImg" src="" class="img-fluid" alt="wider">
-														<a href="#!">
+													<div class="view overlay centerimage">
+														<img id="textImg" src="" class="img-fluid fitimage"
+															alt="wider"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
 														</a>
@@ -281,8 +336,8 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 													style="text-align: center;">
 
 													<!--Card image-->
-													<div class="view overlay">
-														<img id="recommendImg" src="" class="img-fluid"
+													<div class="view overlay centerimage">
+														<img id="recommendImg" src="" class="img-fluid fitimage"
 															alt="wider"> <a href="#!">
 															<div
 																class="mask rgba-white-slight waves-effect waves-light"></div>
@@ -325,134 +380,149 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 											<div class="btn btn-primary" id="btnload"
 												style="display: inline-block;" onclick="showNewCards()">Prikaži
 												još</div>
+											<button style="display: none;" id="load1"
+												class="btn btn-primary btn-lg">
+												<i class="fa fa-spinner fa-spin"></i>
+											</button>
 										</div>
 
 									</div>
 									<div class="single_post_content">
 										<h2
 											class="song_title post_title wow  animated animated animated animated animated"
-											style="visibility: visible;">SCROLLING</h2>
-										<div class="row">
-
-											<!-- Grid column -->
-											<div class="col-lg-4 col-md-12 mb-3">
-
-												<!--Card Wider-->
-												<div class="card card-cascade wider" id="scrolling1">
-
-													<!--Card image-->
-													<div class="view overlay" style="text-align: center;">
-														<img alt="wider" class="img-fluid"
-															src="/res/images/20183252342/muzika.jpg"
-															style="max-height: 250px;"> <a href="#!">
-															<div
-																class="mask rgba-white-slight waves-effect waves-light"></div>
-														</a>
-													</div>
-													<!--/Card image-->
-
-													<!--Card content-->
-													<div class="card-body text-center">
-														<!--Title-->
-														<h4 class="card-title">
-															<strong>Muzika</strong>
-														</h4>
-														<h5 class="indigo-text">
-															<strong>Zanimljivosti</strong>
-														</h5>
-
-														<p class="card-text">Čitajte zanimljivosti iz muzike</p>
-
-													</div>
-													<!--/.Card content-->
-
-												</div>
-												<!--/.Card Wider-->
-
-											</div>
-											<!-- Grid column -->
-											<div class="col-lg-4 col-md-12 mb-3">
-
-												<!--Card Wider-->
-												<div class="card card-cascade wider" id="scrolling2">
-
-													<!--Card image-->
-													<div class="view overlay" style="text-align: center;">
-														<img alt="wider" class="img-fluid"
-															src="/res/images/20183231327/sport.jpg"
-															style="max-height: 250px;"> <a href="#!">
-															<div
-																class="mask rgba-white-slight waves-effect waves-light"></div>
-														</a>
-													</div>
-													<!--/Card image-->
-
-													<!--Card content-->
-													<div class="card-body text-center">
-														<!--Title-->
-														<h4 class="card-title">
-															<strong>Sport</strong>
-														</h4>
-														<h5 class="indigo-text">
-															<strong>Zanimljivosti</strong>
-														</h5>
-
-														<p class="card-text">Čitajte zanimljivosti iz sporta</p>
-
-													</div>
-													<!--/.Card content-->
-
-												</div>
-												<!--/.Card Wider-->
-
-											</div>
-											<div class="col-lg-4 col-md-12 mb-3">
-
-												<!--Card Wider-->
-												<div class="card card-cascade wider" id="scrolling3">
-
-													<!--Card image-->
-													<div class="view overlay" style="text-align: center;">
-														<img alt="wider" class="img-fluid"
-															src="/res/images/2018431224/Movie.jpg"
-															style="max-height: 250px;"> <a href="#!">
-															<div
-																class="mask rgba-white-slight waves-effect waves-light"></div>
-														</a>
-													</div>
-													<!--/Card image-->
-
-													<!--Card content-->
-													<div class="card-body text-center">
-														<!--Title-->
-														<h4 class="card-title">
-															<strong>Filmovi</strong>
-														</h4>
-														<h5 class="indigo-text">
-															<strong>Zanimljivosti</strong>
-														</h5>
-
-														<p class="card-text">Čitajte zanimljivosti iz sveta
-															filma</p>
-
-													</div>
-													<!--/.Card content-->
-
-												</div>
-												<!--/.Card Wider-->
-
-											</div>
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
+											style="visibility: visible;">ROLLING PAPIRI</h2>
+										<div class="row" id="papers"></div>
+										<div class="row justify-content-center"
+											style="text-align: center;">
+											<div class="btn btn-primary" id="paperload"
+												style="display: inline-block;" onclick="showNewPapers()">Prikaži
+												još</div>
+											<button style="display: none;" id="load2"
+												class="btn btn-primary btn-lg">
+												<i class="fa fa-spinner fa-spin"></i>
+											</button>
 										</div>
+										<!-- 										<div class="row"> -->
+
+										<!-- 											Grid column -->
+										<!-- 											<div class="col-lg-4 col-md-12 mb-3"> -->
+
+										<!-- 												Card Wider -->
+										<!-- 												<div class="card card-cascade wider" id="scrolling1"> -->
+
+										<!-- 													Card image -->
+										<!-- 													<div class="view overlay" style="text-align: center;"> -->
+										<!-- 														<img alt="wider" class="img-fluid" -->
+										<!-- 															src="/res/images/20183252342/muzika.jpg" -->
+										<!-- 															style="max-height: 250px;"> <a href="#!"> -->
+										<!-- 															<div -->
+										<!-- 																class="mask rgba-white-slight waves-effect waves-light"></div> -->
+										<!-- 														</a> -->
+										<!-- 													</div> -->
+										<!-- 													/Card image -->
+
+										<!-- 													Card content -->
+										<!-- 													<div class="card-body text-center"> -->
+										<!-- 														Title -->
+										<!-- 														<h4 class="card-title"> -->
+										<!-- 															<strong>Muzika</strong> -->
+										<!-- 														</h4> -->
+										<!-- 														<h5 class="indigo-text"> -->
+										<!-- 															<strong>Zanimljivosti</strong> -->
+										<!-- 														</h5> -->
+
+										<!-- 														<p class="card-text">Čitajte zanimljivosti iz muzike</p> -->
+
+										<!-- 													</div> -->
+										<!-- 													/.Card content -->
+
+										<!-- 												</div> -->
+										<!-- 												/.Card Wider -->
+
+										<!-- 											</div> -->
+										<!-- 											Grid column -->
+										<!-- 											<div class="col-lg-4 col-md-12 mb-3"> -->
+
+										<!-- 												Card Wider -->
+										<!-- 												<div class="card card-cascade wider" id="scrolling2"> -->
+
+										<!-- 													Card image -->
+										<!-- 													<div class="view overlay" style="text-align: center;"> -->
+										<!-- 														<img alt="wider" class="img-fluid" -->
+										<!-- 															src="/res/images/20183231327/sport.jpg" -->
+										<!-- 															style="max-height: 250px;"> <a href="#!"> -->
+										<!-- 															<div -->
+										<!-- 																class="mask rgba-white-slight waves-effect waves-light"></div> -->
+										<!-- 														</a> -->
+										<!-- 													</div> -->
+										<!-- 													/Card image -->
+
+										<!-- 													Card content -->
+										<!-- 													<div class="card-body text-center"> -->
+										<!-- 														Title -->
+										<!-- 														<h4 class="card-title"> -->
+										<!-- 															<strong>Sport</strong> -->
+										<!-- 														</h4> -->
+										<!-- 														<h5 class="indigo-text"> -->
+										<!-- 															<strong>Zanimljivosti</strong> -->
+										<!-- 														</h5> -->
+
+										<!-- 														<p class="card-text">Čitajte zanimljivosti iz sporta</p> -->
+
+										<!-- 													</div> -->
+										<!-- 													/.Card content -->
+
+										<!-- 												</div> -->
+										<!-- 												/.Card Wider -->
+
+										<!-- 											</div> -->
+										<!-- 											<div class="col-lg-4 col-md-12 mb-3"> -->
+
+										<!-- 												Card Wider -->
+										<!-- 												<div class="card card-cascade wider" id="scrolling3"> -->
+
+										<!-- 													Card image -->
+										<!-- 													<div class="view overlay" style="text-align: center;"> -->
+										<!-- 														<img alt="wider" class="img-fluid" -->
+										<!-- 															src="/res/images/2018431224/Movie.jpg" -->
+										<!-- 															style="max-height: 250px;"> <a href="#!"> -->
+										<!-- 															<div -->
+										<!-- 																class="mask rgba-white-slight waves-effect waves-light"></div> -->
+										<!-- 														</a> -->
+										<!-- 													</div> -->
+										<!-- 													/Card image -->
+
+										<!-- 													Card content -->
+										<!-- 													<div class="card-body text-center"> -->
+										<!-- 														Title -->
+										<!-- 														<h4 class="card-title"> -->
+										<!-- 															<strong>Filmovi</strong> -->
+										<!-- 														</h4> -->
+										<!-- 														<h5 class="indigo-text"> -->
+										<!-- 															<strong>Zanimljivosti</strong> -->
+										<!-- 														</h5> -->
+
+										<!-- 														<p class="card-text">Čitajte zanimljivosti iz sveta -->
+										<!-- 															filma</p> -->
+
+										<!-- 													</div> -->
+										<!-- 													/.Card content -->
+
+										<!-- 												</div> -->
+										<!-- 												/.Card Wider -->
+
+										<!-- 											</div> -->
+										<!-- 											Grid column -->
+
+										<!-- 											Grid column -->
+
+										<!-- 											Grid column -->
+
+										<!-- 											Grid column -->
+
+										<!-- 											Grid column -->
+
+										<!-- 										</div> -->
 
 									</div>
 									<div class="single_post_content">
@@ -603,21 +673,10 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 															kulturne događaje, tv program...</p>
 
 													</div>
-													<!--/.Card content-->
 
 												</div>
-												<!--/.Card Wider-->
 
 											</div>
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
-
-											<!-- Grid column -->
 
 										</div>
 
@@ -639,6 +698,51 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 
 				</div>
 			</section>
+			<div id="accordion" role="tablist">
+  <div id="pesmaDana" class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Pesma dana
+        </a>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      <div class="single_post_content"><div id="video_frame" class="embed-responsive embed-responsive-16by9"><iframe id="existing-iframe-example" class="embed-responsive-item" frameborder="0" src="//www.youtube.com/embed/G98fSbqsPjo" style="text-align: center;"></iframe></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
 			<footer id="footer">
 				<div class="footer_top">
 
@@ -673,69 +777,15 @@ Radio Rolling radi na okupljanju takvih ljudi i takve filozofije kotrljanja."
 	<script type="text/javascript" th:inline="javascript">
        var appRoot = [[${appRoot}]];
 		var ws = null;
-		//        var playlist_id = null;
-		//        var lastStartedTime = 0;
-
-		//        function updateClock() {
-		//     	    var currentTime = new Date();
-		//     	    var currentHoursAP = currentTime.getHours();
-		//     	    var currentHours = currentTime.getHours();
-		//     	    var currentMinutes = currentTime.getMinutes();
-		//     	    var currentSeconds = currentTime.getSeconds();
-
-		//     	    // Pad the minutes and seconds with leading zeros, if required
-		//     	    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-		//     	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-
-		//     	    // Choose either "AM" or "PM" as appropriate
-		//     	    var timeOfDay = (currentHours < 12) ? "AM" : "PM";
-
-		//     	    // Convert the hours component to 12-hour format if needed
-		//     	    currentHoursAP = (currentHours > 12) ? currentHours - 12 : currentHours;
-
-		//     	    // Convert an hours component of "0" to "12"
-		//     	    currentHoursAP = (currentHoursAP == 0) ? 12 : currentHoursAP;
-
-		//     	    // Compose the string for display
-		//     	    var currentTimeString = " " + currentHours + ":" + currentMinutes + ":" + currentSeconds
-
-		//     	    $("#clock").html(currentTimeString);
-		//     	}
-
-		//        function updateRollingTime() {
-
-		//    	    var myTime = new Date(lastStartedTime);
-		//    	    var currentMinutes = myTime.getMinutes();
-		//    	    var currentSeconds = myTime.getSeconds();
-		//    	 	var currentTimeString = "...Roll on...";
-		// 	    if (currentMinutes !== 0 || currentSeconds !== 0) {
-		// 	    	currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
-		// 	   	    currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
-		// 	 		lastStartedTime -= 1000;
-		// 	 		currentTimeString = " " + currentMinutes + ":" + currentSeconds;
-		// 	 	}
-		//    	    // Pad the minutes and seconds with leading zeros, if required
-		//    	    $("#clock").html(currentTimeString);
-
-		//    	}
-		//        function shareOverrideOGMeta(overrideLink, overrideTitle, overrideDescription, overrideImage)
-		//        {
-		//        	FB.ui({
-		//        		method: 'share_open_graph',
-		//        		action_type: 'og.shares',
-		//        		action_properties: JSON.stringify({
-		//        			object: {
-		//        				'og:url': overrideLink,
-		//        				'og:title': overrideTitle,
-		//        				'og:description': overrideDescription,
-		//        				'og:image': overrideImage
-		//        			}
-		//        		})
-		//        	},
-		//        	function (response) {
-		//        	// Action after response
-		//        	});
-		//        }
+		$('.nav-link').click(function() {
+		    var sectionTo = $(this).attr('href');
+		    $(".active").removeClass("active");
+		    $(this).parent().addClass("active");
+		    $('html, body').stop().animate({
+		      scrollTop: $(sectionTo).offset().top - 70
+		    }, 1500);
+		    return false;
+		});
 	</script>
 
 	<script src="../js/websockets/startPage.js"></script>

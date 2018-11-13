@@ -169,8 +169,7 @@ function onMessageReceived(payload) {
 		off : data.videoOffset
 	};
 	document.title = data.videoDescription;
-	//addVideoToDivAfterFinished(opt);
-	playVideoNew(opt);
+	addVideoToDivAfterFinished(opt);
 }
 
 function afterVideoRequested(payload) {
@@ -185,8 +184,7 @@ function afterVideoRequested(payload) {
 		off : payload.videoOffset
 	};
 	document.title = payload.videoDescription;
-	//addVideoToDiv(opt);
-	playVideoNew(opt);
+	addVideoToDiv(opt);
 }
 
 function addVideoToDivAfterFinished(options) {
@@ -198,18 +196,6 @@ function addVideoToDivAfterFinished(options) {
 	$(".song_title").text(options.title);
 	getPlaylist();
 	$("#videoQuote").text(""+options.videoQuote+"");
-}
-
-function playVideoNew(options) {
-	var frame = document.getElementById('iframe1');
-	$(".song_title").text(options.title);
-	//frame.contentWindow.postMessage(options.id, '*');
-	setTimeout(function(){
-		var time = parseInt(options.id.split("?")[1].split("=")[1]) + 2;
-		frame.contentWindow.postMessage(options.id.split("?")[0]+"?start="+time, '*');
-		}, 2000);
-	$("#videoQuote").text(""+options.videoQuote+"");
-	getPlaylist();
 }
 
 function addVideoToDiv(options) {

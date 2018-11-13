@@ -40,7 +40,8 @@ $(document).ready(function() {
 					id : newList[ind].id,
 					videoQuote : newList[ind].quote,
 					off : newList[ind].offset,
-					started:newList[ind].started
+					started:newList[ind].started,
+					index:ind
 			}
 			goToVideo(options);
 		});
@@ -141,6 +142,7 @@ function afterPlaylistRequested(pl) {
 	
 	var sortedList = [];
 	var current = myVideos[0];
+	var cIndex = 0; 
 	
 	var opts = {};
 	if (vid_id===-1) {
@@ -151,7 +153,8 @@ function afterPlaylistRequested(pl) {
 				videoQuote : current.quote,
 				off : current.offset,
 				vid_id:current.id,
-				started:current.started
+				started:current.started,
+				index:0
 		}
 		shareDetails.url = "/recommend/r?id="+current.id+"&plName="+urlName;
 		shareDetails.description = "Naslov : "+current.description;
@@ -162,6 +165,7 @@ function afterPlaylistRequested(pl) {
 		for (var i = 0;i<myVideos.length;i++) {
 			if (myVideos[i].id===vid_id) {
 				chosenVid = myVideos[i];
+				cIndex = i;
 				break;
 			}
 			
@@ -172,13 +176,14 @@ function afterPlaylistRequested(pl) {
 				id : chosenVid.id,
 				videoQuote : chosenVid.quote,
 				off : chosenVid.offset,
-				started: chosenVid.started
+				started: chosenVid.started,
+				index:cIndex
 		}
 		shareDetails.url = "/recommend/r?id="+chosenVid.id+"&plName="+urlName;
 		shareDetails.description = "Video : "+chosenVid.description;
 		shareDetails.image = chosenVid.image;
 	}
-	addVideoToDivManual(opts);
+	
 	if (current) sortedList.push(current);
 	lastStartedTime = current.started - new Date().getTime() + current.duration * 1000;
 	for (var i = current.index_num;i<myVideos.length;i++) {
@@ -206,12 +211,14 @@ function afterPlaylistRequested(pl) {
 					id : sortedList[ind].id,
 					videoQuote : sortedList[ind].quote,
 					off : sortedList[ind].offset,
-					started:sortedList[ind].started
+					started:sortedList[ind].started,
+					index:ind
 			}
 			goToVideo(options);
 		});
 		if (i<sortedList.length-1) currentSong += sortedList[i].duration * 1000;
 	}
+	addVideoToDivManual(opts);
 }
 
 function addVideoToDivAfterFinishedManual(options) {
@@ -238,4 +245,9 @@ function addVideoToDivManual(options) {
 			.append(options.videoQuote)
 	$(".song_title").text(options.title);
 	$(".song_title").append('<span id="startedDate" class="media-body" style="font-size: small;">'+formatDate(options.started)+'</span>');
+	$('.singleleft_inner').scrollTop($('.singleleft_inner').scrollTop() + $('#vid_'+options.index).position().top - $('#vid_'+options.index).height());
+	$('.vidstoplay').css("font-weight","normal");
+	$('#vid_'+options.index).css("font-weight","bold");
+	window.scrollTo(0,0);
+	
 }

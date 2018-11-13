@@ -15,6 +15,12 @@ $(document).ready(function() {
 		shuffleVideos();
 	});
 	
+	$("#start_pl").click(function(){
+		PostData({
+			url : "/public/api/video/startPlaylist?pl="+playlist_id
+		}, function(){$("#start_pl").attr("disabled",true); fetchSongs();}, onError);
+	});
+	
 	document.oncontextmenu = function() {return false;};
 	appendAllPls();
 });
@@ -67,7 +73,7 @@ function playlistInserted(response) {
 }
 function fetchSongs() {
 	FetchData({
-		url : "/public/api/playlist/"+playlist_id
+		url : "/public/api/playlist/lazyOne?id="+playlist_id
 	}, setSongs);
 }
 
@@ -75,6 +81,13 @@ var songs;
 
 function setSongs(response) {
 	songs = response.videos;
+	console.log(response.start);
+	$("#go_to_pl").click(function(){
+		window.open("/music/autoplay/"+response.name,'_blank');
+	});
+	if (response.start==true) {
+		$("#start_pl").attr("disabled",true);
+	}
 	songs.sort(function(a, b) {
 		return a.index_num - b.index_num;
 	})
@@ -87,7 +100,7 @@ function setSongs(response) {
 	$("#table_div").children().remove();
 	$("#table_div").append(MakeResponsiveDHTable(songs).html);
 	tableEvents();
-	
+	$("#allcont").show('slow');$("#ldr").hide('slow');
 }
 function shuffleVideos() {
 	var videos = $('table').tableToJSON();
@@ -297,6 +310,114 @@ function getVideoDetails() {
 		})
 		}
 	});
+}
+function doesVideoExist(i, id, fn) {
+	console.log(i);
+	var ytkey = 'AIzaSyAohq-i1Ee_8ei5PLKyMkHYqX9KUDV9Gq8';
+	$.ajax({
+		cache : false,
+		data : $.extend({
+			key : ytkey,
+			part : 'snippet,contentDetails,statistics'
+		}, {
+			id : id
+		}),
+		dataType : 'json',
+		type : 'GET',
+		timeout : 5000,
+		fields : "items(id,contentDetails,statistics,snippet(title),status)",
+		url : 'https://www.googleapis.com/youtube/v3/videos'
+	}).done(function(data) {
+		
+		if (data.items.length==0) {
+//			alert("Ovaj id ne postoji na youtube-u!")
+			fn(i, false);
+			
+		}
+//		if (data.items[0].contentDetails.licensedContent) {
+//			alert("Ne mozes da uneses ovaj video, zasticen je autorskim pravima!")
+//		}
+		else {
+			fn(i, true);
+		}
+	});
+}
+function doesVideoRights(i, id, fn) {
+	var ytkey = 'AIzaSyAohq-i1Ee_8ei5PLKyMkHYqX9KUDV9Gq8';
+	$.ajax({
+		cache : false,
+		data : $.extend({
+			key : ytkey,
+			part : 'snippet,contentDetails,statistics'
+		}, {
+			id : id
+		}),
+		dataType : 'json',
+		type : 'GET',
+		timeout : 5000,
+		fields : "items(id,contentDetails,statistics,snippet(title),status)",
+		url : 'https://www.googleapis.com/youtube/v3/videos'
+	}).done(function(data) {
+		
+//		if (data.items.length==0) {
+////			alert("Ovaj id ne postoji na youtube-u!")
+//			fn(false);
+//			
+//		}
+		if (data.items.length!=0&&data.items[0].contentDetails.licensedContent) {
+			fn(i, false);
+		}
+		else {
+			fn(i, true);
+		}
+	});
+}
+function isIt(value) {
+	return value;
+}
+function detectNotWorkingVideos(i,num) {
+	if (i===undefined || num===undefined) {
+		i = 1;
+		num = 0;
+	}
+	var rows = $("#new_table tr");
+	doesVideoExist(i, $($(rows[i]).children()[4])[0].innerHTML, function(i, value){
+		if (!value) {
+			$(rows[i]).css("background-color","red");
+			num++;
+			
+		}
+		console.log(i);
+		if (i==rows.length-1) {
+			return;
+			alert(num);
+		}
+		i++;
+		detectNotWorkingVideos(i,num);
+	});
+	
+}
+function detectNotWorkingRights(i,num) {
+	if (i===undefined || num===undefined) {
+		i = 1;
+		num = 0;
+	}
+	var rows = $("#new_table tr");
+	doesVideoExist(i, $($(rows[i]).children()[4])[0].innerHTML, function(i, value){
+		if (!value) {
+			$(rows[i]).css("background-color","yellow");
+			num++;
+			
+		}
+		console.log(i);
+		if (i==rows.length-1) {
+			return;
+			alert(num);
+		}
+		i++;
+		detectNotWorkingRights(i,num);
+	});
+	
 }
 function populateFields(options) {
 	$("#title").val(options.title);

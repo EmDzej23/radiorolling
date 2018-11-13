@@ -36,6 +36,20 @@ public class StartPageCotroller {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value = { "/sugg","/sugg/" }, method = RequestMethod.GET)
+	public ModelAndView sugg() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/linkSuggestions");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/remote","/remote/" }, method = RequestMethod.GET)
+	public ModelAndView remote() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/remote");
+		return modelAndView;
+	}
+	
 //	@RequestMapping(value = { "{name}/","{name}" }, method = RequestMethod.GET)
 //	public ModelAndView ids(@PathVariable String name) {
 //		ModelAndView modelAndView = new ModelAndView();

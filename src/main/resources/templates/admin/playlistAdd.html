@@ -41,7 +41,6 @@
 								class="navbar-collapse collapse">
 								<ul class="nav navbar-nav custom_nav">
 									<li><a href="#">Naslovna strana</a></li>
-									<li><a href="/login">Login</a></li>
 								</ul>
 							</div>
 						</div>
@@ -62,6 +61,8 @@
 								<div class="single_post_area">
 									<h2 class="song_title wow "></h2>
 									<div class="single_post_content">
+									
+										
 
 										<label>Naziv plejliste</label> <input type="text" id="plName">
 
@@ -95,9 +96,16 @@
 										<button onclick="addQuestion()">Unesi pitanje</button>
 										<br>
 										<br>
+										<label>Datum daily</label> <input type="text" id="dailyDateVidId">
+										<button onclick="changeDate()">Unesi pitanje</button>
+										<br>
+										<br>
 										<label>Daily Video</label> <input type="text" id="dailyVidId">
 										<br>
 										<label>On or of (1 or 0)</label> <input type="text" id="on_off">
+										<br>
+										<button class="btn btn success" onclick="startPl()">Start Playlists!</button>
+										<br>
 										<button onclick="changeDaily()">Izmeni dnevno</button>
 										<br>
 										<br>
@@ -279,6 +287,18 @@
 			var id = $("#dailyVidId").val();
 			var on_off = $("#on_off").val(); 
 			PostData({url:"/public/api/video/"+id, data:JSON.stringify({daily_recommend:on_off})},
+				function(r){alert("OK");changeDate();},function(r){alert("NOT OK");});
+		}
+		
+		function changeDate() {
+			
+			var id = $("#dailyVidId").val();
+			PostData({url:"/public/api/video/"+id, data:JSON.stringify({recommenddate:new Date()})},
+				function(r){alert("OK")},function(r){alert("NOT OK")});
+		}
+		
+		function startPl() {
+			PostData({url:"/public/api/video/startPlaylists"},
 				function(r){alert("OK")},function(r){alert("NOT OK")});
 		}
 		

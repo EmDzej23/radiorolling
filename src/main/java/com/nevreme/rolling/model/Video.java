@@ -39,6 +39,8 @@ public class Video {
 	private String description;
 
 	private Timestamp started;
+	
+	private Timestamp recommendDate;
 
 	@Column(name="yt_id")
 	private String ytId;
@@ -159,6 +161,14 @@ public class Video {
 
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
+	}
+
+	public Timestamp getRecommendDate() {
+		return recommendDate;
+	}
+
+	public void setRecommendDate(Timestamp recommendDate) {
+		this.recommendDate = recommendDate;
 	}
 	
 }

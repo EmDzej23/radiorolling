@@ -10,6 +10,7 @@ public class VideoDto {
 	private Long id;
 	private String description;
 	private Timestamp started;
+	private Timestamp recommendDate;
 	private String ytId;
 	private int duration;
 	private int index_num;
@@ -114,6 +115,14 @@ public class VideoDto {
 
 	public void setTags(Set<TagDto> tags) {
 		this.tags = tags;
+	}
+
+	public Timestamp getRecommendDate() {
+		return recommendDate;
+	}
+
+	public void setRecommendDate(Timestamp recommendDate) {
+		this.recommendDate = recommendDate;
 	}
 
 }

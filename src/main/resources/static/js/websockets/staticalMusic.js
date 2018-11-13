@@ -36,7 +36,20 @@ $(document).ready(function() {
 		window.location.href = "/music/autoplay/"+plName;
 	});
 	$("#randomSelect").click(function(){
-		window.location.href = "/music/manualplay/vid?vid="+newList[Math.floor(Math.random()*newList.length)].ytId+"&plName="+plName+"&filter="+$("#searchBox").val().replace(/&/g , "aanndd");
+		currentSongIndex = Math.floor(Math.random()*newList.length);
+    	if (currentSongIndex >= newList.length) currentSongIndex = 0;
+    	var video = newList[currentSongIndex];
+    	goToVideo(
+		{
+			duration : video.duration,
+    		title : video.description,
+    		id : video.ytId,
+    		videoQuote : video.quote,
+    		off : 0
+    	});
+    	$('.singleleft_inner').scrollTop($('.singleleft_inner').scrollTop() + $('#vid_'+currentSongIndex).position().top - $('#vid_'+currentSongIndex).height());
+    	$('.vidstoplay').css("font-weight","normal");
+    	$('#vid_'+currentSongIndex).css("font-weight","bold")
 	});
 	$("#searchBox").keyup(function() {
 		onkeyupsearch();

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Rolling Radio</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>
+	<div class="container">
+		<div class="box_wrapper">
+			<header id="header">
+				<div class="header_top">
+					<nav class="navbar navbar-default" role="navigation">
+						<div class="container-fluid">
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse" data-target="#navbar"
+									aria-expanded="false" aria-controls="navbar">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+							<div sec:authorize="isAuthenticated()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="#">Naslovna strana</a></li>
+									<li><a href="/logout">Logout</a></li>
+									<li><a href="/admin/setup">Videos setup</a></li>
+								</ul>
+							</div>
+							<div sec:authorize="isAnonymous()" id="navbar"
+								class="navbar-collapse collapse">
+								<ul class="nav navbar-nav custom_nav">
+									<li><a href="#">Naslovna strana</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="header_bottom">
+					<div class="logo_area">
+						<a class="logo" href="#"><b>Rolling</b> Radio<span>Radio
+								for all</span></a>
+					</div>
+				</div>
+			</header>
+			<section id="contentbody">
+				<div class="row">
+					<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+						<div class="row">
+							<div class="middle_bar">
+								<div class="single_post_area">
+									<h2 class="song_title wow "></h2>
+									<div id="links" class="single_post_content">
+									<button class = "pl" id = "Rolling">Rolling</button>
+									<button class = "pl" id = "Kotrljanje">Kotrljanje</button>
+									<button class = "pl" id = "Bluz">Bluz</button>
+									<button class = "pl" id = "funky">Funky N Disco</button>
+									<button class = "pl" id = "soul">Soul</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<footer id="footer">
+				<div class="footer_top">
+
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+					<div class="col-lg-3 col-md-3 col-sm-6"></div>
+				</div>
+				<div class="footer_bottom">
+					<div class="footer_bottom_left">
+						<p>Powered By Rolling Radio</p>
+					</div>
+					<div class="footer_bottom_right">
+						<ul>
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="../../theme/js/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/dynamicHtmlLib.js"></script>
+	<script>
+		var links = [];
+		var i = 0;
+		$(document).ready(function(){
+			
+			FetchData({url:"/public/api/suggestions/"},
+					function(s){
+						links = s.sort(function(a, b){return a.id-b.id});
+						appendData();
+					}
+			);
+			$(".pl").click(function(){
+				var plName = $(this).attr("id");
+			});
+		});
+		function goToUrl(plName) {
+			window.location.href = "/music/autoplay/"+plName;
+		}
+		function appendData() {
+			$.ajax({
+			    url: 'https://cors-anywhere.herokuapp.com/' + links[i].link
+			  }).then(function(data) {
+			    var html = $(data);
+				var desc = getMetaContent(html, 'desc');
+// 				var imgSrc23 = getMetaContent(html, 'img');
+// 				var imgSrc = html.find('img').attr('src');
+				var imgSrc234 = getMetaContent(html, 'image');
+// 			    $('#kw').html(getMetaContent(html, 'desc') || 'no keywords found');
+// 			    $('#des').html(getMetaContent(html, 'keywords') || 'no description found');
+// 			    $('#img').html(html.find('img').attr('src') || 'no image found');
+			    
+			    var html = '<a href="'+links[i].link+'" target="_blank"><p>'+desc+'</p><img src="'+imgSrc234+'"></img></a><hr>';
+				$("#links").append(html);
+				i++;
+				if (i<links.length) {
+					
+					appendData();
+				}
+			  });
+		}
+	</script>
+</body>
+</html>

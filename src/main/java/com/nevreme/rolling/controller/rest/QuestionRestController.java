@@ -77,8 +77,8 @@ public class QuestionRestController extends AbstractRestController<Question, Que
 	@CrossOrigin(value="*")
 	@RequestMapping(value = { "like/", "like" }, method = RequestMethod.POST)
 	@ResponseBody
-	public synchronized ResponseEntity<AnswerDto>like(@RequestParam Long id, @RequestParam boolean type, HttpServletRequest request) {
-		Answer answer = answerService.findOneEagerly(id);
+	public synchronized ResponseEntity<AnswerDto>like(@RequestParam String id, @RequestParam boolean type, HttpServletRequest request) {
+		Answer answer = answerService.findOneEagerly(Long.parseLong(id));
 		Vote vote = new Vote();
 		Visitor visitor = null;
 		for (Cookie cookie : request.getCookies()) {
@@ -89,7 +89,7 @@ public class QuestionRestController extends AbstractRestController<Question, Que
 				visitor = visitorService.findByVisitorId(cookie.getValue());
 			}
 		}
-		if (voteService.findVoteByVisitorAndAnswer(visitor.getId(), id) != null) {
+		if (voteService.findVoteByVisitorAndAnswer(visitor.getId(), Long.parseLong(id)) != null) {
 			return new ResponseEntity<AnswerDto>(new AnswerDto(),HttpStatus.BAD_REQUEST);
 		}
 		if (type)

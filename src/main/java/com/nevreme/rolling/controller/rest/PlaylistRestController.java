@@ -53,7 +53,7 @@ public class PlaylistRestController extends AbstractRestController<Playlist, Pla
 	}
 	
 	@CrossOrigin(value="*")
-	@RequestMapping(value = { "lazy", "t/" })
+	@RequestMapping(value = { "lazy", "lazy/" })
 	@ResponseBody
 	public synchronized String getPlaylistLazy(@RequestParam int type) throws JsonProcessingException {
 		List<PlaylistInfoDto> plDto = new ArrayList<>();
@@ -61,6 +61,17 @@ public class PlaylistRestController extends AbstractRestController<Playlist, Pla
 		for (Playlist p : pls) {
 			plDto.add(mapper.getMapper().map(p, PlaylistInfoDto.class));
 		}
+		return new ObjectMapper()
+				.writeValueAsString(plDto);
+	}
+	
+	@CrossOrigin(value="*")
+	@RequestMapping(value = { "lazyOne", "lazyOne/" })
+	@ResponseBody
+	public synchronized String getPlaylistByIdLazy(@RequestParam long id) throws JsonProcessingException {
+		PlaylistDto plDto = null;
+		Playlist pls = playlistService.findOne(id);
+		plDto = mapper.getMapper().map(pls, PlaylistDto.class);
 		return new ObjectMapper()
 				.writeValueAsString(plDto);
 	}

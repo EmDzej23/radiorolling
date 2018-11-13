@@ -23,9 +23,9 @@
 <meta property="og:url" th:content="${m_url}" >
 <meta property="og:title" th:content="${m_desc}">
 <meta property="og:description" th:content="${m_title}">
-<meta property="og:image"  content="http://radiorolling.com/res/images/20186261616/rokenrol.jpg" >
-<meta property="og:image:url"  content="http://radiorolling.com/res/images/20186261616/rokenrol.jpg" >
-<meta property="og:image:secure_url"  content="http://radiorolling.com/res/images/20186261616/rokenrol.jpg" >
+<meta property="og:image"  th:content="${m_image}" >
+<meta property="og:image:url"  th:content="${m_image}" >
+<meta property="og:image:secure_url"  th:content="${m_image}" >
 <meta property="og:image:width" content="200" >
 <meta property="og:image:height" content="200" >
 
@@ -33,7 +33,7 @@
 <meta name="twitter:site" content="@Radio__Rolling">
 <meta name="twitter:title" th:content="${m_title}">
 <meta name="twitter:description" th:content="${m_desc}">
-<meta name="twitter:image" content="http://radiorolling.com/res/images/20185241215/23578a5112f36ec.jpg">
+<meta name="twitter:image" th:content="${m_image}">
 
 
 <link href="../theme/css/bootstrap.min.css" rel="stylesheet"
@@ -804,6 +804,7 @@ opacity
 									<li><a href="/video/autoplay/">Video</a></li>
 									<li><a href="/text/">Text</a></li>
 									<li><a href="/recommend/">Preporuke</a></li>
+									<li><a href="/home">Početna</a></li>
 									<li><a href="https://play.google.com/store/apps/details?id=com.mj.radiorolling"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/New-Play-Store-logo.png" style="height: 1.4em;">Preuzmi Android Aplikaciju</a></li>
 									<li><a href="http://m.radiorolling.com/test"><img src="/res/images/2018871223/mobilni.png" style="height: 1.4em;">Mobilna verzija sajta</a></li>
 								</ul>
@@ -813,8 +814,7 @@ opacity
 				</div>
 				<div class="header_bottom">
 					<div class="logo_area">
-						<a class="logo" href="/"><b>Rolling</b> Pitanja<span
-							id="playlistName">Molimo vas da budete kulturni i pristojni pri davanju odgovora</span></a>
+						<a class="logo" href="/"><b>Rolling</b> Papiri<span></span></a>
 					</div>
 				</div>
 			</header>
@@ -824,131 +824,29 @@ opacity
 						<div class="row">
 							<div class="middle_bar">
 								<div class="single_post_area">
-									<!-- 									<div class="row"> -->
-									<!-- 										<div class="col-md-9"> -->
-									<!-- 											<h2 class="song_title wow  animated" -->
-									<!-- 												style="visibility: visible;"></h2> -->
-									<!-- 										</div> -->
-									<!-- 										<div class="col-md-3"> -->
-									<!-- 											<img id = "tv_kanal_slika" src="" -->
-									<!-- 												style="width: 30%; float: right;"> -->
-									<!-- 										</div> -->
-									<!-- 									</div> -->
 									<h2 class="song_title post_title wow  animated"
 										style="visibility: visible;">
 										<br><span id="startedDate"
 											class="media-body" style="font-size: small;"></span>
 									</h2>
 									<div class="row">
-									<button class="btn btn-primary btn-sm col-md-2 col-md-offset-2" id="sortByDate">Najnoviji</button>
-									<button class="btn btn-primary btn-sm col-md-2 col-md-offset-1" id="sortByUp">Najpopularniji</button>
-									<button class="btn btn-primary btn-sm col-md-2 col-md-offset-1" id="sortByDown">Najmanje popularni</button>
 									</div>
 									<div class="single_post_content">
 										
 									</div>
-
-
-									<div class="post_footer">
-										<br>
-										<div class="col-md-12">
-											<div class="panel panel-white post panel-shadow">
-
-												<div class="post-description">
-
-													<div class="stats">
-
-														<div class="row">
-															<div class="col-md-12">
-																<label style="width: 100%;">Kako se zoveš?</label>
-															</div>
-															<div class="col-md-9">
-																<input id="answerName" type="text">
-															</div>
-														</div>
-														<div class="row">
-															<div class="col-md-12">
-																<label style="width: 100%;">Link (opciono)</label>
-															</div>
-															<div class="col-md-9">
-																<input id="answerLink" type="text">
-															</div>
-														</div>
-														<div class="post-heading" style="height: 0px;">
-
-															<div class="pull-left meta">
-																<div id="tit23" class="title h5">
-																	
-																</div>
-
-															</div>
-														</div>
-														<br>
-														<div class="row">
-															<div class="col-md-12">
-																<textarea id="answerText" style="width: 100%; height: 148px;"></textarea>
-															</div>
-														</div>
-														<button id="answerBtn" class="btn btn-default" onclick="answerTheQuestion()"
-															style="position: initial;">Odgovori</button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-<!-- 									<div class="fb-share-button fb_iframe_widget" -->
-<!-- 										data-href="http://radiorolling.com/text/t?text=1653&amp;plName=Poezija" -->
-<!-- 										data-layout="button_count" data-mobile-iframe="true" -->
-<!-- 										data-size="large" id="fbshare" fb-xfbml-state="rendered" -->
-<!-- 										fb-iframe-plugin-query="app_id=1498376340278074&amp;container_width=860&amp;href=http%3A%2F%2Fradiorolling.com%2Ftext%2Ft%3Ftext%3D1653%26plName%3DPoezija&amp;layout=button_count&amp;locale=en_GB&amp;mobile_iframe=true&amp;sdk=joey&amp;size=large"> -->
-<!-- 										<span -->
-<!-- 											style="vertical-align: bottom; width: 84px; height: 28px;"><iframe -->
-<!-- 												name="f264306cc11445c" width="1000px" height="1000px" -->
-<!-- 												frameborder="0" allowtransparency="true" -->
-<!-- 												allowfullscreen="true" scrolling="no" -->
-<!-- 												allow="encrypted-media" -->
-<!-- 												title="fb:share_button Facebook Social Plugin" -->
-<!-- 												src="https://www.facebook.com/v2.12/plugins/share_button.php?app_id=1498376340278074&amp;channel=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FRQ7NiRXMcYA.js%3Fversion%3D42%23cb%3Df3ecd2aed9708b%26domain%3Dradiorolling.com%26origin%3Dhttp%253A%252F%252Fradiorolling.com%252Ff3167efc190e754%26relation%3Dparent.parent&amp;container_width=860&amp;href=http%3A%2F%2Fradiorolling.com%2Ftext%2Ft%3Ftext%3D1653%26plName%3DPoezija&amp;layout=button_count&amp;locale=en_GB&amp;mobile_iframe=true&amp;sdk=joey&amp;size=large" -->
-<!-- 												style="border: none; visibility: visible; width: 84px; height: 28px;" -->
-<!-- 												class=""></iframe></span> -->
-<!-- 									</div> -->
 								</div>
-
 							</div>
-
 						</div>
-<!-- 						<div class="row"> -->
-<!-- 							<div class=" wow fadeInLeft animated animated animated animated" -->
-<!-- 								style="visibility: visible; animation-name: fadeInLeft;"> -->
-<!-- 								<div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid" -->
-<!-- 									data-href="http://radiorolling.com/text/t?text=1653&amp;plName=Poezija" -->
-<!-- 									data-numposts="5" data-width="100%" id="link2" -->
-<!-- 									fb-xfbml-state="rendered"> -->
-<!-- 									<span style="height: 178px;"><iframe id="f27d5d62c9befc" -->
-<!-- 											name="f1ccd411309f678" scrolling="no" -->
-<!-- 											title="Facebook Social Plugin" class="fb_ltr" -->
-<!-- 											src="https://www.facebook.com/plugins/comments.php?api_key=1498376340278074&amp;channel_url=http%3A%2F%2Fstaticxx.facebook.com%2Fconnect%2Fxd_arbiter%2Fr%2FRQ7NiRXMcYA.js%3Fversion%3D42%23cb%3Df23b4c346c9ec2c%26domain%3Dradiorolling.com%26origin%3Dhttp%253A%252F%252Fradiorolling.com%252Ff3167efc190e754%26relation%3Dparent.parent&amp;href=http%3A%2F%2Fradiorolling.com%2Ftext%2Ft%3Ftext%3D1653%26plName%3DPoezija&amp;locale=en_GB&amp;numposts=5&amp;sdk=joey&amp;version=v2.12&amp;width=100%25" -->
-<!-- 											style="border: none; overflow: hidden; height: 178px; width: 100%;"></iframe></span> -->
-<!-- 								</div> -->
-
-<!-- 							</div> -->
-<!-- 						</div> -->
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="row"></div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 						<div class="row">
 							<div class="right_bar">
-								<div class="playLists single_leftbar wow fadeInDown animated"
-									style="visibility: visible; animation-name: fadeInDown;">
+								<div class="single_leftbar wow fadeInDown">
 									<h2>
-										<span>Pitanja</span>
+										<span>Papiri</span>
 									</h2>
 									<div class="singleleft_inner">
-										<ul class="catg3_snav ppost_nav wow fadeInDown animated"
-											id="plists"
-											style="visibility: visible; animation-name: fadeInDown;">
+										<ul id="papiri" class="catg3_snav ppost_nav wow fadeInDown">
 
 										</ul>
 									</div>
@@ -992,12 +890,67 @@ opacity
 		type="text/javascript"></script>
 
 	<script type="text/javascript" th:inline="javascript">
-       var quest = [[${dto}]];
-       var questionId = quest.id;
-       var user = JSON.parse([[${visitor}]]);
+	var paper = [[${paper}]];
+	var name = [[${name}]];
+	var questId = [[${id}]];
+	$(document).ready(function() {
+		
+		$(".song_title").children().remove();
+		$(".song_title").append('<a href="/home">Naslovna</a>');
+		
+		appendAnswer(paper);
+		appendOtherPapers();
+	});
+	function appendAnswer(paper, id) {
+		$(".single_post_content").css("background-color","white");
+		$(".single_post_content").css("text-align","center");
+		$(".single_post_content")
+				.append(
+						'<img src="'+paper.ytId+'"><br><button class="btn btn-primary" onclick="shareToFb()">Deli na FB</button>	');
+	}
+	function shareToFb() {
+		window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t=Rolling Papiri", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=700');return false;
+	}
+	
+	function appendOtherPapers() {
+		FetchData(
+			{
+				url : "/public/api/playlist/t?type=7"
+			},
+			function(res) {
+				for (var i = 0; i < res[0].videos.length; i++) {
+					$("#papiri").append(
+							'<li class="vidstoplay" id = "vid_'+i+'"><div class="media"><div><img alt="No Image" src="'
+							+ res[0].videos[i].ytId
+							+ '"></div></div></li>');
+					$("#vid_"+i).click(function(){
+						var ind = parseInt(this.id.split("_")[1]);
+						var options = {
+								duration : res[0].videos[ind].duration,
+								title : res[0].videos[ind].description,
+								yid : res[0].videos[ind].ytId,
+								id : res[0].videos[ind].id,
+								videoQuote : res[0].videos[ind].quote,
+								off : res[0].videos[ind].offset,
+								started:res[0].videos[ind].started
+						}
+						goToVideo(options);
+					});
+				}
+			});
+	}
+	function goToVideo(opt) {
+//		window.location.href = "/text/t?text="+opt.id+"&plName="+plName;
+		var sharing_url = "/paper?id="+opt.id;
+		history.pushState(null, null, sharing_url);
+		$("#video_frame").remove();
+		$('.single_post_content').children().remove()
+		$(".single_post_content")
+				.append(
+						'<img src="'+opt.yid+'"><br><button class="btn btn-primary" onclick="shareToFb()">Deli na FB</button>	');
+		window.scrollTo(0,0);
+	}
 	</script>
-
-	<script src="../js/websockets/question.js"></script>
 
 </body>
 </html>
